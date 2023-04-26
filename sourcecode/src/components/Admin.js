@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Navbar from './nav_bar';
-import PermanentDrawerLeft from './side_bar';
+import Navbar from './Navbar';
+import PermanentDrawerLeft from './Sidebar';
 import axios from 'axios';
 
 
