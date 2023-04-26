@@ -15,8 +15,7 @@ function Login(){
     const [password, setPassword] = useState('');
     const [credential, setCredential] = useState({});
     const url = "http://localhost/key-lime-pie/php/login.php";
-    let getUser="Cineva";
-    getUser = () => {axios.get(url).then((res)=>res.data)}
+    let getUser = () => {axios.get(url).then((res)=>res.data)}
     
 
     const handleSubmit = () => {

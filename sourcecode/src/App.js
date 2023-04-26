@@ -1,6 +1,8 @@
 import React from 'react';
 import Login from "./components/Login";
 import Admin from "./components/Admin";
+import Projects from "./components/admin/Projects";
+import Teams from "./components/admin/Teams";
 
 var isLoggedIn = true;
 

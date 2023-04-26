@@ -46,7 +46,7 @@ export default function PermanentDrawerLeft() {
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemText primary={text} />
+                <ListItemText primary={text} onClick/>
               </ListItemButton>
             </ListItem>
           ))}
