@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Button from "@mui/material/Button";
-import AddEmployee from "./AddEmployee";
 import Box from "@mui/material/Box";
-
-function addEmployee(){
-  return <AddEmployee />
-}
-
+import {Link } from "react-router-dom";
+import url from '../../get_php_link';
 function Employees() {
+  
   const [users, setUsers] = useState([]);
 
+
   useEffect(() => {
-    fetch('http://localhost/key-lime-pie/php/get_users.php')
+    fetch(url+'get_users.php')
       .then(response => response.json())
       .then(data => setUsers(data))
       .catch(error => console.error(error));
@@ -48,10 +46,11 @@ function Employees() {
   justifyContent="flex-end"
   alignItems="flex-end"
 >
-      <Button variant="contained" onClick={addEmployee()}>Add Employee</Button>
+      <Button variant="contained" component={Link} to="/addEmployee">Add Employee</Button>
       </Box>
     </div>
   );
 }
 
 export default Employees;
+

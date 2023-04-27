@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import {Link } from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -18,16 +19,7 @@ export default function PermanentDrawerLeft() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Admin page
-          </Typography>
-        </Toolbar>
-      </AppBar>
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -43,23 +35,21 @@ export default function PermanentDrawerLeft() {
         <Toolbar />
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} onClick/>
+            <ListItem key="Employees" disablePadding>
+              <ListItemButton component={Link} to="/">
+                <ListItemText primary="Employees" />
               </ListItemButton>
             </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} />
+            <ListItem key="Projects" disablePadding>
+              <ListItemButton component={Link} to="/projects">
+                <ListItemText primary="Projects" />
               </ListItemButton>
             </ListItem>
-          ))}
+            <ListItem key="Teams" disablePadding>
+              <ListItemButton component={Link} to="/teams">
+                <ListItemText primary="Teams" />
+              </ListItemButton>
+            </ListItem>
         </List>
       </Drawer>
       <Box
