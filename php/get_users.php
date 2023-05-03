@@ -10,7 +10,7 @@ if ($conn) {
   FROM  [dbo].[employees] AS e
   INNER JOIN [dbo].[users] AS u
   ON e.id_user=u.id_user 
-  INNER JOIN [dbo].[teams] AS t
+  LEFT JOIN [dbo].[teams] AS t
   ON e.id_team=t.id_teams";
   
   $stmt = sqlsrv_query($conn, $sql);
