@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-function Teams() {
+function Reports() {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
@@ -13,6 +13,7 @@ function Teams() {
 
   return (
     <div>
+     <h2 style={{textAlign: 'center'}}> WILL BE DONE </h2>
       <table style={{borderCollapse: 'collapse', width: '100%'}}>
         <thead>
           <tr style={{backgroundColor: '#990099'}}>
@@ -35,4 +36,4 @@ function Teams() {
   );
 }
 
-export default Teams;
+export default Reports;

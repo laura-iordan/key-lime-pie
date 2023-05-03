@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from "./components/Login";
 import Admin from "./scenes/admin/Admin";
+import Manager from "./scenes/manager/Manager"
 //import Projects from "./components/admin/Projects";
 //import Teams from "./components/admin/Teams";
 import { ThemeProvider } from '@emotion/react';
