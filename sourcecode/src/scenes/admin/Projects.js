@@ -1,17 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-
-
-/*function Admin(){
-    const [credential, setCredential] = useState({});
-    const url = "http://localhost/key-lime-pie/php/login.php/";
-    React.useEffect(() => {
-        axios.get(url).then(response=>alert(response.data))
-        .catch(error=>alert(error));
-      }, []);
-    return <h1>Admin</h1>
-}*/
-
 
 function Projects() {
   const [projects, setProjects] = useState([]);

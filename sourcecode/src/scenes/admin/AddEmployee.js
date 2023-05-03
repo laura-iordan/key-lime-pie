@@ -4,6 +4,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import axios from 'axios';
 import url from '../../get_php_link';
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import {Link } from "react-router-dom";
 
 
 
@@ -15,20 +19,26 @@ function AddEmployee(){
     const [address, setAddress] = useState('');
     const [phoneNo, setPhoneNo] = useState('');
     const [hourlyFee, setHourlyFee] = useState('');
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState(1);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState("1234");
-    const [role, setRole] = useState('');
-
+    const [role, setRole] = useState(3);
     const [roles, setRoles] = useState([]);
+    const [statuses, setStatuses] = useState([]);
 
-    /*useEffect(() => {
+    useEffect(() => {
       fetch(url+'get_role.php')
         .then(response => response.json())
         .then(data => setRoles(data))
         .catch(error => console.error(error));
-    }, []);*/
+    }, []);
+
+    useEffect(() => {
+      fetch(url+'get_status.php')
+        .then(response => response.json())
+        .then(data => setStatuses(data))
+        .catch(error => console.error(error));
+    }, []);
     
     const handleSubmit = () => {
           if(username.length === 0){
@@ -44,33 +54,35 @@ function AddEmployee(){
             .catch((err) => console.log(err));*/
               
   
-              /*let fData = new FormData();
+              let fData = new FormData();
               fData.append('username', username);
-              fData.append('password', password);
+              fData.append('email', email);
+              fData.append('password', '1234');
+              fData.append('id_role', role);
+              fData.append('name', name);
+              fData.append('surname', surname);
+              fData.append('SSN', ssn);
+              fData.append('address', address);
+              fData.append('email', email);
+              fData.append('phoneNo', phoneNo);
+              fData.append('hourlyFee', hourlyFee);
+              fData.append('status', status);
   
-              axios.post(url, fData)
+              axios.post(url+'add_employee.php', fData)
               .then(response=>alert(response.data))
-              .catch(error=>alert(error));
-  
-              console.log("Hello");*/
-  
-                  
-              /*getUser = () => {axios.get(url).then((res)=>{
-                const allCredential = res.data;
-                setCredential(allCredential);
-              
-              })}*/
-              
-  
-                     
-  
-                  
+              .catch(error=>alert(error));                  
               }
           }
+    const handleChangeRole=(e)=>{
+      setRole(e.target.value);
+    }
+
+    const handleChangeStatus=(e)=>{
+      setStatus(e.target.value);
+    }
 
     return (
-    <div>
-    <h1>{roles[0]}</h1>
+    <div> 
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -81,6 +93,8 @@ function AddEmployee(){
             name="username"
             autoComplete="username"
             autoFocus
+            value={username} 
+            onChange={(e)=>setUsername(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -91,7 +105,27 @@ function AddEmployee(){
             type="email"
             id="email"
             autoComplete="email"
+            value={email} 
+            onChange={(e)=>setEmail(e.target.value)}
           />
+          <InputLabel id="role-label">Role</InputLabel>
+            <Select
+              sx={{       
+                width: 250,
+                height: 50,
+              }}
+
+              value={role}
+              labelId="role-label"
+              id="role-select"
+              label="Role"
+              onChange={handleChangeRole}
+              >
+              {roles.map(role => (
+                <MenuItem value={role.id_role}>{role.role}</MenuItem>
+              ))}
+
+            </Select>
           <TextField
             margin="normal"
             required
@@ -101,6 +135,8 @@ function AddEmployee(){
             name="name"
             autoComplete="name"
             autoFocus
+            value={name} 
+            onChange={(e)=>setName(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -111,6 +147,8 @@ function AddEmployee(){
             type="surname"
             id="surname"
             autoComplete="surname"
+            value={surname} 
+            onChange={(e)=>setSurname(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -121,6 +159,8 @@ function AddEmployee(){
             name="ssn"
             autoComplete="ssn"
             autoFocus
+            value={ssn} 
+            onChange={(e)=>setSsn(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -131,6 +171,8 @@ function AddEmployee(){
             type="address"
             id="address"
             autoComplete="address"
+            value={address} 
+            onChange={(e)=>setAddress(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -141,6 +183,8 @@ function AddEmployee(){
             name="phoneNo"
             autoComplete="phoneNo"
             autoFocus
+            value={phoneNo} 
+            onChange={(e)=>setPhoneNo(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -151,11 +195,32 @@ function AddEmployee(){
             type="hourlyFee"
             id="hourlyFee"
             autoComplete="hourlyFee"
+            value={hourlyFee} 
+            onChange={(e)=>setHourlyFee(e.target.value)}
           />
+          <InputLabel id="status-label">Status</InputLabel>
+            <Select
+              sx={{       
+                width: 250,
+                height: 50,
+              }}
+
+              value={status}
+              labelId="status-label"
+              id="status-select"
+              label="Status"
+              onChange={handleChangeStatus}
+              >
+              {statuses.map(status => (
+                <MenuItem value={status.id_status}>{status.status}</MenuItem>
+              ))}
+
+            </Select>
           <Button
             type="submit"
             fullWidth
             variant="contained"
+            component={Link} to="/Employees"
             sx={{ mt: 3, mb: 2 }}
           >
             Submit

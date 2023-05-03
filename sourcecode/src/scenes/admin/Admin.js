@@ -28,7 +28,6 @@ function Admin() {
     <div>
     <Topbar />
     <PermanentDrawerLeft />
-    
       <Routes>
         <Route path="/" element={<Employees />} />
         <Route path="/projects" element={<Projects />} />
