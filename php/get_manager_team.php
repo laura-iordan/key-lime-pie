@@ -6,24 +6,24 @@ header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: http://localhost:3000');
 
 if ($conn) {
-  $sql = "SELECT e.id_employee, e.name, e.surname, u.email, e.status, t.team_name 
-  FROM  [dbo].[employees] AS e
-  INNER JOIN [dbo].[users] AS u
-  ON e.id_user=u.id_user 
-  LEFT JOIN [dbo].[teams] AS t
-  ON e.id_team=t.id_teams";
+  $sql = "SELECT t.id_teams, CONCAT(e.name, ' ',  e.surname) AS employee_name, e.id_employee AS id_emp
+  FROM [dbo].[teams] AS t
+  INNER JOIN [dbo].[employees] AS e
+  ON t.id_teams = e.id_team
+  WHERE t.id_manager = 4"; // 4 - id manager logat
   
   $stmt = sqlsrv_query($conn, $sql);
   if (!$stmt) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  $users = array();
+  $team = array();
   while ($row = sqlsrv_fetch_object($stmt)) {
-    array_push($users, $row);
+    array_push($team, $row);
   }
   
-  echo json_encode($users);
+  echo json_encode($team);
+  
 } else {
   die(print_r(sqlsrv_errors(), true));
 }

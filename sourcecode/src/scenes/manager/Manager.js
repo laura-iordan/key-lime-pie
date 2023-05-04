@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Topbar from '../global/Topbar';
 import PermanentDrawerLeft from '../global/Siderbar.js';
-import Employees from './Employees';
-import AddEmployee from './AddEmployee';
 import { Routes, Route } from "react-router-dom";
-import Projects from './Projects';
-import Teams from './Teams';
 import url from '../../get_php_link';
+import ManagerProjects from './ManagerProjects';
+import SideBarManager from './SideBarManager';
+import ManagerTeam from './ManagerTeam';
+import Reports from './Reports';
 
 
 /*function Admin(){
@@ -21,22 +21,22 @@ import url from '../../get_php_link';
 
 
 
-function Admin() {
+function Manager() {
 
 
   return (
     <div>
     <Topbar />
-    <PermanentDrawerLeft />
+    <SideBarManager />
+    
       <Routes>
-        <Route path="/" element={<Employees />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/teams" element={<Teams />} />
-        <Route path="/addEmployee" element={<AddEmployee />} />
+        <Route path="/" element={<ManagerProjects />} />
+        <Route path="/team" element={<ManagerTeam/>} />
+        <Route path="/reports" element={<Reports />} />
       </Routes>
     
     </div>
   );
 }
 
-export default Admin;
+export default Manager;
