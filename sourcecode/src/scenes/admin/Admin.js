@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import Projects from './Projects';
 import Teams from './Teams';
 import url from '../../get_php_link';
+import Sidebar from '../global/Siderbar.js';
 
 
 /*function Admin(){
@@ -27,7 +28,7 @@ function Admin() {
   return (
     <div>
     <Topbar />
-    <PermanentDrawerLeft />
+    <Sidebar/>
       <Routes>
         <Route path="/" element={<Employees />} />
         <Route path="/projects" element={<Projects />} />

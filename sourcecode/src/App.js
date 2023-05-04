@@ -7,6 +7,7 @@ import Manager from "./scenes/manager/Manager"
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from "@mui/material";
 import { mainTheme } from "./theme"
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
 var isLoggedIn = true;
 
@@ -20,9 +21,12 @@ function renderConditionally(){
 
 function App() {
     return (
-        <ThemeProvider theme = { mainTheme } >
-           {renderConditionally()}
-        </ThemeProvider>
+        <ProSidebarProvider>
+            <ThemeProvider theme = { mainTheme } >
+                {renderConditionally()}
+            </ThemeProvider>
+        </ProSidebarProvider>
+        
     )        
 }
 
