@@ -33,24 +33,23 @@ header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: http://localhost:3000');
 
 if ($conn) {
-  $sql = "SELECT * FROM users WHERE username=? AND password=?";
-  $params = array($_GET['username'], $_GET['password']);
+  echo $username = $_POST['username'];
+  $sql = "SELECT * FROM users WHERE username=?";
+  $params = array($username);
   
-  $stmt = sqlsrv_prepare($conn, $sql, $params);
+  $stmt = sqlsrv_query($conn, $sql, $params);
   if (!$stmt) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  if (sqlsrv_execute($stmt)) {
-    $row = sqlsrv_fetch_object($stmt);
-    if ($row) {
-     echo json_encode($row);
-    } else {
-      print "Invalid username or password.";
-    }
-  } else {
-    die(print_r(sqlsrv_errors(), true));
+  $users = array();
+  while ($row = sqlsrv_fetch_object($stmt)) {
+    array_push($users, $row);
   }
+  
+  echo json_encode($users);
+} else {
+  die(print_r(sqlsrv_errors(), true));
 }
 
 ?>

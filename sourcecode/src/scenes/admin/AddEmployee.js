@@ -220,8 +220,9 @@ function AddEmployee(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/Employees"
+            component={Link} to="/"
             sx={{ mt: 3, mb: 2 }}
+            onClick={() => handleSubmit()}
           >
             Submit
           </Button>

@@ -9,13 +9,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import url from '../get_php_link';
 
 function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [credential, setCredential] = useState({});
-    const url = "http://localhost/key-lime-pie/php/login.php";
-    let getUser = () => {axios.get(url).then((res)=>res.data)}
+    const [credential, setCredential] = useState([]);
     
 
     const handleSubmit = () => {
@@ -29,39 +28,31 @@ function Login(){
 
             let fData = new FormData();
             fData.append('username', username);
-            fData.append('password', password);
 
-            axios.post(url, fData)
-            .then(response=>alert(response.data))
-            .catch(error=>alert(error));
-
-            console.log("Hello");
-
-                
-            /*getUser = () => {axios.get(url).then((res)=>{
-              const allCredential = res.data;
-              setCredential(allCredential);
-            
-            })}*/
-            
-
-                   
-
-                
+            axios.post(url+'login.php', fData)
+              .then(response=>alert(response.data))
+              .then(data=>setCredential(data))
+              .catch(error=>alert(error));                           
+            }
+            console.log(credential);
+            if(credential[0].username === username && credential[0].password === password){
+              alert("Success!");
+            } else{
+              alert("Error");
             }
         }
 
-        React.useEffect(() => {
+        /*React.useEffect(() => {
           axios.get(url).then((response) => {
             setCredential(response.data);
           });
         }, []);
 
-        console.log(credential);
+        console.log(credential);*/
     
 
     return (
-    /*<Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs">
       <Box
         sx={{  
           marginTop: 8,
@@ -83,6 +74,8 @@ function Login(){
             name="username"
             autoComplete="username"
             autoFocus
+            value={username} 
+            onChange={(e)=>setUsername(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -93,24 +86,27 @@ function Login(){
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password} 
+            onChange={(e)=>setPassword(e.target.value)}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={() => handleSubmit()}
           >
             Sign In
           </Button>
         </Box>
       </Box>
-    </Container>);*/
-    <div>
+    </Container>);
+    /*<div>
         <TextField id="outlined-basic" label="Username" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)}/>
         <TextField id="outlined-basic" label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)}/>
         <Button variant="contained" onClick={handleSubmit}>Login</Button>
 
-    </div>);
+    </div>);*/
 }
 
 export default Login;

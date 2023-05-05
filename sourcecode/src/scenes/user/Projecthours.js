@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Projecthours() {
+  const [id_project, setIdProject] = useState(null);
   const [projects, setProjects] = useState([]);
   const [date, setDate] = useState("");
   const [hours, setHours] = useState("");
+
+  console.log(date);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,6 +22,11 @@ function Projecthours() {
   }, []);
 
   const postHours = async (projectId, date, hours) => {
+    let fData = new FormData();
+    fData.append('id_project', id_project);
+    fData.append('date', date);
+    fData.append('hours', hours);
+    fData.append('id_user', 5);
     const data = {
       id_project: projectId,
       date: date,
@@ -28,7 +36,7 @@ function Projecthours() {
     console.log(data); 
   
     try {
-      const response = await axios.post('http://localhost/key-lime-pie/php/post_hours.php', data);
+      const response = await axios.post('http://localhost/key-lime-pie/php/post_hours.php', fData);
       console.log(response.data);
       if (response.data === "Orele de lucru au fost adăugate cu succes.") {
         return true;
@@ -43,7 +51,7 @@ function Projecthours() {
 
   const handleHourChange = async (projectId) => {
     try {
-      const success = await postHours(projectId, date, hours);
+      const success = await postHours(id_project, date, hours);
       if (success) {
         console.log("Orele de lucru au fost adăugate cu succes.");
         setDate("");
@@ -59,8 +67,11 @@ function Projecthours() {
   const renderProjects = () => {
     return projects.map(project => {
       return (
-        <tr key={project.id}>
+        <tr key={project.id_project}>
           <td>{project.project_name}</td>
+          <td>
+            <input type="number" name="id_project" value={project.id_project} onChange={(event) => setIdProject(event.target.value)} />
+          </td>
           <td>
             <input type="date" name="date" value={date} onChange={(event) => setDate(event.target.value)} />
           </td>
@@ -81,6 +92,7 @@ function Projecthours() {
         <thead>
           <tr>
             <th>Project Name</th>
+            <th>ID</th>
             <th>Date</th>
             <th>Hours</th>
             <th>Actions</th>
