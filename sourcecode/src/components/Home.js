@@ -9,6 +9,7 @@ import UpdateEmployee from '../scenes/admin/UpdateEmployee';
 import AddEmployee from '../scenes/admin/AddEmployee';
 import Projects from '../scenes/admin/Projects';
 import Teams from '../scenes/admin/Teams';
+import Team from '../scenes/manager/Team';
 
 
 
@@ -26,7 +27,9 @@ function Home() {
             <Route path="/admin/addEmployee" element={<AddEmployee />} />
             <Route path="/admin/updateEmployee/:id" element={<UpdateEmployee />} />
         </Route>
-        <Route path="/manager" element={<Manager />} />
+        <Route path="/manager" element={<Manager />}>       
+            <Route path="/manager/team" element={<Team />} />
+      </Route>
         <Route path="/user" element={<Projecthours />} />
       </Routes>
     

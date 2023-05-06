@@ -23,7 +23,7 @@ function Employees() {
       <table style={{borderCollapse: 'collapse', width: '100%'}}>
         <thead>
           <tr style={{backgroundColor: '#990099'}} >
-            <th style={{border: '1px solid #ddd', padding: '8px'}}>ID</th>
+            <th style={{border: '1px solid #ddd', padding: '8px', display: 'none'}}>ID</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Name</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Surname</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Email</th>
@@ -34,7 +34,7 @@ function Employees() {
         <tbody>
           {users.map(user => (
             <tr onClick={() => navigate(`/admin/updateEmployee/${user.id_user}`)} key={user.id_user} style={{backgroundColor: 'white'}}>
-              <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.id_user}</td>
+              <td style={{border: '1px solid #ddd', padding: '8px', display: 'none'}}>{user.id_user}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.name}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.surname}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.email}</td>
