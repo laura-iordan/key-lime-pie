@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Topbar from '../global/Topbar';
 import PermanentDrawerLeft from '../global/Siderbar.js';
 import Employees from './Employees';
+import UpdateEmployee from './UpdateEmployee';
 import AddEmployee from './AddEmployee';
 import { Routes, Route } from "react-router-dom";
 import Projects from './Projects';
@@ -34,6 +35,7 @@ function Admin() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/addEmployee" element={<AddEmployee />} />
+        <Route path="/updateEmployee/:id" element={<UpdateEmployee />} />
       </Routes>
     
     </div>

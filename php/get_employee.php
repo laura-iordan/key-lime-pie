@@ -6,24 +6,27 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT e.id_employee, e.name, e.surname, u.email, e.status, t.team_name 
+
+
+  $id_user = $_GET['id_user'];
+  $sql = "SELECT u.username, u.email, u.id_role, e.name, e.surname, e.SSN, e.address, e.phone_no, e.hourly_fee, e.status 
   FROM  [dbo].[employees] AS e
   LEFT JOIN [dbo].[users] AS u
   ON e.id_user=u.id_user 
-  LEFT JOIN [dbo].[teams] AS t
-  ON e.id_team=t.id_teams";
+  WHERE u.id_user = ?";
+  $params = array($id_user);
   
-  $stmt = sqlsrv_query($conn, $sql);
+  $stmt = sqlsrv_query($conn, $sql, $params);
   if (!$stmt) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  $users = array();
+  /*$users = array();
   while ($row = sqlsrv_fetch_object($stmt)) {
     array_push($users, $row);
-  }
+  }*/
   
-  echo json_encode($users);
+  echo json_encode($row = sqlsrv_fetch_object($stmt));
 } else {
   die(print_r(sqlsrv_errors(), true));
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -14,10 +14,61 @@ import url from '../get_php_link';
 function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [credential, setCredential] = useState([]);
-    
+    const [userCredential, setUserCredential] = useState({
+      id_user: 0,
+      username: "",
+      email: "",
+      password: "",
+      id_role: 0     
+    });
+    const [role, setRole] = useState(0);
+
+    function getPath(role){
+      if(role === 0){
+        return "/";
+      } else if(role === 1){
+        return "/admin";
+      }
+    }
+
+    const getData = useEffect(() => {
+      if (!username) return;
+      axios.post(url+'login.php?username='+username)
+      .then(function(response) {
+        setUserCredential(response.data);
+        console.log(userCredential.username);
+    })
+        .catch(error => console.error(error));
+    })
+
 
     const handleSubmit = () => {
+      if(username.length === 0){
+        alert("Username is blank!");
+    } else if(password.length === 0){
+        alert("Password is blank!");
+    } else{
+        /*getData();*/
+        if(userCredential.username === username && userCredential.password === password){
+          alert("Success!");
+        } else{
+          alert("Error");
+        }
+        //console.log(credential);
+      //setRole(credential[0].id_role);
+      /*async function postData(url, data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url);
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
+      postData(url+'login.php', { username: username }).then((data) => {
+  console.log(data); // JSON data parsed by `data.json()` call
+});*/
+    }
+  }
+    
+
+    /*const handleSubmit = () => {
       console.log(username);
         if(username.length === 0){
             alert("Username is blank!");
@@ -40,7 +91,7 @@ function Login(){
             } else{
               alert("Error");
             }
-        }
+        }*/
 
         /*React.useEffect(() => {
           axios.get(url).then((response) => {
@@ -94,6 +145,7 @@ function Login(){
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            component={Link} to={getPath()}
             onClick={() => handleSubmit()}
           >
             Sign In

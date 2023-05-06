@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {Link } from "react-router-dom";
 import url from '../../get_php_link';
 function Employees() {
-  
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
 
@@ -15,11 +16,14 @@ function Employees() {
       .catch(error => console.error(error));
   }, []);
 
+  console.log(users);
+
   return (
     <div>
       <table style={{borderCollapse: 'collapse', width: '100%'}}>
         <thead>
-          <tr style={{backgroundColor: '#990099'}}>
+          <tr style={{backgroundColor: '#990099'}} >
+            <th style={{border: '1px solid #ddd', padding: '8px'}}>ID</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Name</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Surname</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Email</th>
@@ -29,7 +33,8 @@ function Employees() {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr key={user.email} style={{backgroundColor: 'white'}}>
+            <tr onClick={() => navigate(`/updateEmployee/${user.id_user}`)} key={user.id_user} style={{backgroundColor: 'white'}}>
+              <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.id_user}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.name}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.surname}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.email}</td>

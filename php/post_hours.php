@@ -1,8 +1,8 @@
 <?php
 require_once('dbsqlconnection.php');
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
 if($conn){
     echo $id_project = $_POST['id_project'];

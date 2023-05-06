@@ -2,8 +2,8 @@
 <?php
 include "dbsqlconnection.php";
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-header('Access-Control-Allow-Headers: http://localhost:3000');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
   $sql = "SELECT t.id_teams, t.team_name, CONCAT(e.name, ' ',  e.surname) AS manager_name

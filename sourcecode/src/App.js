@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from "./components/Login";
+import Login, {role} from "./components/Login";
 import Admin from "./scenes/admin/Admin";
 import Manager from "./scenes/manager/Manager"
 //import Projects from "./components/admin/Projects";
@@ -8,6 +8,7 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from "@mui/material";
 import { mainTheme } from "./theme"
 import { ProSidebarProvider } from 'react-pro-sidebar';
+import { Routes, Route } from "react-router-dom";
 
 var isLoggedIn = true;
 
@@ -19,11 +20,13 @@ function renderConditionally(){
     }
 }
 
+
+
 function App() {
     return (
         <ProSidebarProvider>
             <ThemeProvider theme = { mainTheme } >
-                {renderConditionally()}
+            {renderConditionally()}
             </ThemeProvider>
         </ProSidebarProvider>
         

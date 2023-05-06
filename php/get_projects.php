@@ -2,8 +2,8 @@
 <?php
 include "dbsqlconnection.php";
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-header('Access-Control-Allow-Headers: http://localhost:3000');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
   $sql = "SELECT p.id_project, p.project_name, p.budget, p.hours, CONCAT(e.name, ' ',  e.surname) AS manager_name, p.starting_date, p.ending_date 

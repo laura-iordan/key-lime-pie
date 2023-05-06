@@ -29,11 +29,11 @@ if($conn){
 
 include "dbsqlconnection.php";
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-header('Access-Control-Allow-Headers: http://localhost:3000');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  echo $username = $_POST['username'];
+  $username = $_GET['username'];
   $sql = "SELECT * FROM users WHERE username=?";
   $params = array($username);
   
@@ -42,12 +42,11 @@ if ($conn) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  $users = array();
+ /* $users = array();
   while ($row = sqlsrv_fetch_object($stmt)) {
     array_push($users, $row);
-  }
-  
-  echo json_encode($users);
+  }*/
+  echo json_encode(sqlsrv_fetch_object($stmt));
 } else {
   die(print_r(sqlsrv_errors(), true));
 }

@@ -2,11 +2,11 @@
 <?php
 include "dbsqlconnection.php";
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-header('Access-Control-Allow-Headers: http://localhost:3000');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT e.id_employee, e.name, e.surname, u.email, e.status, t.team_name 
+  $sql = "SELECT u.id_user, e.name, e.surname, u.email, e.status, t.team_name 
   FROM  [dbo].[employees] AS e
   INNER JOIN [dbo].[users] AS u
   ON e.id_user=u.id_user 
