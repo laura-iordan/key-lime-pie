@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Topbar from '../global/Topbar';
-import PermanentDrawerLeft from '../global/Siderbar.js';
 import Employees from './Employees';
 import UpdateEmployee from './UpdateEmployee';
 import AddEmployee from './AddEmployee';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import Projects from './Projects';
 import Teams from './Teams';
 import url from '../../get_php_link';
@@ -30,13 +29,7 @@ function Admin() {
     <div>
     <Topbar />
     <Sidebar/>
-      <Routes>
-        <Route path="/" element={<Employees />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/teams" element={<Teams />} />
-        <Route path="/addEmployee" element={<AddEmployee />} />
-        <Route path="/updateEmployee/:id" element={<UpdateEmployee />} />
-      </Routes>
+    <Outlet />
     
     </div>
   );

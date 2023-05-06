@@ -52,9 +52,9 @@ const Siderbar = () => {
     >
       <Sidebar>
         <Menu>
-            <MenuItem component={<Link to="/" />}>Employees</MenuItem>
-            <MenuItem component={<Link to="/projects" />}>Projects</MenuItem>
-            <MenuItem component={<Link to="/teams" />}>Teams</MenuItem>
+            <MenuItem component={<Link to="/admin" />}>Employees</MenuItem>
+            <MenuItem component={<Link to="/admin/projects" />}>Projects</MenuItem>
+            <MenuItem component={<Link to="/admin/teams" />}>Teams</MenuItem>
         </Menu>
       </Sidebar>
     </Box>

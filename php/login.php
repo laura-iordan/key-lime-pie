@@ -33,7 +33,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $username = $_GET['username'];
+  $username = $_POST['username'];
   $sql = "SELECT * FROM users WHERE username=?";
   $params = array($username);
   

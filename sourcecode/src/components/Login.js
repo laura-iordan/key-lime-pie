@@ -10,8 +10,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import url from '../get_php_link';
+import { useNavigate } from "react-router-dom";
 
 function Login(){
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [userCredential, setUserCredential] = useState({
@@ -31,15 +33,15 @@ function Login(){
       }
     }
 
-    const getData = useEffect(() => {
-      if (!username) return;
+    /*useEffect(() => {
       axios.post(url+'login.php?username='+username)
       .then(function(response) {
+        console.log(response.data);
         setUserCredential(response.data);
         console.log(userCredential.username);
     })
         .catch(error => console.error(error));
-    })
+    })*/
 
 
     const handleSubmit = () => {
@@ -48,12 +50,25 @@ function Login(){
     } else if(password.length === 0){
         alert("Password is blank!");
     } else{
-        /*getData();*/
-        if(userCredential.username === username && userCredential.password === password){
-          alert("Success!");
+      let fData = new FormData();
+      fData.append('username', username)
+      axios.post(url+'login.php', fData)
+      .then(function(response) {
+        const userData = response.data;
+        console.log(userCredential.username);
+        if(userData.username === username && userData.password === password){
+          if(userData.id_role===1){
+            navigate(`/admin`);
+          } else if(userData.id_role===2){
+            navigate(`/manager`);
+          } else if(userData.id_role===3){
+            navigate(`/user`);
+          }
         } else{
           alert("Error");
         }
+    })
+        .catch(error => console.error(error));
         //console.log(credential);
       //setRole(credential[0].id_role);
       /*async function postData(url, data = {}) {

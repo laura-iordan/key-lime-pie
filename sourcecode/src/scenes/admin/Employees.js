@@ -33,7 +33,7 @@ function Employees() {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr onClick={() => navigate(`/updateEmployee/${user.id_user}`)} key={user.id_user} style={{backgroundColor: 'white'}}>
+            <tr onClick={() => navigate(`/admin/updateEmployee/${user.id_user}`)} key={user.id_user} style={{backgroundColor: 'white'}}>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.id_user}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.name}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{user.surname}</td>
@@ -51,7 +51,7 @@ function Employees() {
   justifyContent="flex-end"
   alignItems="flex-end"
 >
-      <Button variant="contained" component={Link} to="/addEmployee">Add Employee</Button>
+      <Button variant="contained" component={Link} to="/admin/addEmployee">Add Employee</Button>
       </Box>
     </div>
   );

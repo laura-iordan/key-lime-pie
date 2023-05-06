@@ -320,7 +320,7 @@ function UpdateEmployee(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/"
+            component={Link} to="/admin"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >

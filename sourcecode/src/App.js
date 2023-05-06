@@ -1,7 +1,7 @@
 import React from 'react';
 import Login, {role} from "./components/Login";
 import Admin from "./scenes/admin/Admin";
-import Manager from "./scenes/manager/Manager"
+import Home from "./components/Home"
 //import Projects from "./components/admin/Projects";
 //import Teams from "./components/admin/Teams";
 import { ThemeProvider } from '@emotion/react';
@@ -10,7 +10,7 @@ import { mainTheme } from "./theme"
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Routes, Route } from "react-router-dom";
 
-var isLoggedIn = true;
+var isLoggedIn = false;
 
 function renderConditionally(){
     if(isLoggedIn){
@@ -26,7 +26,7 @@ function App() {
     return (
         <ProSidebarProvider>
             <ThemeProvider theme = { mainTheme } >
-            {renderConditionally()}
+                <Home />
             </ThemeProvider>
         </ProSidebarProvider>
         
