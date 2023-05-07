@@ -13,6 +13,7 @@ import Team from '../scenes/manager/Team';
 import Chart from '../scenes/manager/Chart';
 import Pie from '../scenes/manager/Pie';
 import Line from '../scenes/manager/Line';
+import Dashboard from '../scenes/manager/Dashboard';
 
 
 
@@ -30,7 +31,8 @@ function Home() {
             <Route path="/admin/addEmployee" element={<AddEmployee />} />
             <Route path="/admin/updateEmployee/:id" element={<UpdateEmployee />} />
         </Route>
-        <Route path="/manager" element={<Manager />}>       
+        <Route path="/manager" element={<Manager />}>
+            <Route path="/manager/dashboard" element={<Dashboard />}/>       
             <Route path="/manager/team" element={<Team />} />
             <Route path="/manager/barChart" element={<Chart />} />
             <Route path="/manager/pieChart" element={<Pie />} />
