@@ -86,11 +86,7 @@ function PieChart(){
                 spacing: 10
             }
         ]}
-<<<<<<< HEAD
         fill={[
-=======
-        /*fill={[
->>>>>>> cbc131235d64777f59c0d4cb33463392b734fc1f
             {
                 match: {
                     id: 'ruby'
@@ -139,11 +135,7 @@ function PieChart(){
                 },
                 id: 'lines'
             }
-<<<<<<< HEAD
         ]}
-=======
-        ]}*/
->>>>>>> cbc131235d64777f59c0d4cb33463392b734fc1f
         legends={[
             {
                 anchor: 'bottom',
