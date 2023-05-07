@@ -7,7 +7,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import Projects from './Projects';
 import Teams from './Teams';
 import url from '../../get_php_link';
-import Sidebar from '../global/Siderbar.js';
+import Sidebar from '../global/Sidebar.js';
 
 
 /*function Admin(){
