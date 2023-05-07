@@ -14,10 +14,7 @@ function Manager() {
 
   return (
     <div>
-    <Topbar />
     <Outlet />
-    
-      
     
     </div>
   );

@@ -27,8 +27,6 @@ function Admin() {
 
   return (
     <div>
-    <Topbar />
-    <Sidebar/>
     <Outlet />
     
     </div>

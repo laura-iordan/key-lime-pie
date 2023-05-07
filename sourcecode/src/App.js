@@ -7,8 +7,9 @@ import Home from "./components/Home"
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from "@mui/material";
 import { mainTheme } from "./theme"
-import { ProSidebarProvider } from 'react-pro-sidebar';
+import { ProSidebarProvider, Sidebar } from 'react-pro-sidebar';
 import { Routes, Route } from "react-router-dom";
+import Topbar from './scenes/global/Topbar';
 
 var isLoggedIn = false;
 
@@ -26,7 +27,14 @@ function App() {
     return (
         <ProSidebarProvider>
             <ThemeProvider theme = { mainTheme } >
-                <Home />
+                <CssBaseline/>
+                <div className='app'>
+                    <Sidebar/>
+                    <main className='content'>
+                        <Topbar/>
+                        <Home />
+                    </main>
+                </div>
             </ThemeProvider>
         </ProSidebarProvider>
         

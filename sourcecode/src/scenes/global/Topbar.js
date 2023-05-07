@@ -16,19 +16,18 @@ const Topbar = () => {
     const theme = mainTheme;
     const colors = theme.palette;
     return (
-        <Box display="flex" justifyContent="space-between" sx={{
+        <Box display="flex" justifyContent="space-between"  sx={{
             display: "center",
             backgroundColor: colors.primary.dark,
             borderRadius: "3px"
             }} >
 
             <img src={logo} style={{
-                width: '100px', 
-                height: '100px',
-                paddingLeft: '25px',
-                paddingRight: '15px',
-                paddingTop: '15px',
-                marginBottom: '10px'
+                width: '90px', 
+                height: '90px',
+                marginLeft: '20px',
+                marginBottom: '10px',
+                marginTop: '15px'
             }}/>
 
             <Box display="flex" justifyContent="space-between">
@@ -52,9 +51,15 @@ const Topbar = () => {
                     paddingLeft: '30px',
                     marginRight: '20px'
                     }}>
-                    <Icon className="material-icons-outlined">notifications_outlined_icon</Icon>
-                    <Icon className="material-icons-outlined">settings_outlined_icon</Icon>
-                    <Icon className="material-icons-outlined">person_outlined_icon</Icon>
+                    <Icon className="material-icons-outlined" sx = {{
+                        marginInlineEnd: '5px'
+                    }}>notifications_outlined_icon</Icon>
+                    <Icon className="material-icons-outlined" sx = {{
+                        marginInlineEnd: '5px'
+                    }}>settings_outlined_icon</Icon>
+                    <Icon className="material-icons-outlined" sx = {{
+                        marginInlineEnd: '5px'
+                    }}>person_outlined_icon</Icon>
                 </Box>
 
             </Box>
