@@ -29,7 +29,7 @@ useEffect(() => {
 
 return (
   <Box
-          m="40px 0 0 0"
+        m="40px 0 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {

@@ -10,6 +10,7 @@ import AddEmployee from '../scenes/admin/AddEmployee';
 import Projects from '../scenes/admin/Projects';
 import Teams from '../scenes/admin/Teams';
 import Team from '../scenes/manager/Team';
+import Chart from '../scenes/manager/Chart';
 
 
 
@@ -29,6 +30,7 @@ function Home() {
         </Route>
         <Route path="/manager" element={<Manager />}>       
             <Route path="/manager/team" element={<Team />} />
+            <Route path="/manager/barChart" element={<Chart />} />
       </Route>
         <Route path="/user" element={<Projecthours />} />
       </Routes>
