@@ -32,7 +32,7 @@ else {
     echo "Connection not established";
 }*/
 
-$serverName = "DESKTOP-I61PSD9\SQLEXPRESS"; //serverName\instanceName
+$serverName = "LAP-ILK-G3\SQLEXPRESS"; //serverName\instanceName
 
 // Since UID and PWD are not specified in the $connectionInfo array,
 // The connection will be attempted using Windows Authentication.
