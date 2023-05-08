@@ -9,6 +9,7 @@ import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import PieChart from "../../components/PieChart";
 
 const Dashboard = () => {
 
@@ -265,9 +266,10 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ marginBottom: "15px" }}
           >
-            Geography Based Traffic
+          
           </Typography>
           <Box height="200px">
+          <PieChart />
           </Box>
         </Box>
       </Box>
