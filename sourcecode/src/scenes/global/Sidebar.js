@@ -54,10 +54,10 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: "#ceff9d !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#000000 !important",
         },
       }}
     >
@@ -69,7 +69,7 @@ const Sidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.primary.dark,
+              color: theme.green[900],
             }}
           >
             {!isCollapsed && (
@@ -79,8 +79,8 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.primary[100]}>
-                  ADMINIS
+                <Typography variant="h3" color={colors.primary.dark}>
+                  ADMIN
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -91,25 +91,16 @@ const Sidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
-                  color={colors.primary[100]}
+                  color={theme.green[900]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
                   Ed Roh
                 </Typography>
-                <Typography variant="h5" color={colors.primary[500]}>
+                <Typography variant="h5" color={colors.primary.dark}>
                   VP Fancy Admin
                 </Typography>
               </Box>
@@ -127,7 +118,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.primary.dark}
+              color={theme.green[900]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
@@ -156,7 +147,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.primary[300]}
+              color={theme.green[900]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Pages
@@ -185,7 +176,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.primary[300]}
+              color={theme.green[900]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Charts
