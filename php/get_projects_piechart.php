@@ -6,24 +6,19 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT t.id_teams, t.team_name, CONCAT(e.name, ' ',  e.surname) AS manager_name
-    FROM [dbo].[teams] AS t
-    INNER JOIN [dbo].[managers] AS m
-    ON t.id_manager=m.id_manager
-    INNER JOIN [dbo].[employees] AS e
-    ON m.id_employee = e.id_employee";
+  $sql = "SELECT [project_name], [budget] FROM [dbo].[projects]";
   
   $stmt = sqlsrv_query($conn, $sql);
   if (!$stmt) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  $teams = array();
+  $projects = array();
   while ($row = sqlsrv_fetch_object($stmt)) {
-    array_push($teams, $row);
+    array_push($projects, $row);
   }
   
-  echo json_encode($teams);
+  echo json_encode($projects);
 } else {
   die(print_r(sqlsrv_errors(), true));
 }

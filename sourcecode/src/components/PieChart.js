@@ -1,7 +1,28 @@
+import React, {useState, useEffect} from 'react';
 import { ResponsivePie } from "@nivo/pie";
+import url from '../get_php_link';
 
 function PieChart(){
-    const data=[
+
+    const [projects, setProjects] = useState([]);
+    let data=[];
+
+    useEffect(() => {
+      fetch(url+'get_projects_piechart.php')
+        .then(response => response.json())
+        .then(data => setProjects(data))
+        .catch(error => console.error(error));
+    }, []);
+
+    for(var i=0; i<projects.length; i++){
+        var obj={};
+        obj["id"]=projects[i]["project_name"];
+        obj["label"]=projects[i]["project_name"];
+        obj["value"]=projects[i]["budget"];
+        data[i]=obj;
+    }
+
+    /*const data=[
         {
           "id": "sass",
           "label": "sass",
@@ -32,7 +53,7 @@ function PieChart(){
           "value": 179,
           "color": "hsl(120, 70%, 50%)"
         }
-      ];
+      ];*/
     return(
         <ResponsivePie
         data={data}
@@ -86,56 +107,7 @@ function PieChart(){
                 spacing: 10
             }
         ]}
-        fill={[
-            {
-                match: {
-                    id: 'ruby'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'c'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'go'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'python'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'scala'
-                },
-                id: 'lines'
-            },
-            {
-                match: {
-                    id: 'lisp'
-                },
-                id: 'lines'
-            },
-            {
-                match: {
-                    id: 'elixir'
-                },
-                id: 'lines'
-            },
-            {
-                match: {
-                    id: 'javascript'
-                },
-                id: 'lines'
-            }
-        ]}
+
         legends={[
             {
                 anchor: 'bottom',
