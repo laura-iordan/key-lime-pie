@@ -7,7 +7,6 @@ import Home from "./components/Home"
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from "@mui/material";
 import { mainTheme } from "./theme"
-import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Routes, Route } from "react-router-dom";
 import Topbar from './scenes/global/Topbar';
 import Sidebar from './scenes/global/Sidebar';
@@ -27,7 +26,6 @@ function App() {
             <ThemeProvider theme = { mainTheme } >
                 <CssBaseline/>
                 <div className='app'>
-                    
                     <main className='content'>
                         <Topbar/>
                         <Sidebar/>
