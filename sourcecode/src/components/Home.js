@@ -21,7 +21,6 @@ function Home() {
 
 
   return (
-    <div>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/admin" element={<Admin />}>
@@ -41,7 +40,6 @@ function Home() {
         <Route path="/user" element={<Projecthours />} />
       </Routes>
     
-    </div>
   );
 }
 

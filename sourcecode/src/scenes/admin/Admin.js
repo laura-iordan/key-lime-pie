@@ -24,12 +24,8 @@ import Sidebar from '../global/Sidebar.js';
 
 function Admin() {
 
-
   return (
-    <div>
     <Outlet />
-    
-    </div>
   );
 }
 
