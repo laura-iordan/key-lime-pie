@@ -21,7 +21,7 @@ function Projects() {
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Hours</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Manager</th>
             <th style={{border: '1px solid #ddd', padding: '8px'}}>Starting Date</th>
-            <th style={{border: '1px solid #ddd', padding: '8px'}}>Ending Date</th>
+            <th style={{border: '1px solid #ddd', padding: '8px'}}>Target Date</th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@ function Projects() {
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{project.hours}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{project.manager_name}</td>
               <td style={{border: '1px solid #ddd', padding: '8px'}}>{project.starting_date.date}</td>
-              <td style={{border: '1px solid #ddd', padding: '8px'}}>{project.ending_date.date}</td>
+              <td style={{border: '1px solid #ddd', padding: '8px'}}>{project.target_date.date}</td>
             </tr>
           ))}
         </tbody>
