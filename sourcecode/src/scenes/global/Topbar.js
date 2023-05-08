@@ -49,16 +49,19 @@ const Topbar = () => {
                 <Box display="flex" justifyContent="flex-end" sx={{
                     alignSelf: 'center',
                     paddingLeft: '30px',
-                    marginRight: '20px'
+                    marginRight: '20px',
                     }}>
                     <Icon className="material-icons-outlined" sx = {{
-                        marginInlineEnd: '5px'
+                        marginInlineEnd: '5px',
+                        color: '#f4ffe9'
                     }}>notifications_outlined_icon</Icon>
                     <Icon className="material-icons-outlined" sx = {{
-                        marginInlineEnd: '5px'
+                        marginInlineEnd: '5px',
+                        color: '#f4ffe9'
                     }}>settings_outlined_icon</Icon>
                     <Icon className="material-icons-outlined" sx = {{
-                        marginInlineEnd: '5px'
+                        marginInlineEnd: '5px',
+                        color: '#f4ffe9'
                     }}>person_outlined_icon</Icon>
                 </Box>
 

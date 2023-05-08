@@ -24,7 +24,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     <MenuItem
       active={selected === title}
       style={{
-        color: colors.primary[100],
+        color: '#f4ffe9',
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -38,14 +38,14 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = mainTheme;
   const colors = theme.palette;
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
+          background: `${colors.primary.light} !important`,
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -69,7 +69,7 @@ const Sidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.primary[100],
+              color: colors.primary.dark,
             }}
           >
             {!isCollapsed && (
@@ -127,7 +127,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.primary[300]}
+              color={colors.primary.dark}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
