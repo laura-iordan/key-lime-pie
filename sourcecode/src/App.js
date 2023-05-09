@@ -6,10 +6,10 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from "@mui/material";
 import { mainTheme } from "./theme"
 import Topbar from './scenes/global/Topbar';
-import Sidebar from './scenes/global/Sidebar';
+import SidebarManager from './scenes/global/SidebarManager';
 import Manager from './scenes/manager/Manager';
 import Projecthours from './scenes/user/Projecthours';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Router } from "react-router-dom";
 import Employees from './scenes/admin/Employees';
 import UpdateEmployee from './scenes/admin/UpdateEmployee';
 import AddEmployee from './scenes/admin/AddEmployee';
@@ -37,25 +37,29 @@ function App() {
             <ThemeProvider theme = { mainTheme } >
                 <CssBaseline/>
                 <div className="app">
-                <Routes>
-                <Route path="/admin" element={<Sidebar isSidebar={isSidebar} />}>
-                    <Route path="/admin/projects" element={<Sidebar isSidebar={isSidebar} />} />
-                    <Route path="/admin/teams" element={<Sidebar isSidebar={isSidebar} />} />
-                    <Route path="/admin/addEmployee" element={<Sidebar isSidebar={isSidebar} />} />
-                    <Route path="/admin/updateEmployee/:id" element={<Sidebar isSidebar={isSidebar} />} />
+                    
+                    <Routes>
+                <Route path="/admin" element={<SidebarManager isSidebar={isSidebar} />}>
+                    <Route path="/admin/projects" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/admin/teams" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/admin/addEmployee" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/admin/updateEmployee/:id" element={<SidebarManager isSidebar={isSidebar} />} />
                 </Route>
-                <Route path="/manager" element={<Sidebar isSidebar={isSidebar} />}>
-                    <Route path="/manager/dashboard" element={<Sidebar isSidebar={isSidebar} />}/>       
-                    <Route path="/manager/team" element={<Sidebar isSidebar={isSidebar} />} />
-                    <Route path="/manager/barChart" element={<Sidebar isSidebar={isSidebar} />} />
-                    <Route path="/manager/pieChart" element={<Sidebar isSidebar={isSidebar} />} />
-                    <Route path="/manager/lineChart" element={<Sidebar isSidebar={isSidebar} />} />
+                <Route path="/manager" element={<SidebarManager isSidebar={isSidebar} />}>
+                    <Route path="/manager/dashboard" element={<SidebarManager isSidebar={isSidebar} />}/>       
+                    <Route path="/manager/team" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/barChart" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/pieChart" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/lineChart" element={<SidebarManager isSidebar={isSidebar} />} />
                 </Route>
-                <Route path="/user" element={<Sidebar isSidebar={isSidebar} />}/>
+                <Route path="/user" element={<SidebarManager isSidebar={isSidebar} />}/>
                 </Routes>
+               
+                
                 
                     <main className="content">
                     <Topbar setIsSidebar={setIsSidebar} />
+                    
                     <Routes>
                         <Route path="/" element={<Login />} />
                         <Route path="/admin" element={<Admin />}>
@@ -74,6 +78,8 @@ function App() {
                     </Route>
                         <Route path="/user" element={<Projecthours />} />
                     </Routes>
+               
+                    
                     </main>
                 </div>
             </ThemeProvider>
