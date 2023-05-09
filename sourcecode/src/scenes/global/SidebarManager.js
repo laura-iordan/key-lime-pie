@@ -15,6 +15,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import StackedLineChartOutlinedIcon from '@mui/icons-material/StackedLineChartOutlined';
 import { mainTheme } from "../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -162,6 +163,13 @@ const SidebarManager = () => {
               title="Line Chart"
               to="/manager/lineChart"
               icon={<TimelineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Line Chart"
+              to="/manager/bumpChart"
+              icon={<StackedLineChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
