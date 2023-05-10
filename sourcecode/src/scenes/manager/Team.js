@@ -41,7 +41,7 @@ function Team() {
               borderBottom: "none",
             },
             "& .name-column--cell": {
-              color: '#f8f8f8',
+              color: '#8f8f8f',
             },
             "& .MuiDataGrid-columnHeaders": {
               backgroundColor: '#f8f8f8',

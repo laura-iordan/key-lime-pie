@@ -9,7 +9,6 @@ import LineChart from "../../components/LineChart";
 import BumpChart from "../../components/BumpChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
 import PieChart from "../../components/PieChart";
 
 const Dashboard = () => {
@@ -173,7 +172,7 @@ const Dashboard = () => {
           >
           
           </Typography>
-          <Box height="300px">
+          <Box height="270px">
           <PieChart />
           </Box>
         </Box>
@@ -193,8 +192,8 @@ const Dashboard = () => {
           >
           
           </Typography>
-          <Box height="200px">
-          <LineChart />
+          <Box height="250px">
+          <LineChart isDashboard={true} />
           </Box>
         </Box>
         <Box
@@ -207,7 +206,7 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Sales Quantity
+            
           </Typography>
           <Box height="250px" mt="-20px">
             <BarChart isDashboard={true} />

@@ -22,38 +22,6 @@ function PieChart(){
         data[i]=obj;
     }
 
-    /*const data=[
-        {
-          "id": "sass",
-          "label": "sass",
-          "value": 45,
-          "color": "hsl(66, 70%, 50%)"
-        },
-        {
-          "id": "c",
-          "label": "c",
-          "value": 16,
-          "color": "hsl(75, 70%, 50%)"
-        },
-        {
-          "id": "make",
-          "label": "make",
-          "value": 23,
-          "color": "hsl(225, 70%, 50%)"
-        },
-        {
-          "id": "stylus",
-          "label": "stylus",
-          "value": 428,
-          "color": "hsl(283, 70%, 50%)"
-        },
-        {
-          "id": "python",
-          "label": "python",
-          "value": 179,
-          "color": "hsl(120, 70%, 50%)"
-        }
-      ];*/
     return(
         <ResponsivePie
         data={data}
@@ -62,6 +30,7 @@ function PieChart(){
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
+        colors={{ scheme: 'accent' }}
         borderWidth={1}
         borderColor={{
             from: 'color',

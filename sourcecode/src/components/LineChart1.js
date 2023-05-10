@@ -3,7 +3,7 @@ import { ResponsiveLine } from "@nivo/line";
 import url from '../get_php_link';
 
 function LineChart(){
-    const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
     const data=[];
 
     useEffect(() => {
@@ -42,17 +42,20 @@ function LineChart(){
     
     return (
       <ResponsiveLine
+
+      animate
       data={data}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+  margin={{
+    bottom: 60,
+    left: 80,
+    right: 20,
+    top: 20
+  }}
+  yFormat={function noRefCheck(){}}
+  yScale={{
+    type: 'linear'
+  }}
       xScale={{ type: 'point' }}
-      yScale={{
-          type: 'linear',
-          min: 'auto',
-          max: 'auto',
-          stacked: true,
-          reverse: false
-      }}
-      yFormat=" >-.2f"
       curve="cardinal"
       axisTop={null}
       axisRight={null}
@@ -78,11 +81,12 @@ function LineChart(){
       pointColor={{ theme: 'background' }}
       pointBorderWidth={2}
       pointBorderColor={{ from: 'serieColor' }}
-      enablePointLabel={false}
+      enablePointLabel={true}
       pointLabelYOffset={-12}
       useMesh={true}
       legends={[
           {
+              dataFrom: 'keys',
               anchor: 'bottom-right',
               direction: 'column',
               justify: false,
@@ -107,6 +111,7 @@ function LineChart(){
               ]
           }
       ]}
+
   />
 
        

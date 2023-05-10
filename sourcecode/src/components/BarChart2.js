@@ -5,38 +5,38 @@ import url from '../get_php_link';
 function BarChart(){
     const [tasks, setTasks] = useState([]);
     const data=[];
-    const key = {};
+    const keys = {};
 
     useEffect(() => {
-      fetch(url+'get_tasks_overdue.php')
+      fetch(url+'get_tasks.php')
         .then(response => response.json())
         .then(data => setTasks(data))
         .catch(error => console.error(error));
     }, []);
 
     for(var i=0; i<tasks.length; i++){
-        var obj = {}
-        obj["employee"]=tasks[i]["emp_name"];
-        obj["total tasks"]=tasks[i]["total_tasks"];
-        obj["total tasksColor"] = "hsl(50, 70%, 50%)";
-        obj["in schedule tasks"]=tasks[i]["on_schedule_tasks"];
-        obj["in schedule tasksColor"]="hsl(168, 70%, 50%)";
-        obj["overdue tasks"]=tasks[i]["overdue_tasks"];
-        obj["overdue tasksColor"]="hsl(79, 70%, 50%)";
-        data.push(obj);
+        let ok=0;
+        for(var j=0; j<data.length; j++){
+            data[j][tasks[i]["emp_name"]]=tasks[i]["task_no"];
+            ok=1;
+        }
+        if(ok===0){
+            var obj={};
+            obj["project"]=tasks[i]["project_name"];
+            obj[tasks[i]["emp_name"]]=tasks[i]["task_no"];
+            data.push(obj);
+            keys.push(tasks[i]["project_name"]);
+        }
     }
+
+
     console.log(data);
 
     
 return(
     <ResponsiveBar
         data={data}
-        groupMode="grouped"
-        keys={[
-            'total tasks',
-            'in schedule tasks',
-            'overdue tasks'
-        ]}
+        keys={keys}
         indexBy="employee"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
