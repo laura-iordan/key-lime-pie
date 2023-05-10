@@ -21,6 +21,7 @@ import Pie from './scenes/manager/Pie';
 import Line from './scenes/manager/Line';
 import Bump from './scenes/manager/Bump';
 import Dashboard from './scenes/manager/Dashboard';
+import BChart from './scenes/manager/Bar2';
 
 var isLoggedIn = false;
 
@@ -53,6 +54,7 @@ function App() {
                     <Route path="/manager/pieChart" element={<SidebarManager isSidebar={isSidebar} />} />
                     <Route path="/manager/lineChart" element={<SidebarManager isSidebar={isSidebar} />} />
                     <Route path="/manager/bumpChart" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/barChart2" element={<SidebarManager isSidebar={isSidebar} />} />
                 </Route>
                 <Route path="/user" element={<SidebarManager isSidebar={isSidebar} />}/>
                 </Routes>
@@ -78,6 +80,7 @@ function App() {
                             <Route path="/manager/pieChart" element={<Pie />} />
                             <Route path="/manager/lineChart" element={<Line />} />
                             <Route path="/manager/bumpChart" element={<Bump />} />
+                            <Route path="/manager/barChart2" element={<BChart />} />
                     </Route>
                         <Route path="/user" element={<Projecthours />} />
                     </Routes>

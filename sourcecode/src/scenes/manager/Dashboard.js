@@ -10,6 +10,7 @@ import BumpChart from "../../components/BumpChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import PieChart from "../../components/PieChart";
+import BarChart2 from '../../components/BarChart2';
 
 const Dashboard = () => {
 
@@ -180,7 +181,25 @@ const Dashboard = () => {
         {/* ROW 3 */}
 
         <Box
-          gridColumn="span 8"
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor="#97cb8c"
+          padding="30px"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ marginBottom: "15px" }}
+          >
+          
+          </Typography>
+          <Box height="250px">
+          <BarChart2 isDashboard={true} />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
           gridRow="span 2"
           backgroundColor="#97cb8c"
           padding="30px"

@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {ResponsiveBar} from '@nivo/bar';
 import url from '../get_php_link';
 
-function BarChart(){
+function BarChart2(){
     const [tasks, setTasks] = useState([]);
     const data=[];
-    const keys = {};
+    const keys = [];
 
     useEffect(() => {
       fetch(url+'get_tasks.php')
@@ -17,32 +17,42 @@ function BarChart(){
     for(var i=0; i<tasks.length; i++){
         let ok=0;
         for(var j=0; j<data.length; j++){
-            data[j][tasks[i]["emp_name"]]=tasks[i]["task_no"];
-            ok=1;
+            if(data[j]["project"]===tasks[i]["project_name"]){
+                data[j][tasks[i]["emp_name"]]=tasks[i]["task_no"];
+                if(!keys.includes(tasks[i]["emp_name"])){
+                    keys.push(tasks[i]["emp_name"]);
+                }
+                ok=1;
+            }
+            
         }
         if(ok===0){
             var obj={};
             obj["project"]=tasks[i]["project_name"];
             obj[tasks[i]["emp_name"]]=tasks[i]["task_no"];
             data.push(obj);
-            keys.push(tasks[i]["project_name"]);
+            if(!keys.includes(tasks[i]["emp_name"])){
+                keys.push(tasks[i]["emp_name"]);
+            }
+            
         }
     }
 
 
     console.log(data);
+    console.log(keys);
 
     
 return(
     <ResponsiveBar
         data={data}
         keys={keys}
-        indexBy="employee"
+        indexBy="project"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'nivo' }}
+        colors={{ scheme: 'paired' }}
         defs={[
             {
                 id: 'dots',
@@ -79,7 +89,7 @@ return(
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'employees',
+            legend: 'project',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -87,7 +97,7 @@ return(
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'food',
+            legend: 'tasks',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -127,10 +137,11 @@ return(
             }
         ]}
         role="application"
+        isFocusable={true}
         ariaLabel="Nivo bar chart demo"
         barAriaLabel={e=>e.id+": "+e.formattedValue+" in country: "+e.indexValue}
     />
 )
 }
 
-export default BarChart;
+export default BarChart2;
