@@ -17,6 +17,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import StackedLineChartOutlinedIcon from '@mui/icons-material/StackedLineChartOutlined';
 import { mainTheme } from "../../theme";
+import StackedBarChartOutlinedIcon from '@mui/icons-material/StackedBarChartOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = mainTheme;
@@ -149,6 +150,13 @@ const SidebarManager = () => {
               title="Bar Chart"
               to="/manager/barChart"
               icon={<BarChartOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Bar Chart"
+              to="/manager/barChart2"
+              icon={<StackedBarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
