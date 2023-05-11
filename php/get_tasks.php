@@ -26,5 +26,5 @@ if ($conn) {
   
   echo json_encode($users);
 } else {
-  die(print_r(sqlsrv_errors(), true));
+  die(print_r(sqlsrv_errors(), true));
 }
