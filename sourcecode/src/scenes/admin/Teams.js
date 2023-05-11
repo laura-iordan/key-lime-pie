@@ -77,7 +77,7 @@ function Teams({ history }) {
   justifyContent="flex-end"
   alignItems="flex-end"
 >
-      <Button variant="contained" component={Link} to="/admin/addEmployee">Add Teams</Button>
+      
       </Box>
         </Box>
         
