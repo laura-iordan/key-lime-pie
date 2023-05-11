@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT e.id_employee, e.name, e.surname, u.email, e.status, t.team_name 
+  $sql = "SELECT e.id_employee, e.name, e.surname, u.email, e.status 
   FROM  [dbo].[employees] AS e
   LEFT JOIN [dbo].[users] AS u
   ON e.id_user=u.id_user 

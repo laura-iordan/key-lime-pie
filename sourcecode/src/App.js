@@ -7,6 +7,7 @@ import { CssBaseline } from "@mui/material";
 import { mainTheme } from "./theme"
 import Topbar from './scenes/global/Topbar';
 import SidebarManager from './scenes/global/SidebarManager';
+import SidebarAdmin from './scenes/global/SidebarAdmin';
 import Manager from './scenes/manager/Manager';
 import Projecthours from './scenes/user/Projecthours';
 import { Routes, Route, Router } from "react-router-dom";
@@ -15,8 +16,10 @@ import UpdateEmployee from './scenes/admin/UpdateEmployee';
 import AddEmployee from './scenes/admin/AddEmployee';
 import Projects from './scenes/admin/Projects';
 import Teams from './scenes/admin/Teams';
+import Piead from './scenes/admin/Piead';
 import Team from './scenes/manager/Team';
 import Chart from './scenes/manager/Chart';
+import ChartAdmin from './scenes/admin/ChartAdmin';
 import Pie from './scenes/manager/Pie';
 import Line from './scenes/manager/Line';
 import Bump from './scenes/manager/Bump';
@@ -40,11 +43,13 @@ function App() {
                 <div className="app">
                     
                     <Routes>
-                <Route path="/admin" element={<SidebarManager isSidebar={isSidebar} />}>
-                    <Route path="/admin/projects" element={<SidebarManager isSidebar={isSidebar} />} />
-                    <Route path="/admin/teams" element={<SidebarManager isSidebar={isSidebar} />} />
-                    <Route path="/admin/addEmployee" element={<SidebarManager isSidebar={isSidebar} />} />
-                    <Route path="/admin/updateEmployee/:id" element={<SidebarManager isSidebar={isSidebar} />} />
+                <Route path="/admin" element={<SidebarAdmin isSidebar={isSidebar} />}>
+                    <Route path="/admin/projects" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/teams" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/addEmployee" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/updateEmployee/:id" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/barChartAdmin" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/pieChartAdmin" element={<SidebarAdmin isSidebar={isSidebar} />} />
                 </Route>
                 <Route path="/manager" element={<SidebarManager isSidebar={isSidebar} />}>
                     <Route path="/manager/dashboard" element={<SidebarManager isSidebar={isSidebar} />}/>       
@@ -70,6 +75,8 @@ function App() {
                             <Route path="/admin/teams" element={<Teams />} />
                             <Route path="/admin/addEmployee" element={<AddEmployee />} />
                             <Route path="/admin/updateEmployee/:id" element={<UpdateEmployee />} />
+                            <Route path="/admin/barChartAdmin" element={<ChartAdmin />} />
+                            <Route path="/admin/pieChartAdmin" element={<Piead />} />
                         </Route>
                         <Route path="/manager" element={<Manager />}>
                             <Route path="/manager/dashboard" element={<Dashboard />}/>       

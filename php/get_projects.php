@@ -6,12 +6,10 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT p.id_project, p.project_name, p.budget, p.hours, CONCAT(e.name, ' ',  e.surname) AS manager_name, p.starting_date, p.target_date 
+  $sql = "SELECT p.id_project, p.project_name, p.budget, p.hours, CONCAT(e.name, ' ',  e.surname) AS manager_name, p.starting_date, p.ending_date 
   FROM [dbo].[projects] AS p
-  INNER JOIN  [dbo].[users] AS u
-  ON p.id_manager=u.id_user
-  INNER JOIN [dbo].[employees] AS e
-  ON e.id_user=u.id_user";
+  INNER JOIN  [dbo].[employees] AS e
+  ON p.id_manager=e.id_employee";
   
   $stmt = sqlsrv_query($conn, $sql);
   if (!$stmt) {

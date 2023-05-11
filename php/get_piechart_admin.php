@@ -6,22 +6,22 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT t.id_teams, t.team_name, CONCAT(e.name, ' ',  e.surname) AS manager_name
-  FROM [dbo].[teams] AS t
-  INNER JOIN [dbo].[employees] AS e
-  ON t.id_manager=e.id_employee";
+  $sql = "SELECT status.status, COUNT(employees.id_employee) AS count
+  FROM status
+  LEFT JOIN employees ON status.id_status = employees.status
+  GROUP BY status.status";
   
   $stmt = sqlsrv_query($conn, $sql);
   if (!$stmt) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  $teams = array();
+  $activ = array();
   while ($row = sqlsrv_fetch_object($stmt)) {
-    array_push($teams, $row);
+    array_push($activ, $row);
   }
   
-  echo json_encode($teams);
+  echo json_encode($activ);
 } else {
   die(print_r(sqlsrv_errors(), true));
 }
