@@ -26,6 +26,7 @@ import Bump from './scenes/manager/Bump';
 import Dashboard from './scenes/manager/Dashboard';
 import BChart from './scenes/manager/Bar2';
 
+
 var isLoggedIn = false;
 
 function renderConditionally(){

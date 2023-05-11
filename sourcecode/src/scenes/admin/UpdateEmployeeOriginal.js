@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useParams, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -8,13 +9,25 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {Link } from "react-router-dom";
-import { Typography } from '@mui/material';
-import { mainTheme } from '../../theme';
-import Header from '../../components/Header';
-import { alignProperty } from '@mui/material/styles/cssUtils';
 
 
-function AddEmployee(){
+function UpdateEmployee(){
+  
+  const navigate = useNavigate();
+  const { id } = useParams();
+    const [user, setUser] = useState({
+      username: "",
+      email: "",
+      id_role: 3,
+      name: "",
+      surname: "",
+      SSN: 0,
+      address: "",
+      phone_no: "",
+      hourly_fee: 0,
+      status: 1,
+    });
+    
     
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -30,6 +43,93 @@ function AddEmployee(){
     const [statuses, setStatuses] = useState([]);
 
     useEffect(() => {
+      axios.post(url+'get_employee.php?id_user='+id)
+      .then(function(response) {
+        console.log(response.data);
+        setUser(response.data);
+    })
+        .catch(error => console.error(error));
+    }, []);
+
+
+    /*useEffect(() => {
+      if (!id) return;
+      axios.get(url+'get_employee.php',{
+          params: {
+            id_user: id,
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+       })
+       .then(function (response) {
+        console.log(response.data);
+      });
+    }, []);*/
+    
+    /*const getData = () => {
+
+      //setLoading(true);
+      
+      const params = new FormData();
+      params.append("id_user", id);
+
+      axios.post(url+"get_employee.php", params).then((response)=>{
+        setUser({});
+        setUser(response.data);
+      });
+    }
+    useEffect(getData, [id]);*/
+
+    
+
+
+   /*useEffect(() => {
+      //if (!id) return;
+      let fetchPost = () => {
+        const response1 = axios.get(url+'get_employee.php?id_user='+id).then(response => {return response.data}).catch(error=>console.error(error));
+        return response1;
+        //console.log(user);
+      };
+      const a = fetchPost();
+      console.log(a);
+
+      a.then( result => {setUser(result);
+      console.log(user)});
+    }, []);*/
+
+    /*useEffect(() => {
+   const userUpdated = () => {
+      const data1 = axios.get(url+'get_employee.php',{
+        params: {
+          id_user: id,
+        }
+      }).then(response => {return response.data}).catch(error=>console.error(error))
+      return data1;
+  }
+
+  const data = userUpdated();
+  console.log(data);
+  
+  data.then(result => {
+    setUser(result);
+    console.log(user); // "Some User token"
+ })
+});*/
+
+  /*useEffect(() => {
+    let newURL = url+'get_employee.php?id_user='+id;
+
+    fetch(newURL)
+      .then(response => response.json())
+      .then(data => setUser(data))
+      .catch(error => console.error(error));
+  }, []);*/
+
+
+  
+
+    useEffect(() => {
       fetch(url+'get_role.php')
         .then(response => response.json())
         .then(data => setRoles(data))
@@ -42,42 +142,37 @@ function AddEmployee(){
         .then(data => setStatuses(data))
         .catch(error => console.error(error));
     }, []);
-    
-    const handleSubmit = () => {
-          if(username.length === 0){
-              alert("Username is blank!");
-          } else if(email.length === 0){
-              alert("Email is blank!");
-          } else{
 
-            /*axios.get(url)
-            .then((response) => {
-                alert(response.data);
-            })
-            .catch((err) => console.log(err));*/
-              
-  
+    const handleChange = (e) => {
+      const userClone = { ...user };
+      userClone[e.target.name] = e.target.value;
+      setUser(userClone);
+    };
+    
+    const handleSubmit = () => {          
               let fData = new FormData();
-              fData.append('username', username);
-              fData.append('email', email);
-              fData.append('password', '1234');
-              fData.append('id_role', role);
-              fData.append('name', name);
-              fData.append('surname', surname);
-              fData.append('SSN', ssn);
-              fData.append('address', address);
-              fData.append('email', email);
-              fData.append('phoneNo', phoneNo);
-              fData.append('hourlyFee', hourlyFee);
-              fData.append('status', status);
+              fData.append('id_user', id)
+              fData.append('username', user.username);
+              fData.append('email', user.email);
+              fData.append('id_role', user.role);
+              fData.append('name', user.name);
+              fData.append('surname', user.surname);
+              fData.append('SSN', user.SSN);
+              fData.append('address', user.address);
+              fData.append('email', user.email);
+              fData.append('phoneNo', user.phone_no);
+              fData.append('hourlyFee', user.hourly_fee);
+              fData.append('status', user.status);
   
-              axios.post(url+'add_employee.php', fData)
+              axios.post(url+'update_employee.php', fData)
               .then(response=>alert(response.data))
               .catch(error=>alert(error));                  
-              }
+              
           }
     const handleChangeRole=(e)=>{
-      setRole(e.target.value);
+      const userClone = { ...user };
+      userClone[e.target.name] = e.target.value;
+      setUser(userClone);
     }
 
     const handleChangeStatus=(e)=>{
@@ -85,29 +180,9 @@ function AddEmployee(){
     }
 
     return (
-      <div style = {{
-        paddingLeft: '450px',
-        paddingRight: '450px'
-        
-      }}>
-        <Typography variant='h1'>
-          <p style={{
-            textAlign: 'center'
-          }}>
-          Add Employee
-          </p>
-        </Typography>
-        <Box className="rounded-corners" style = {{
-          padding: '50px',
-          backgroundColor: mainTheme.green[100]
-          }}> 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ 
-          mt: 1,
-          '.MuiTextField-root': {
-            background: '#ffffff'
-          } }}>
+    <div> 
+        <Box component="form" noValidate sx={{ mt: 1 }}>
           <TextField
-            backgroundColor='#ffffff'
             margin="normal"
             required
             fullWidth
@@ -116,8 +191,8 @@ function AddEmployee(){
             name="username"
             autoComplete="username"
             autoFocus
-            value={username} 
-            onChange={(e)=>setUsername(e.target.value)}
+            value={user.username} 
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -128,25 +203,25 @@ function AddEmployee(){
             type="email"
             id="email"
             autoComplete="email"
-            value={email} 
-            onChange={(e)=>setEmail(e.target.value)}
+            value={user.email} 
+            onChange={handleChange}
           />
           <InputLabel id="role-label">Role</InputLabel>
             <Select
               sx={{       
                 width: 250,
                 height: 50,
-                background: '#ffffff'
               }}
 
-              value={role}
+              value={user.id_role}
               labelId="role-label"
               id="role-select"
               label="Role"
-              onChange={handleChangeRole}
+              name="id_role"
+              onChange={handleChange}
               >
               {roles.map(role => (
-                <MenuItem value={role.id_role}>{role.role}</MenuItem>
+                <MenuItem key={role.id_role} name="id_role" value={role.id_role}>{role.role}</MenuItem>
               ))}
 
             </Select>
@@ -159,8 +234,8 @@ function AddEmployee(){
             name="name"
             autoComplete="name"
             autoFocus
-            value={name} 
-            onChange={(e)=>setName(e.target.value)}
+            value={user.name} 
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -171,8 +246,8 @@ function AddEmployee(){
             type="surname"
             id="surname"
             autoComplete="surname"
-            value={surname} 
-            onChange={(e)=>setSurname(e.target.value)}
+            value={user.surname} 
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -180,10 +255,10 @@ function AddEmployee(){
             fullWidth
             id="ssn"
             label="SSN"
-            name="ssn"
+            name="SSN"
             autoComplete="ssn"
             autoFocus
-            value={ssn} 
+            value={user.SSN} 
             onChange={(e)=>setSsn(e.target.value)}
           />
           <TextField
@@ -195,8 +270,8 @@ function AddEmployee(){
             type="address"
             id="address"
             autoComplete="address"
-            value={address} 
-            onChange={(e)=>setAddress(e.target.value)}
+            value={user.address} 
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -204,40 +279,40 @@ function AddEmployee(){
             fullWidth
             id="phoneNo"
             label="PhoneNo"
-            name="phoneNo"
+            name="phone_no"
             autoComplete="phoneNo"
             autoFocus
-            value={phoneNo} 
-            onChange={(e)=>setPhoneNo(e.target.value)}
+            value={user.phone_no} 
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            name="hourlyFee"
+            name="hourly_fee"
             label="Hourly Fee"
             type="hourlyFee"
             id="hourlyFee"
             autoComplete="hourlyFee"
-            value={hourlyFee} 
-            onChange={(e)=>setHourlyFee(e.target.value)}
+            value={user.hourly_fee} 
+            onChange={handleChange}
           />
           <InputLabel id="status-label">Status</InputLabel>
             <Select
               sx={{       
                 width: 250,
                 height: 50,
-                background: '#ffffff'
               }}
 
-              value={status}
+              value={user.status}
               labelId="status-label"
               id="status-select"
               label="Status"
-              onChange={handleChangeStatus}
+              name="status"
+              onChange={handleChange}
               >
               {statuses.map(status => (
-                <MenuItem value={status.id_status}>{status.status}</MenuItem>
+                <MenuItem key={status.id_status} value={status.id_status}>{status.id_status}</MenuItem>
               ))}
 
             </Select>
@@ -249,15 +324,10 @@ function AddEmployee(){
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >
-            <Typography>
-              Submit
-            </Typography>
-            
+            Update
           </Button>
         </Box>
-    </Box>
-      </div>
-    );
+    </div>);
 }
 
-export default AddEmployee;
+export default UpdateEmployee;

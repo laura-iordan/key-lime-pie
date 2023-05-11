@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Topbar from '../global/Topbar';
 import Employees from './Employees';
 import UpdateEmployee from './UpdateEmployee';
-import AddEmployee from './AddEmployee';
+import AddEmployee from './AddEmployeeOriginal';
 import { Routes, Route, Outlet } from "react-router-dom";
 import Projects from './Projects';
 import Teams from './Teams';

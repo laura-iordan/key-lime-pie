@@ -9,7 +9,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {Link } from "react-router-dom";
-
+import { mainTheme } from '../../theme';
+import { Typography } from '@mui/material';
 
 function UpdateEmployee(){
   
@@ -180,9 +181,28 @@ function UpdateEmployee(){
     }
 
     return (
-    <div> 
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+    <div style = {{
+        paddingLeft: '450px',
+        paddingRight: '450px'
+        
+      }}> 
+      <Typography variant='h1'>
+          <p style={{
+            textAlign: 'center'
+          }}>
+          Update Employee
+          </p>
+        </Typography>
+        <Box className="rounded-corners" style = {{
+          padding: '50px',
+          backgroundColor: mainTheme.green[100]
+          }}> 
+        <Box component="form" noValidate sx={{ mt: 1,
+          '.MuiTextField-root': {
+            background: '#ffffff'
+          } }}>
           <TextField
+          backgroundColor='#ffffff'
             margin="normal"
             required
             fullWidth
@@ -211,6 +231,7 @@ function UpdateEmployee(){
               sx={{       
                 width: 250,
                 height: 50,
+                background: '#ffffff'
               }}
 
               value={user.id_role}
@@ -302,6 +323,7 @@ function UpdateEmployee(){
               sx={{       
                 width: 250,
                 height: 50,
+                background: '#ffffff'
               }}
 
               value={user.status}
@@ -324,8 +346,11 @@ function UpdateEmployee(){
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >
-            Update
+            <Typography>
+                Update
+            </Typography>
           </Button>
+          </Box>
         </Box>
     </div>);
 }

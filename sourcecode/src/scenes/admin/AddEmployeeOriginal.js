@@ -8,10 +8,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {Link } from "react-router-dom";
-import { Typography } from '@mui/material';
-import { mainTheme } from '../../theme';
-import Header from '../../components/Header';
-import { alignProperty } from '@mui/material/styles/cssUtils';
+
 
 
 function AddEmployee(){
@@ -85,29 +82,9 @@ function AddEmployee(){
     }
 
     return (
-      <div style = {{
-        paddingLeft: '450px',
-        paddingRight: '450px'
-        
-      }}>
-        <Typography variant='h1'>
-          <p style={{
-            textAlign: 'center'
-          }}>
-          Add Employee
-          </p>
-        </Typography>
-        <Box className="rounded-corners" style = {{
-          padding: '50px',
-          backgroundColor: mainTheme.green[100]
-          }}> 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ 
-          mt: 1,
-          '.MuiTextField-root': {
-            background: '#ffffff'
-          } }}>
+    <div> 
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
-            backgroundColor='#ffffff'
             margin="normal"
             required
             fullWidth
@@ -136,7 +113,6 @@ function AddEmployee(){
               sx={{       
                 width: 250,
                 height: 50,
-                background: '#ffffff'
               }}
 
               value={role}
@@ -227,7 +203,6 @@ function AddEmployee(){
               sx={{       
                 width: 250,
                 height: 50,
-                background: '#ffffff'
               }}
 
               value={status}
@@ -249,15 +224,10 @@ function AddEmployee(){
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >
-            <Typography>
-              Submit
-            </Typography>
-            
+            Submit
           </Button>
         </Box>
-    </Box>
-      </div>
-    );
+    </div>);
 }
 
 export default AddEmployee;
