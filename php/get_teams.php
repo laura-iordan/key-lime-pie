@@ -7,9 +7,11 @@ header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
   $sql = "SELECT t.id_teams, t.team_name, CONCAT(e.name, ' ',  e.surname) AS manager_name
-  FROM [dbo].[teams] AS t
-  INNER JOIN [dbo].[employees] AS e
-  ON t.id_manager=e.id_employee";
+    FROM [dbo].[teams] AS t
+    INNER JOIN [dbo].[managers] AS m
+    ON t.id_manager=m.id_manager
+    INNER JOIN [dbo].[employees] AS e
+    ON m.id_employee = e.id_employee";
   
   $stmt = sqlsrv_query($conn, $sql);
   if (!$stmt) {
