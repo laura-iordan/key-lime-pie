@@ -31,7 +31,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography>{title}</Typography>
+      <Typography component='div'>{title}</Typography>
       <Link to={to} />
     </MenuItem>
   );
@@ -81,7 +81,7 @@ const SidebarManager = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.primary.dark}>
+                <Typography component='div' variant="h3" color={colors.primary.dark}>
                   MANAGER
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -95,6 +95,7 @@ const SidebarManager = () => {
             <Box mb="25px">
               <Box textAlign="center">
                 <Typography
+                component='div'
                   variant="h2"
                   color={theme.green[900]}
                   fontWeight="bold"
@@ -102,7 +103,7 @@ const SidebarManager = () => {
                 >
                   Name Surname
                 </Typography>
-                <Typography variant="h5" color={colors.primary.dark}>
+                <Typography component='div' variant="h5" color={colors.primary.dark}>
                   name.surname@gmail.com
                 </Typography>
               </Box>
@@ -119,6 +120,7 @@ const SidebarManager = () => {
             />
 
             <Typography
+            component='div'
               variant="h6"
               color={theme.green[900]}
               sx={{ m: "15px 0 5px 20px" }}
@@ -140,6 +142,7 @@ const SidebarManager = () => {
               setSelected={setSelected}
             />
             <Typography
+            component='div'
               variant="h6"
               color={theme.green[900]}
               sx={{ m: "15px 0 5px 20px" }}

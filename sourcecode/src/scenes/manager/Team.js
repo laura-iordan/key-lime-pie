@@ -64,7 +64,7 @@ function Team() {
   >
     
     <Box m="20px">
-    <Typography>
+    <Typography component='div'>
       <Header title="Manage Users" />
       </Typography>
       <Box
@@ -73,6 +73,7 @@ function Team() {
       margin: '50px'
     }}>
       <DataGrid
+      component='div'
       checkboxSelection
       columns={columns}
       rows={users}
