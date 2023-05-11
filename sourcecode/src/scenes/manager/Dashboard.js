@@ -11,6 +11,7 @@ import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import PieChart from "../../components/PieChart";
 import BarChart2 from '../../components/BarChart2';
+import { mainTheme } from "../../theme";
 
 const Dashboard = () => {
 
@@ -23,14 +24,16 @@ const Dashboard = () => {
         <Box>
           <Button
             sx={{
-              backgroundColor: '#37CBC2',
-              color: '#839897',
+              backgroundColor: mainTheme.palette.primary.main,
+              color: '#f4ffe9',
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
             }}
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+            <DownloadOutlinedIcon sx={{ 
+              mr: "10px"
+               }} />
             Download Reports
           </Button>
         </Box>
@@ -45,8 +48,9 @@ const Dashboard = () => {
       >
         {/* ROW 1 */}
         <Box
+          className="rounded-corners"
           gridColumn="span 3"
-          backgroundColor="#97cb8c"
+          backgroundColor="#eaf5e8"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -64,13 +68,15 @@ const Dashboard = () => {
           />
         </Box>
         <Box
+          className="rounded-corners"
           gridColumn="span 3"
-          backgroundColor='#97cb8c'
+          backgroundColor='#eaf5e8'
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
+            className="rounded-corners"
             title="431,225"
             subtitle="Sales Obtained"
             progress="0.50"
@@ -83,13 +89,15 @@ const Dashboard = () => {
           />
         </Box>
         <Box
+          className="rounded-corners"
           gridColumn="span 3"
-          backgroundColor='#97cb8c'
+          backgroundColor='#eaf5e8'
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
+            className="rounded-corners"
             title="32,441"
             subtitle="New Clients"
             progress="0.30"
@@ -102,8 +110,9 @@ const Dashboard = () => {
           />
         </Box>
         <Box
+          className="rounded-corners"
           gridColumn="span 3"
-          backgroundColor="#5b7a54"
+          backgroundColor="#eaf5e8"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -123,11 +132,12 @@ const Dashboard = () => {
 
         {/* ROW 2 */}
         <Box
+          className="rounded-corners"
           gridColumn="span 8"
           gridRow="span 2"
-          backgroundColor="#5b7a54"
+          backgroundColor="#eaf5e8"
         >
-          <Box
+          <Box  
             mt="25px"
             p="0 30px"
             display="flex "
@@ -161,6 +171,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+          className="rounded-corners"
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor="#eaf5e8"
@@ -181,9 +192,10 @@ const Dashboard = () => {
         {/* ROW 3 */}
 
         <Box
+          className="rounded-corners"
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor="#97cb8c"
+          backgroundColor="#eaf5e8"
           padding="30px"
         >
           <Typography
@@ -199,9 +211,10 @@ const Dashboard = () => {
         </Box>
 
         <Box
+          className="rounded-corners"
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor="#97cb8c"
+          backgroundColor="#eaf5e8"
           padding="30px"
         >
           <Typography
@@ -216,9 +229,10 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+          className="rounded-corners"
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor="#97cb8c"
+          backgroundColor="#eaf5e8"
         >
           <Typography
             variant="h5"

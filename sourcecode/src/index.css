@@ -16,6 +16,10 @@ body,
     position: relative;
 }
 
+.rounded-corners {
+    border-radius: 25px;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
