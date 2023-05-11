@@ -25,6 +25,7 @@ import Line from './scenes/manager/Line';
 import Bump from './scenes/manager/Bump';
 import Dashboard from './scenes/manager/Dashboard';
 import BChart from './scenes/manager/Bar2';
+import AddTeam from './scenes/admin/AddTeam';
 
 
 var isLoggedIn = false;
@@ -76,6 +77,7 @@ function App() {
                             <Route path="/admin" element={<Employees />} />
                             <Route path="/admin/projects" element={<Projects />} />
                             <Route path="/admin/teams" element={<Teams />} />
+                            <Route path="/admin/addTeam" element={<AddTeam />} />
                             <Route path="/admin/addEmployee" element={<AddEmployee />} />
                             <Route path="/admin/updateEmployee/:id" element={<UpdateEmployee />} />
                             <Route path="/admin/barChartAdmin" element={<ChartAdmin />} />
