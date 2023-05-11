@@ -42,7 +42,7 @@ return(
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'nivo' }}
+        colors={{ scheme: 'purpleRed_green' }}
         defs={[
             {
                 id: 'dots',
@@ -87,7 +87,7 @@ return(
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'food',
+            legend: 'tasks',
             legendPosition: 'middle',
             legendOffset: -40
         }}
