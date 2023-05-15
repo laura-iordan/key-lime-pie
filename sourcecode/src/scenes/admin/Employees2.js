@@ -39,7 +39,7 @@ function Employees2() {
 }
 
   const columns = useMemo(()=>[
-    {field:'id_user', headerName:'ID', width:60, hide: true},
+    {field:'id_user', headerName:'ID', width:60},
     {field:'name', headerName:'Name', flex: 1, cellClassName: "name-column--cell", editable:true},
     {field:'surname', headerName:'Surname', flex: 1, editable:true},
     {field:'email', headerName:'Email', flex: 1,},
@@ -162,6 +162,4 @@ function Employees2() {
 }
 
 export default Employees2;
-
-
 
