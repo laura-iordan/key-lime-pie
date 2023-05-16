@@ -1,9 +1,10 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, Dialog, IconButton, Typography } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
+import CloseIcon from '@mui/icons-material/Close';
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import BumpChart from "../../components/BumpChart";
@@ -12,11 +13,63 @@ import StatBox from "../../components/StatBox";
 import PieChart from "../../components/PieChart";
 import BarChart2 from '../../components/BarChart2';
 import { mainTheme } from "../../theme";
+import { useState, useRef } from "react";
+import "./../../index.css";
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Dashboard = () => {
 
+  const [open, setOpen] = useState(false);
+  const[boxId, setBoxId] =useState("");
+
+  const ref = useRef(null);
+
+  const handleClickOpen = (event) => {
+    setOpen(true);
+    setBoxId(event.currentTarget.id);
+  };
+
+  function handleContent(boxId) {
+    if (boxId === "first-box") {
+      return (
+        <span>
+          box1
+        </span>
+      );
+    }
+    if (boxId === "second-box") {
+      return (
+        <span>
+          box2
+        </span>
+      );
+    }
+    if (boxId === "third-box") {
+      return (
+        <span>
+          box3
+        </span>
+      );
+    }
+    if (boxId === "fourth-box") {
+      return (
+        <span>
+          box4
+        </span>
+      );
+    }
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
-    <Box m="20px">
+        <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
@@ -46,28 +99,35 @@ const Dashboard = () => {
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
+
         <Box
+          id="first-box"
+          ref={ref}
+          onClick={handleClickOpen}
           className="rounded-corners"
           gridColumn="span 3"
           backgroundColor="#eaf5e8"
           display="flex"
           alignItems="center"
           justifyContent="center"
-        >
+          >
+
           <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={
-              <EmailIcon
-                sx={{ color: '#5b7a54', fontSize: "26px" }}
-              />
-            }
-          />
+              title="12,361"
+              subtitle="Emails Sent"
+              progress="0.75"
+              increase="+14%"
+              icon={
+                <EmailIcon
+                  sx={{ color: '#5b7a54', fontSize: "26px" }}
+                />
+              }/>
         </Box>
+
         <Box
+          id="second-box"
+          ref={ref}
+          onClick={handleClickOpen}
           className="rounded-corners"
           gridColumn="span 3"
           backgroundColor='#eaf5e8'
@@ -88,7 +148,11 @@ const Dashboard = () => {
             }
           />
         </Box>
+
         <Box
+          id="third-box"
+          ref={ref}
+          onClick={handleClickOpen}
           className="rounded-corners"
           gridColumn="span 3"
           backgroundColor='#eaf5e8'
@@ -110,6 +174,9 @@ const Dashboard = () => {
           />
         </Box>
         <Box
+          id="fourth-box"
+          ref={ref}
+          onClick={handleClickOpen}
           className="rounded-corners"
           gridColumn="span 3"
           backgroundColor="#eaf5e8"
@@ -129,6 +196,30 @@ const Dashboard = () => {
             }
           />
         </Box>
+
+        <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogActions>
+        <CloseIcon
+              onClick={handleClose} autoFocus>
+              </CloseIcon>
+        </DialogActions>
+        <DialogTitle>
+          <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
+          {"TITLE"}
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <div>
+              {handleContent(boxId)}
+            </div>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+
 
         {/* ROW 2 */}
         <Box
@@ -247,6 +338,7 @@ const Dashboard = () => {
         </Box>
         </Box>
         </Box>
+   
   );
 };
 
