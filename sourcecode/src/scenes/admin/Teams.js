@@ -123,15 +123,7 @@ function Teams({ history }) {
         <Typography>
           <Header title="Teams" />
         </Typography>
-        <Box height="75vh" sx={{ margin: "50px" }}>
-          <DataGrid
-            checkboxSelection
-            columns={columns}
-            rows={teams}
-            getRowId={(row) => row.id_teams}
-            components={{ Toolbar: GridToolbar }}
-          />
-          <Box
+        <Box
   m={1}
  //margin
   display="flex"
@@ -140,6 +132,15 @@ function Teams({ history }) {
 >
       <Button variant="contained" component={Link} to="/admin/addTeam">Add Team</Button>
       </Box>
+        <Box height="75vh" sx={{ margin: "50px" }}>
+          <DataGrid
+            checkboxSelection
+            columns={columns}
+            rows={teams}
+            getRowId={(row) => row.id_teams}
+            components={{ Toolbar: GridToolbar }}
+          />
+
         </Box>
         
       </Box>

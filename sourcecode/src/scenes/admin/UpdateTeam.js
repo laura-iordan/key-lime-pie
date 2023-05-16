@@ -71,7 +71,7 @@ function UpdateTeam(){
           <p style={{
             textAlign: 'center'
           }}>
-          Update Employee
+          Update Team
           </p>
         </Typography>
         <Box className="rounded-corners" style = {{

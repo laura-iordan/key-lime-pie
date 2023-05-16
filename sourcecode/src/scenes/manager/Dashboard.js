@@ -113,8 +113,8 @@ const Dashboard = () => {
           >
 
           <StatBox
-              title="12,361"
-              subtitle="Emails Sent"
+              title="12"
+              subtitle="Finalized Projects"
               progress="0.75"
               increase="+14%"
               icon={
@@ -137,8 +137,8 @@ const Dashboard = () => {
         >
           <StatBox
             className="rounded-corners"
-            title="431,225"
-            subtitle="Sales Obtained"
+            title="431"
+            subtitle="Tasks on time"
             progress="0.50"
             increase="+21%"
             icon={
@@ -162,8 +162,8 @@ const Dashboard = () => {
         >
           <StatBox
             className="rounded-corners"
-            title="32,441"
-            subtitle="New Clients"
+            title="5"
+            subtitle="New Projects"
             progress="0.30"
             increase="+5%"
             icon={
@@ -185,8 +185,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
+            title="17"
+            subtitle="Projects"
             progress="0.80"
             increase="+43%"
             icon={

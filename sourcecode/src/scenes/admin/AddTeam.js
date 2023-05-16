@@ -8,6 +8,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { mainTheme } from '../../theme';
+import { Typography } from '@mui/material';
 
 function AddTeam() {
   const [teamName, setTeamName] = useState('');
@@ -46,8 +48,25 @@ function AddTeam() {
   };
 
   return (
-    <div>
-      <Box component="form" onSubmit={handleInsert} noValidate sx={{ mt: 1 }}>
+    <div style = {{
+      paddingLeft: '450px',
+      paddingRight: '450px'
+      
+    }}>      <Typography variant='h1'>
+          <p style={{
+            textAlign: 'center'
+          }}>
+          Add Team
+          </p>
+        </Typography>
+            <Box className="rounded-corners" style = {{
+          padding: '50px',
+          backgroundColor: mainTheme.green[100]
+          }}> 
+      <Box component="form" onSubmit={handleInsert} noValidate sx={{ mt: 1,
+          '.MuiTextField-root': {
+            background: '#ffffff'
+          } }}>
         <TextField
           margin="normal"
           required
@@ -94,6 +113,7 @@ function AddTeam() {
         >
           Create New Team
         </Button>
+      </Box>
       </Box>
     </div>
   );

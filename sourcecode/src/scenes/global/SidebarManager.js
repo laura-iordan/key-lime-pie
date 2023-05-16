@@ -136,7 +136,7 @@ const SidebarManager = () => {
             />
             <Item
               title="Contacts Information"
-              to="/contacts"
+              to="/manager/task"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

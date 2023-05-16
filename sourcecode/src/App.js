@@ -27,6 +27,9 @@ import Dashboard from './scenes/manager/Dashboard';
 import BChart from './scenes/manager/Bar2';
 import AddTeam from './scenes/admin/AddTeam';
 import UpdateTeam from './scenes/admin/UpdateTeam';
+import Task from './scenes/manager/Task';
+import AddTask from './scenes/manager/AddTask';
+import UpdateTask from './scenes/manager/UpdateTask';
 
 
 var isLoggedIn = false;
@@ -59,6 +62,9 @@ function App() {
                 <Route path="/manager" element={<SidebarManager isSidebar={isSidebar} />}>
                     <Route path="/manager/dashboard" element={<SidebarManager isSidebar={isSidebar} />}/>       
                     <Route path="/manager/team" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/task" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/addTask" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/updateTask/:id" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/manager/barChart" element={<SidebarManager isSidebar={isSidebar} />} />
                     <Route path="/manager/pieChart" element={<SidebarManager isSidebar={isSidebar} />} />
                     <Route path="/manager/lineChart" element={<SidebarManager isSidebar={isSidebar} />} />
@@ -89,6 +95,9 @@ function App() {
                         <Route path="/manager" element={<Manager />}>
                             <Route path="/manager/dashboard" element={<Dashboard />}/>       
                             <Route path="/manager/team" element={<Team />} />
+                            <Route path="/manager/task" element={<Task />} />
+                            <Route path="/manager/addTask" element={<AddTask />} />
+                            <Route path="/manager/updateTask/:id" element={<UpdateTask />} />
                             <Route path="/manager/barChart" element={<Chart />} />
                             <Route path="/manager/pieChart" element={<Pie />} />
                             <Route path="/manager/lineChart" element={<Line />} />
