@@ -10,8 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import {Link } from "react-router-dom";
 import { Typography } from '@mui/material';
 import { mainTheme } from '../../theme';
-import Header from '../../components/Header';
-import { alignProperty } from '@mui/material/styles/cssUtils';
+
 
 
 function AddEmployee(){
@@ -49,12 +48,6 @@ function AddEmployee(){
           } else if(email.length === 0){
               alert("Email is blank!");
           } else{
-
-            /*axios.get(url)
-            .then((response) => {
-                alert(response.data);
-            })
-            .catch((err) => console.log(err));*/
               
   
               let fData = new FormData();

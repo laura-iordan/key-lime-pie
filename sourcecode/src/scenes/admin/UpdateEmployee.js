@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -13,12 +13,9 @@ import { mainTheme } from '../../theme';
 import { Typography } from '@mui/material';
 
 function UpdateEmployee(){
-  
-  const navigate = useNavigate();
+
   const { id } = useParams();
     const [user, setUser] = useState({
-      username: "",
-      email: "",
       id_role: 3,
       name: "",
       surname: "",
@@ -29,17 +26,7 @@ function UpdateEmployee(){
       status: 1,
     });
     
-    
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [ssn, setSsn] = useState('');
-    const [address, setAddress] = useState('');
-    const [phoneNo, setPhoneNo] = useState('');
-    const [hourlyFee, setHourlyFee] = useState('');
-    const [status, setStatus] = useState(1);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [role, setRole] = useState(3);
+
     const [roles, setRoles] = useState([]);
     const [statuses, setStatuses] = useState([]);
 
@@ -50,85 +37,9 @@ function UpdateEmployee(){
         setUser(response.data);
     })
         .catch(error => console.error(error));
-    }, []);
+    }, [id]);
 
-
-    /*useEffect(() => {
-      if (!id) return;
-      axios.get(url+'get_employee.php',{
-          params: {
-            id_user: id,
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-       })
-       .then(function (response) {
-        console.log(response.data);
-      });
-    }, []);*/
-    
-    /*const getData = () => {
-
-      //setLoading(true);
-      
-      const params = new FormData();
-      params.append("id_user", id);
-
-      axios.post(url+"get_employee.php", params).then((response)=>{
-        setUser({});
-        setUser(response.data);
-      });
-    }
-    useEffect(getData, [id]);*/
-
-    
-
-
-   /*useEffect(() => {
-      //if (!id) return;
-      let fetchPost = () => {
-        const response1 = axios.get(url+'get_employee.php?id_user='+id).then(response => {return response.data}).catch(error=>console.error(error));
-        return response1;
-        //console.log(user);
-      };
-      const a = fetchPost();
-      console.log(a);
-
-      a.then( result => {setUser(result);
-      console.log(user)});
-    }, []);*/
-
-    /*useEffect(() => {
-   const userUpdated = () => {
-      const data1 = axios.get(url+'get_employee.php',{
-        params: {
-          id_user: id,
-        }
-      }).then(response => {return response.data}).catch(error=>console.error(error))
-      return data1;
-  }
-
-  const data = userUpdated();
-  console.log(data);
-  
-  data.then(result => {
-    setUser(result);
-    console.log(user); // "Some User token"
- })
-});*/
-
-  /*useEffect(() => {
-    let newURL = url+'get_employee.php?id_user='+id;
-
-    fetch(newURL)
-      .then(response => response.json())
-      .then(data => setUser(data))
-      .catch(error => console.error(error));
-  }, []);*/
-
-
-  
+ 
 
     useEffect(() => {
       fetch(url+'get_role.php')
@@ -152,9 +63,7 @@ function UpdateEmployee(){
     
     const handleSubmit = () => {          
               let fData = new FormData();
-              fData.append('id_user', id)
-              fData.append('username', user.username);
-              fData.append('email', user.email);
+              fData.append('id_user', id);
               fData.append('id_role', user.role);
               fData.append('name', user.name);
               fData.append('surname', user.surname);
@@ -170,15 +79,7 @@ function UpdateEmployee(){
               .catch(error=>alert(error));                  
               
           }
-    const handleChangeRole=(e)=>{
-      const userClone = { ...user };
-      userClone[e.target.name] = e.target.value;
-      setUser(userClone);
-    }
 
-    const handleChangeStatus=(e)=>{
-      setStatus(e.target.value);
-    }
 
     return (
     <div style = {{
@@ -201,29 +102,29 @@ function UpdateEmployee(){
           '.MuiTextField-root': {
             background: '#ffffff'
           } }}>
+          
           <TextField
-          backgroundColor='#ffffff'
             margin="normal"
             required
             fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="name"
             autoFocus
-            value={user.username} 
+            value={user.name} 
             onChange={handleChange}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            name="email"
-            label="Email"
-            type="email"
-            id="email"
-            autoComplete="email"
-            value={user.email} 
+            name="surname"
+            label="Surname"
+            type="surname"
+            id="surname"
+            autoComplete="surname"
+            value={user.surname} 
             onChange={handleChange}
           />
           <InputLabel id="role-label">Role</InputLabel>
@@ -250,37 +151,13 @@ function UpdateEmployee(){
             margin="normal"
             required
             fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            value={user.name} 
-            onChange={handleChange}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="surname"
-            label="Surname"
-            type="surname"
-            id="surname"
-            autoComplete="surname"
-            value={user.surname} 
-            onChange={handleChange}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
             id="ssn"
             label="SSN"
             name="SSN"
             autoComplete="ssn"
             autoFocus
             value={user.SSN} 
-            onChange={(e)=>setSsn(e.target.value)}
+            onChange={handleChange}
           />
           <TextField
             margin="normal"

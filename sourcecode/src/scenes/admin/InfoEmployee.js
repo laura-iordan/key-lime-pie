@@ -251,4 +251,4 @@ function InfoEmployee(){
     </div>);
 }
 
-export default UpdateEmployee;
+export default InfoEmployee;

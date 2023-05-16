@@ -26,7 +26,7 @@ import Bump from './scenes/manager/Bump';
 import Dashboard from './scenes/manager/Dashboard';
 import BChart from './scenes/manager/Bar2';
 import AddTeam from './scenes/admin/AddTeam';
-import Employees2 from './scenes/admin/Employees2';
+import UpdateTeam from './scenes/admin/UpdateTeam';
 
 
 var isLoggedIn = false;
@@ -52,6 +52,7 @@ function App() {
                     <Route path="/admin/teams" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/addEmployee" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/updateEmployee/:id" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/updateTeam/:id" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/barChartAdmin" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/pieChartAdmin" element={<SidebarAdmin isSidebar={isSidebar} />} />
                 </Route>
@@ -76,10 +77,10 @@ function App() {
                         <Route path="/" element={<Login />} />
                         <Route path="/admin" element={<Admin />}>
                             <Route path="/admin" element={<Employees />} />+
-                            <Route path="/admin/employees" element={<Employees2 />} />
                             <Route path="/admin/projects" element={<Projects />} />
                             <Route path="/admin/teams" element={<Teams />} />
                             <Route path="/admin/addTeam" element={<AddTeam />} />
+                            <Route path="/admin/updateTeam/:id" element={<UpdateTeam />} />
                             <Route path="/admin/addEmployee" element={<AddEmployee />} />
                             <Route path="/admin/updateEmployee/:id" element={<UpdateEmployee />} />
                             <Route path="/admin/barChartAdmin" element={<ChartAdmin />} />

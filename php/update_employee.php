@@ -7,8 +7,6 @@ header('Access-Control-Allow-Headers: *');
 
 if($conn){
     echo $id_user = $_POST['id_user'];
-    echo $username = $_POST['username'];
-    echo $email = $_POST['email'];
     echo $id_role = $_POST['id_role'];
     echo $name = $_POST['name'];
     echo $surname = $_POST['surname'];

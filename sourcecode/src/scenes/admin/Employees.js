@@ -14,6 +14,7 @@ function Employees2() {
 
   const [users, setUsers] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let opt= [];
   for(var i=0; i<teams.length; i++){
@@ -33,9 +34,14 @@ function Employees2() {
     fData.append('id_team', row.team_name);
 
     axios.post(url+'update_e.php', fData)
-    .then(response=>alert(response.data))
-    .catch(error=>alert(error));                  
+    .then(response=>response.data)
+    .catch(error=>alert(error)); 
     
+    if(loading === true){
+      setLoading(false);
+    } else{
+      setLoading(true);
+    }  
 }
 
   const columns = useMemo(()=>[
@@ -71,7 +77,7 @@ function Employees2() {
           ]
       }
 
-  ], [opt])
+  ], [opt, loading])
 
   useEffect(() => {
     fetch(url+'get_users.php')
@@ -80,7 +86,7 @@ function Employees2() {
         console.log(data)
         setUsers(data)})
       .catch(error => console.error(error));
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     fetch(url + "get_teams.php")
@@ -89,7 +95,7 @@ function Employees2() {
         setTeams(data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [loading]);
 
 
   return (
@@ -129,8 +135,17 @@ function Employees2() {
     
     <Box m="20px">
     <Typography>
-      <Header title="Employee" />
+      <Header title="Manage Employees" />
       </Typography>
+      <Box
+  m={1}
+ //margin
+  display="flex"
+  justifyContent="flex-end"
+  alignItems="flex-end"
+>
+      <Button variant="contained" component={Link} to="/admin/addEmployee">Add Employee</Button>
+      </Box>
       <Box
     height="75vh"
     sx = {{
@@ -144,15 +159,7 @@ function Employees2() {
       components={{ Toolbar: GridToolbar }}
     >
     </DataGrid>
-    <Box
-  m={1}
- //margin
-  display="flex"
-  justifyContent="flex-end"
-  alignItems="flex-end"
->
-      <Button variant="contained" component={Link} to="/admin/addEmployee">Add Employee</Button>
-      </Box>
+
     </Box>
     </Box>
     

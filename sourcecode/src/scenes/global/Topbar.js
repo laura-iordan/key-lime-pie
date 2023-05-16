@@ -11,8 +11,11 @@ import Box from '@mui/material/Box';
 import { mainTheme } from "../../theme"
 import logo from '../../resources/logo.png'
 import { Padding, PaddingOutlined } from "@mui/icons-material";
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import { useNavigate } from "react-router-dom";
 
 const Topbar = () => {
+    const navigate = useNavigate();
     const theme = mainTheme;
     const colors = theme.palette;
     return (
@@ -63,6 +66,9 @@ const Topbar = () => {
                         marginInlineEnd: '5px',
                         color: '#f4ffe9'
                     }}>person_outlined_icon</Icon>
+                    <IconButton onClick={() => navigate(`/`)}>
+                        <ExitToAppOutlinedIcon />
+                    </IconButton>
                 </Box>
 
             </Box>
