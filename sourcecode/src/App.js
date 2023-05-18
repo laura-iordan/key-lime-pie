@@ -30,6 +30,7 @@ import UpdateTeam from './scenes/admin/UpdateTeam';
 import Task from './scenes/manager/Task';
 import AddTask from './scenes/manager/AddTask';
 import UpdateTask from './scenes/manager/UpdateTask';
+import CardinalAreaChart from './components/CardinalAreaChart';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
                     <Route path="/manager/lineChart" element={<SidebarManager isSidebar={isSidebar} />} />
                     <Route path="/manager/bumpChart" element={<SidebarManager isSidebar={isSidebar} />} />
                     <Route path="/manager/barChart2" element={<SidebarManager isSidebar={isSidebar} />} />
+                    <Route path="/manager/cardinalAreaChart" element={<CardinalAreaChart isSidebar={isSidebar} />}/>
                 </Route>
                 <Route path="/user" element={<SidebarManager isSidebar={isSidebar} />}/>
                 </Routes>
@@ -93,6 +95,7 @@ function App() {
                             <Route path="/manager/lineChart" element={<Line />} />
                             <Route path="/manager/bumpChart" element={<Bump />} />
                             <Route path="/manager/barChart2" element={<BChart />} />
+                            <Route path="/manager/cardinalAreaChart" element={<CardinalAreaChart/>}/>
                     </Route>
                         <Route path="/user" element={<Projecthours />} />
                     </Routes>
