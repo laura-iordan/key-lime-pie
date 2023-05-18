@@ -1,8 +1,4 @@
 import { Box, Dialog, IconButton, Typography } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import CloseIcon from '@mui/icons-material/Close';
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
@@ -18,6 +14,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { AiFillAlert } from "react-icons/ai";
+import { MdOutlineWorkHistory } from "react-icons/md";
+import { BsPersonFillUp } from "react-icons/bs";
+import { FaTasks } from "react-icons/fa";
+import CardinalAreaChart from "./../../components/CardinalAreaChart";
 
 const Dashboard = () => {
 
@@ -95,13 +95,13 @@ const Dashboard = () => {
           >
 
           <StatBox
-              title="12"
+              title="89%"
               subtitle="Employees Performance"
               progress="0.75"
               increase="+14%"
               icon={
-                <EmailIcon
-                  sx={{ color: '#5b7a54', fontSize: "26px" }}
+                <BsPersonFillUp
+                  style = {{ color: '#5b7a54', fontSize: "26px" }}
                 />
               }/>
         </Box>
@@ -124,8 +124,8 @@ const Dashboard = () => {
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
-                sx={{ color: '#5b7a54', fontSize: "26px" }}
+              <FaTasks
+                style = {{ color: '#5b7a54', fontSize: "26px" }}
               />
             }
           />
@@ -149,8 +149,8 @@ const Dashboard = () => {
             progress="0.30"
             increase="+5%"
             icon={
-              <PersonAddIcon
-                sx={{ color: "#5b7a54", fontSize: "26px" }}
+              <MdOutlineWorkHistory
+                style ={{ color: "#5b7a54", fontSize: "26px" }}
               />
             }
           />
@@ -167,7 +167,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="17"
+            title="2"
             subtitle="Projects Approaching Deadline"
             progress="0.80"
             increase="+23%"
@@ -243,7 +243,8 @@ const Dashboard = () => {
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
-            <BumpChart isDashboard={true} />
+            <CardinalAreaChart/>
+            
           </Box>
         </Box>
         <Box
@@ -301,7 +302,7 @@ const Dashboard = () => {
           
           </Typography>
           <Box height="250px">
-          <LineChart isDashboard={true} />
+          <BumpChart isDashboard={true} />
           </Box>
         </Box>
         <Box
