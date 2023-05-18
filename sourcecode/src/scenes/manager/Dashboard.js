@@ -1,5 +1,4 @@
-import { Box, Button, Dialog, IconButton, Typography } from "@mui/material";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import { Box, Dialog, IconButton, Typography } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -12,7 +11,6 @@ import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import PieChart from "../../components/PieChart";
 import BarChart2 from '../../components/BarChart2';
-import { mainTheme } from "../../theme";
 import { useState, useRef } from "react";
 import "./../../index.css";
 import DialogActions from '@mui/material/DialogActions';
