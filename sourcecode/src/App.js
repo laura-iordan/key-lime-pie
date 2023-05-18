@@ -31,6 +31,7 @@ import Task from './scenes/manager/Task';
 import AddTask from './scenes/manager/AddTask';
 import UpdateTask from './scenes/manager/UpdateTask';
 import CardinalAreaChart from './components/CardinalAreaChart';
+import UpdateProjects from './scenes/admin/UpdateProjects';
 
 
 function App() {
@@ -75,7 +76,7 @@ function App() {
                         <Route path="/" element={<Login />} />
                         <Route path="/admin" element={<Admin />}>
                             <Route path="/admin" element={<Employees />} />+
-                            <Route path="/admin/projects" element={<Projects />} />
+                            <Route path="/admin/projects" element={<UpdateProjects />} />
                             <Route path="/admin/teams" element={<Teams />} />
                             <Route path="/admin/addTeam" element={<AddTeam />} />
                             <Route path="/admin/updateTeam/:id" element={<UpdateTeam />} />
