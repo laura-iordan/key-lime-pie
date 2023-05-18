@@ -10,7 +10,7 @@ import SidebarManager from './scenes/global/SidebarManager';
 import SidebarAdmin from './scenes/global/SidebarAdmin';
 import Manager from './scenes/manager/Manager';
 import Projecthours from './scenes/user/Projecthours';
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Employees from './scenes/admin/Employees';
 import UpdateEmployee from './scenes/admin/UpdateEmployee';
 import AddEmployee from './scenes/admin/AddEmployee';
@@ -31,16 +31,6 @@ import Task from './scenes/manager/Task';
 import AddTask from './scenes/manager/AddTask';
 import UpdateTask from './scenes/manager/UpdateTask';
 
-
-var isLoggedIn = false;
-
-function renderConditionally(){
-    if(isLoggedIn){
-        return <Admin />
-    } else{
-        return <Login />
-    }
-}
 
 function App() {
     const [isSidebar, setIsSidebar] = useState(true);

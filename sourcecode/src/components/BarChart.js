@@ -5,7 +5,6 @@ import url from '../get_php_link';
 function BarChart(){
     const [tasks, setTasks] = useState([]);
     const data=[];
-    const key = {};
 
     useEffect(() => {
       fetch(url+'get_tasks_overdue.php')

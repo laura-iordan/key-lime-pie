@@ -76,7 +76,7 @@ function Employees2() {
         </IconButton>
           ]
       }
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   ], [opt, loading])
 
   useEffect(() => {

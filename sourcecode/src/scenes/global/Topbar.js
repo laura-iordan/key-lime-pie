@@ -1,16 +1,11 @@
 import { IconButton } from "@mui/material";
-import { useTheme } from '@mui/material/styles';
 import { InputBase } from "@mui/material";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import Icon from '@mui/material/Icon';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { mainTheme } from "../../theme"
-import logo from '../../resources/logo.png'
-import { Padding, PaddingOutlined } from "@mui/icons-material";
+import { mainTheme } from "../../theme";
+import logo from '../../resources/logo.png';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +20,7 @@ const Topbar = () => {
             borderRadius: "3px"
             }} >
 
-            <img src={logo} style={{
+            <img alt="" src={logo} style={{
                 width: '90px', 
                 height: '90px',
                 marginLeft: '20px',
