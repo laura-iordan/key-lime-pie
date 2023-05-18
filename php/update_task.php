@@ -13,8 +13,9 @@ if($conn){
     echo $starting_date = $_POST['starting_date'];
     echo $target_date = $_POST['target_date'];
     echo $ending_date=$_POST['ending_date'];
-    echo $starting_date=substr($starting_date, 0, 10);
-    echo $target_date=substr($target_date, 0, 10);
+    //echo $starting_date=substr($starting_date, 0, 10);
+    //echo $target_date=substr($target_date, 0, 10);
+    echo $starting_date=var_dump(json_decode($starting_date));
 
 
     if(!is_numeric($id_project)&&!is_numeric($id_employee)){
