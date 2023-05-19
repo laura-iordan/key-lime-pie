@@ -17,6 +17,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { AiFillAlert } from "react-icons/ai";
 
 const Dashboard = () => {
 
@@ -95,7 +96,7 @@ const Dashboard = () => {
 
           <StatBox
               title="12"
-              subtitle="Finalized Projects"
+              subtitle="Employees Performance"
               progress="0.75"
               increase="+14%"
               icon={
@@ -167,15 +168,18 @@ const Dashboard = () => {
         >
           <StatBox
             title="17"
-            subtitle="Projects"
+            subtitle="Projects Approaching Deadline"
             progress="0.80"
-            increase="+43%"
+            increase="+23%"
             icon={
-              <TrafficIcon
-                sx={{ color: "#5b7a54", fontSize: "26px" }}
+              <AiFillAlert
+                style = {{
+                  color: "#5b7a54", fontSize: "26px" 
+                }}
               />
             }
-          />
+          >
+          </StatBox>
         </Box>
 
         <Dialog
