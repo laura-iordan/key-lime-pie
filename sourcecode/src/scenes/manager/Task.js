@@ -66,8 +66,8 @@ function Tasks() {
     fData.append('task_name', row.task_name);
     fData.append('id_employee', row.employee_name);
     fData.append('id_project', row.project_name);
-    fData.append('starting_date', row.starting_date.date);
-    fData.append('target_date', row.target_date.date);
+    fData.append('starting_date', row.starting_date);
+    fData.append('target_date', row.target_date);
     console.log(row.starting_date);
 
     axios.post(url+'update_task.php', fData)
@@ -89,16 +89,16 @@ function Tasks() {
     valueOptions: opt1},
         {field:'project_name', headerName:'Project', flex: 1, editable: true, type: 'singleSelect', 
     valueOptions: opt2},
-    { field: "starting_date", headerName: "Starting date", flex: 1 , editable: true,
-valueGetter: (tasks)=>moment(tasks.row.starting_date.date).format('DD-MM-YYYY')},
-    { field: "target_date", headerName: "Target Date", flex: 1 , editable: true, 
-    valueGetter: (tasks)=>moment(tasks.row.target_date.date).format('DD-MM-YYYY')},
-    { field: "ending_date", headerName: "Ending Date", flex: 1 , editable: true,
-    valueGetter: (tasks)=>{if(tasks.row.ending_date === null){
+    { field: "starting_date", headerName: "Starting date", flex: 1, editable: true},
+//valueGetter: (tasks)=>moment(tasks.row.starting_date.date).format('YYYY-MM-DD')},
+    { field: "target_date", headerName: "Target Date", flex: 1 , editable: true}, 
+    //valueGetter: (tasks)=>moment(tasks.row.target_date.date).format('YYYY-MM-DD')},
+    { field: "ending_date", headerName: "Ending Date", flex: 1 , editable: true}
+    /*valueGetter: (tasks)=>{if(tasks.row.ending_date === null){
         return null;
     }else{
-        return moment(tasks.row.ending_date.date).format('DD-MM-YYYY')
-    }}},
+        return moment(tasks.row.ending_date.date).format('YYYY-MM-DD')
+    }}}*/,
         {
             field: "action",
             headerName: "Action",
@@ -115,6 +115,8 @@ valueGetter: (tasks)=>moment(tasks.row.starting_date.date).format('DD-MM-YYYY')}
    // eslint-disable-next-line react-hooks/exhaustive-deps
    [opt1, opt2, loading]
   );
+
+  
 
 
 

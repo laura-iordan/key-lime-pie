@@ -4,18 +4,21 @@ include "dbsqlconnection.php";
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
+//print_r($_POST['starting_date']);
+//print_r(substr($_POST['starting_date'], 0, 10));
 
+//die();
 if($conn){
     echo $id_task = $_POST['id_task'];
     echo $task_name = $_POST['task_name'];
     echo $id_employee = $_POST['id_employee'];
     echo $id_project = $_POST['id_project'];
-    echo $starting_date = $_POST['starting_date'];
-    echo $target_date = $_POST['target_date'];
-    echo $ending_date=$_POST['ending_date'];
+    echo $starting_date = substr($_POST['starting_date'], 0, 10);
+    echo $target_date = substr($_POST['target_date'], 0, 10);
+    //echo $ending_date=substr($_POST['ending_date'], 0, 10);
     //echo $starting_date=substr($starting_date, 0, 10);
     //echo $target_date=substr($target_date, 0, 10);
-    echo $starting_date=var_dump(json_decode($starting_date));
+    //echo $starting_date=var_dump(json_decode($starting_date));
 
 
     if(!is_numeric($id_project)&&!is_numeric($id_employee)){
