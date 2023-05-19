@@ -48,14 +48,14 @@ const cardinal = curveCardinal.tension(0.2);
 export default function App() {
   return (
     <AreaChart
-      width={700}
-      height={400}
+      width={900}
+      height={250}
       data={data}
       margin={{
-        top: 10,
-        right: 30,
+        top: 50,
+        right: 10,
         left: 0,
-        bottom: 0
+        bottom: 10
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
