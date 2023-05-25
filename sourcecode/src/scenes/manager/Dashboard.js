@@ -28,9 +28,10 @@ const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [boxId, setBoxId] = useState("");
 
-  const [teamPerformance, setTeamPerformance] = useState([]);
+  const [teamPerformance, setTeamPerformance] = useState();
   const [onTimeTasks, setOnTimeTasks] = useState([]);
   const [overdueTasks, setOverdueTasks] = useState([]);
+  
 
   const performance = [];
   const onTime = [];
@@ -39,7 +40,8 @@ const Dashboard = () => {
   useEffect(() => {
     fetch(url+'get_team_performance.php')
       .then(response => response.json())
-      .then(teamPerformance => setTeamPerformance(teamPerformance))
+      .then(data => {setTeamPerformance(data)
+      console.log(data)})
       .catch(error => console.error(error));
   }, []);
 
@@ -57,9 +59,11 @@ const Dashboard = () => {
       .catch(error => console.error(error));
   }, []);
 
-  performance.push(teamPerformance[0]["team_performance"]);
-  onTime.push(onTimeTasks[0]["on_schedule_tasks"]);
-  overdue.push(overdueTasks[0]["overdue_tasks"]);
+  console.log(teamPerformance['team_performance']);
+
+  //performance.push(teamPerformance[0]["team_performance"]);
+  //onTime.push(onTimeTasks[0]["on_schedule_tasks"]);
+  //overdue.push(overdueTasks[0]["overdue_tasks"]);
 
   const ref = useRef(null);
 
@@ -136,7 +140,7 @@ const Dashboard = () => {
           >
 
           <StatBox
-              title={performance}
+              title={teamPerformance['team_performance']}
               subtitle="Employees Performance"
               progress="0.75"
               increase="+14%"
