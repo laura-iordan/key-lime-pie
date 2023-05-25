@@ -242,10 +242,7 @@ const Dashboard = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <CardinalAreaChart/>
-            
-          </Box>
+          <CardinalAreaChart />
         </Box>
         <Box
           className="rounded-corners"
