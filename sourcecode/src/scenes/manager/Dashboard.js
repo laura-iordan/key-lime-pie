@@ -28,12 +28,14 @@ const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [boxId, setBoxId] = useState("");
 
-  const [teamPerformance, setTeamPerformance] = useState();
+  const [teamPerformance, setTeamPerformance] = useState({
+    team_performance: 0
+  });
   const [onTimeTasks, setOnTimeTasks] = useState([]);
   const [overdueTasks, setOverdueTasks] = useState([]);
   
 
-  const performance = [];
+  //const performance = [];
   const onTime = [];
   const overdue = [];
 
@@ -58,8 +60,8 @@ const Dashboard = () => {
       .then(overdueTasks => setOverdueTasks(overdueTasks))
       .catch(error => console.error(error));
   }, []);
-
-  console.log(teamPerformance['team_performance']);
+  let title = teamPerformance['team_performance'] + "%";
+  console.log(title);
 
   //performance.push(teamPerformance[0]["team_performance"]);
   //onTime.push(onTimeTasks[0]["on_schedule_tasks"]);
@@ -140,7 +142,7 @@ const Dashboard = () => {
           >
 
           <StatBox
-              title={teamPerformance['team_performance']}
+              title={title}
               subtitle="Employees Performance"
               progress="0.75"
               increase="+14%"
