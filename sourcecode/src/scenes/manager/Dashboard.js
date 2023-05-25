@@ -1,7 +1,7 @@
 import { Box, Dialog, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import Header from "../../components/Header";
-import LineChart from "../../components/LineChart";
+//import LineChart from "../../components/LineChart";
 import BumpChart from "../../components/BumpChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
@@ -18,6 +18,9 @@ import { MdOutlineWorkHistory } from "react-icons/md";
 import { BsPersonFillUp } from "react-icons/bs";
 import { FaTasks } from "react-icons/fa";
 import CardinalAreaChart from "./../../components/CardinalAreaChart";
+import Canvas1 from "./Canvas";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import { Canvas } from "@react-pdf/renderer";
 
 const Dashboard = () => {
 
@@ -30,6 +33,10 @@ const Dashboard = () => {
     setOpen(true);
     setBoxId(event.currentTarget.id);
   };
+
+  function download(){
+      
+  }
 
   function handleContent(boxId) {
     if (boxId === "first-box") {
@@ -318,8 +325,16 @@ const Dashboard = () => {
           >
             
           </Typography>
+          <Box>
+              <IconButton>
+                <DownloadOutlinedIcon
+                  sx={{ fontSize: "26px", color: "#5b7a54"}}
+                  onclick={() => download()}
+                />
+              </IconButton>
+            </Box>
           <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+            <Canvas1 isDashboard={true} />
           </Box>
         </Box>
         </Box>

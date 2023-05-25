@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {ResponsiveBar} from '@nivo/bar';
 import url from '../get_php_link';
 
-function BarChart(){
+function BarChart({forwardRef}){
     const [tasks, setTasks] = useState([]);
     const data=[];
 
@@ -29,6 +29,7 @@ function BarChart(){
     
 return(
     <ResponsiveBar
+        ref={forwardRef}
         data={data}
         groupMode="grouped"
         keys={[
