@@ -7,22 +7,40 @@ import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import PieChart from "../../components/PieChart";
 import BarChart2 from '../../components/BarChart2';
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./../../index.css";
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { AiFillAlert } from "react-icons/ai";
-import { MdOutlineWorkHistory } from "react-icons/md";
+import { BiTaskX } from "react-icons/bi";
 import { BsPersonFillUp } from "react-icons/bs";
 import { FaTasks } from "react-icons/fa";
 import CardinalAreaChart from "./../../components/CardinalAreaChart";
+import url from '../../get_php_link';
 
 const Dashboard = () => {
 
   const [open, setOpen] = useState(false);
-  const[boxId, setBoxId] =useState("");
+  const [boxId, setBoxId] = useState("");
+
+  const [teamPerformance, setTeamPerformance] = useState([]);
+  const [onTimeTasks, setOnTimeTasks] = useState([]);
+  const [overdueTasks, setOverdueTasks] = useState([]);
+
+  const performance = [];
+
+  useEffect(() => {
+    fetch(url+'get_team_performance.php')
+      .then(response => response.json())
+      .then(performance => setTeamPerformance(performance))
+      .catch(error => console.error(error));
+  }, []);
+
+  var obj = {}
+  obj = teamPerformance["team_performance"];
+  performance.push(obj);
 
   const ref = useRef(null);
 
@@ -95,7 +113,7 @@ const Dashboard = () => {
           >
 
           <StatBox
-              title="89%"
+              title={performance}
               subtitle="Employees Performance"
               progress="0.75"
               increase="+14%"
@@ -145,11 +163,11 @@ const Dashboard = () => {
           <StatBox
             className="rounded-corners"
             title="5"
-            subtitle="New Projects"
+            subtitle="Overdue tasks"
             progress="0.30"
             increase="+5%"
             icon={
-              <MdOutlineWorkHistory
+              <BiTaskX
                 style ={{ color: "#5b7a54", fontSize: "26px" }}
               />
             }
