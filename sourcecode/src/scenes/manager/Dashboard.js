@@ -37,13 +37,11 @@ const Dashboard = () => {
   useEffect(() => {
     fetch(url+'get_team_performance.php')
       .then(response => response.json())
-      .then(performance => setTeamPerformance(performance))
+      .then(teamPerformance => setTeamPerformance(teamPerformance))
       .catch(error => console.error(error));
   }, []);
 
-  var obj = {}
-  obj = teamPerformance["team_performance"];
-  performance.push(obj);
+  performance.push(teamPerformance[0]["team_performance"]);
 
   const ref = useRef(null);
 
