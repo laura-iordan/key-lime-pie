@@ -33,6 +33,8 @@ const Dashboard = () => {
   const [overdueTasks, setOverdueTasks] = useState([]);
 
   const performance = [];
+  const onTime = [];
+  const overdue = [];
 
   useEffect(() => {
     fetch(url+'get_team_performance.php')
@@ -41,7 +43,23 @@ const Dashboard = () => {
       .catch(error => console.error(error));
   }, []);
 
+  useEffect(() => {
+    fetch(url+'get_tasks_on_time.php')
+      .then(response => response.json())
+      .then(onTimeTasks => setOnTimeTasks(onTimeTasks))
+      .catch(error => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    fetch(url+'get_tasks_overdue.php')
+      .then(response => response.json())
+      .then(overdueTasks => setOverdueTasks(overdueTasks))
+      .catch(error => console.error(error));
+  }, []);
+
   performance.push(teamPerformance[0]["team_performance"]);
+  onTime.push(onTimeTasks[0]["on_schedule_tasks"]);
+  overdue.push(overdueTasks[0]["overdue_tasks"]);
 
   const ref = useRef(null);
 
@@ -142,7 +160,7 @@ const Dashboard = () => {
         >
           <StatBox
             className="rounded-corners"
-            title="431"
+            title={onTime}
             subtitle="Tasks on time"
             progress="0.50"
             increase="+21%"
@@ -167,7 +185,7 @@ const Dashboard = () => {
         >
           <StatBox
             className="rounded-corners"
-            title="5"
+            title={overdue}
             subtitle="Overdue tasks"
             progress="0.30"
             increase="+5%"
