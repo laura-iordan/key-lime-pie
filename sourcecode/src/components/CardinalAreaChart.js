@@ -5,77 +5,70 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip
+  Tooltip, 
+  ResponsiveContainer
 } from "recharts";
 import { curveCardinal } from "d3-shape";
 import "./../index.css";
+import url from "../get_php_link";
 
-const data = [
-  {
-    name: "Angajat 1",
-    target: 90,
-    randament: 99
-  },
-  {
-    name: "Angajat 2",
-    target: 90,
-    randament: 78
-  },
-  {
-    name: "Angajat 3",
-    target: 90,
-    randament: 92
-  },
-  {
-    name: "Angajat 4",
-    target: 90,
-    randament: 95
-  },
-  {
-    name: "Angajat 5",
-    target: 90,
-    randament: 90
-  },
-  {
-    name: "Angajat 6",
-    target: 90,
-    randament: 100
+function CardinalAreaChart() {
+  const [performance, setPerformance] = React.useState([]);
+  const data = [];
+
+  console.log(performance);
+
+  React.useEffect(() => {
+    fetch(url+'get_employees_performance.php')
+    .then(response => response.json())
+    .then(data => setPerformance(data))
+    .catch(error => console.error(error));
+  }, []);
+
+  for (var i = 0; i < performance.length; i++) {
+    var obj = {}
+    obj["name"] = performance[i]["emp_name"];
+    obj["target"] = 90;
+    obj["randament"] = performance[i]["employee_performance"];
+    data.push(obj);
   }
-  
-];
-const cardinal = curveCardinal.tension(0.2);
 
-export default function App() {
+  const cardinal = curveCardinal.tension(0.2);
+
   return (
-    <AreaChart
-      width={900}
-      height={250}
-      data={data}
-      margin={{
-        top: 50,
-        right: 10,
-        left: 0,
-        bottom: 10
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis type="number" domain={[0, 100]} />
-      <Tooltip />
-      <Area
-        type="monotone"
-        dataKey="target"
-        stroke="#8884d8"
-        fill="#8884d8"
-        fillOpacity={0}
-      />
-      <Area
-        type={cardinal}
-        dataKey="randament"
-        stroke="#82ca9d"
-        fill="#82ca9d"
-        fillOpacity={0.1}
-      />
-    </AreaChart>
+    <ResponsiveContainer width="95%" height="90%">
+        <AreaChart
+          data={data}
+          margin={{
+            top: 20,
+            right: 10,
+            left: 0,
+            bottom: 40
+          }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis type="number" domain={[0, 100]} />
+        <Tooltip />
+        <Area
+          type="monotone"
+          dataKey="target"
+          stroke="#8884d8"
+          fill="#8884d8"
+          fillOpacity={0}
+        />
+        <Area
+          type={cardinal}
+          dataKey="randament"
+          stroke="#82ca9d"
+          fill="#82ca9d"
+          fillOpacity={0.1}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+
   );
+
 }
+
+export default CardinalAreaChart;
