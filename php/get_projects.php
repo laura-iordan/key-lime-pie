@@ -6,7 +6,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
-  $sql = "SELECT p.id_project, p.project_name, p.budget, p.hours, CONCAT(e.name, ' ',  e.surname) AS manager_name, p.starting_date, p.target_date 
+  $sql = "SELECT p.id_project, p.project_name, p.budget, p.hours, 
+  CONCAT(e.name, ' ',  e.surname) AS manager_name, CAST(p.starting_date AS varchar) AS starting_date, 
+  CAST(p.target_date AS varchar) AS target_date 
   FROM [dbo].[projects] AS p
   INNER JOIN  [dbo].[users] AS u
   ON p.id_manager=u.id_user

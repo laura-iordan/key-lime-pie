@@ -11,7 +11,7 @@ import {Link } from "react-router-dom";
 import { Typography } from '@mui/material';
 import { mainTheme } from '../../theme';
 import { useParams } from "react-router-dom";
-import moment from 'moment';
+//import moment from 'moment';
 
 
 
@@ -27,6 +27,7 @@ function UpdateTask(){
       target_date: "",
       ending_date: ""
     });
+    console.log(task.task_name);
     
     const [employees, setEmployees] = useState([]);
     const [projects, setProjects] = useState([]);
@@ -34,8 +35,8 @@ function UpdateTask(){
     useEffect(() => {
         axios.post(url+'get_task1.php?id_task='+id)
         .then(function(response) {
-          console.log(response.data);
-          setTask(response.data);
+          console.log(response.data[0]);
+          setTask(response.data[0]);
       })
           .catch(error => console.error(error));
       }, [id]);
@@ -54,19 +55,16 @@ function UpdateTask(){
         .catch(error => console.error(error));
     }, []);
     
-    const handleSubmit = () => {    
-        console.log(task.starting_date.date);  
-        console.log(task.target_date.date);          
-        console.log(task.ending_date.date);  
+    const handleSubmit = () => {     
   
               let fData = new FormData();
               fData.append('id_task', id);
               fData.append('task_name', task.task_name);
               fData.append('id_employee', task.id_employee);
               fData.append('id_project', task.id_project);
-              fData.append('starting_date', task.starting_date.date);
-              fData.append('target_date', task.target_date.date);
-              fData.append('target_date', task.ending_date.date);
+              fData.append('starting_date', task.starting_date);
+              fData.append('target_date', task.target_date);
+              fData.append('ending_date', task.ending_date);
               
   
               axios.post(url+'update_task.php', fData)
@@ -106,9 +104,9 @@ function UpdateTask(){
             margin="normal"
             required
             fullWidth
-            id="taskName"
+            id="task_name"
             label="Task Name"
-            name="taskName"
+            name="task_name"
             autoComplete="taskName"
             autoFocus
             value={task.task_name} 
@@ -123,9 +121,10 @@ function UpdateTask(){
               }}
 
               value={task.id_employee}
-              labelId="role-label"
-              id="role-select"
+              labelId="employee-label"
+              id="employee-select"
               label="Role"
+              name="id_employee"
               onChange={handleChange}
               >
               {employees.map(employee => (
@@ -142,9 +141,10 @@ function UpdateTask(){
               }}
 
               value={task.id_project}
-              labelId="status-label"
-              id="status-select"
+              labelId="project-label"
+              id="project-select"
               label="Status"
+              name="id_project"
               onChange={handleChange}
               >
               {projects.map(project => (
@@ -157,12 +157,12 @@ function UpdateTask(){
             margin="normal"
             required
             fullWidth
-            id="startingDate"
+            id="starting_date"
             label="Starting Date"
-            name="startingDate"
-            autoComplete="startingDate"
+            name="starting_date"
+            autoComplete="starting_date"
             autoFocus
-            value={moment(task.starting_date.date).format("DD-MM-YYYY")} 
+            value={task.starting_date} 
             onChange={handleChange}
           />
           <TextField
@@ -170,12 +170,12 @@ function UpdateTask(){
             margin="normal"
             required
             fullWidth
-            id="targetDate"
+            id="target_date"
             label="Target Date"
-            name="targetDate"
-            autoComplete="targetDate"
+            name="target_date"
+            autoComplete="target_date"
             autoFocus
-            value={moment(task.target_date.date).format("DD-MM-YYYY")} 
+            value={task.target_date} 
             onChange={handleChange}
           />
           <TextField
@@ -183,12 +183,12 @@ function UpdateTask(){
             margin="normal"
             required
             fullWidth
-            id="endingDate"
+            id="ending_date"
             label="Ending Date"
-            name="endingDate"
-            autoComplete="endingDate"
+            name="ending_date"
+            autoComplete="ending_date"
             autoFocus
-            value={task.ending_date!=null ? moment(task.ending_date.date).format("DD-MM-YYYY"):null} 
+            value={task.ending_date!=null ? task.ending_date:null} 
             onChange={handleChange}
           />
             

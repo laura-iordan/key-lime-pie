@@ -5,7 +5,6 @@ import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import Header from '../../components/Header';
 import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import moment from 'moment';
 
 function UpdateProjects() {
 
@@ -30,6 +29,8 @@ function UpdateProjects() {
     fData.append('budget', row.budget);
     fData.append('hours', row.hours);
     fData.append('id_manager', row.manager_name);
+    fData.append('starting_date', row.starting_date);
+    fData.append('target_date', row.target_date);
 
     axios.post(url+'update_projects.php', fData)
     .then(response=>alert(response.data))
@@ -69,27 +70,8 @@ function UpdateProjects() {
     //{field:'manager_name', headerName:'Manager', flex: 1},
     {field:'manager_name', headerName:'Manager', flex: 1, editable: true, type: 'singleSelect', 
     valueOptions: options},
-    {
-      field: 'id_manager',
-      headerName: 'Manager ID',
-      flex: 1,
-      hide: true, // Set hide to true if you want to hide the column initially
-    },
-    { 
-      field: 'starting_date', 
-      headerName: 'Start', 
-      flex: 1, 
-      type: 'date', 
-      valueGetter: (tasks)=>moment(tasks.row.starting_date.date).format('DD-MM-YYYY')
-    },
-    { 
-      field: 'target_date', 
-      headerName: 'Target', 
-      flex: 1, 
-      type: 'date', 
-      valueGetter: (tasks)=>moment(tasks.row.target_date.date).format('DD-MM-YYYY')
-    },
-
+    {field: 'starting_date', headerName: 'Starting Date', flex: 1, editable: true},
+    {field: 'target_date', headerName: 'Target Date', flex: 1, editable: true},
     {
       field: "action",
       headerName: "Action",

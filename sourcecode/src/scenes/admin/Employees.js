@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 function Employees2() {
     const navigate = useNavigate();
@@ -30,7 +31,6 @@ function Employees2() {
     fData.append('id_user', row.id_user)
     fData.append('name', row.name);
     fData.append('surname', row.surname);
-    fData.append('status', row.status);
     fData.append('id_team', row.team_name);
 
     axios.post(url+'update_e.php', fData)
@@ -44,13 +44,27 @@ function Employees2() {
     }  
 }
 
+const handleDelete = (row) => { 
+  console.log(row);         
+  let fData = new FormData();
+  fData.append('id_user', row.id_user)
+
+  axios.post(url+'delete.php', fData)
+  .then(response=>response.data)
+  .catch(error=>alert(error)); 
+  
+  if(loading === true){
+    setLoading(false);
+  } else{
+    setLoading(true);
+  }  
+}
+
   const columns = useMemo(()=>[
     {field:'id_user', headerName:'ID', width:60, hide: true},
     {field:'name', headerName:'Name', flex: 1, cellClassName: "name-column--cell", editable:true},
     {field:'surname', headerName:'Surname', flex: 1, editable:true},
     {field:'email', headerName:'Email', flex: 1,},
-    {field:'status', headerName:'Status', flex: 1, headerAlign: "left", align: "left", editable: true, type: 'singleSelect', 
-    valueOptions: [1, 2, 3]},
     {field:'team_name', headerName:'Team Name', flex: 1, editable: true, type: 'singleSelect', 
     valueOptions: opt},
     {
@@ -73,6 +87,9 @@ function Employees2() {
         </IconButton>,
         <IconButton  onClick={() => handleUpdate(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
         <SaveOutlinedIcon />
+        </IconButton>,
+        <IconButton  onClick={() => handleDelete(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
+        <DeleteOutlineOutlinedIcon />
         </IconButton>
           ]
       }

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import moment from 'moment';
+//import moment from 'moment';
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -68,6 +68,7 @@ function Tasks() {
     fData.append('id_project', row.project_name);
     fData.append('starting_date', row.starting_date);
     fData.append('target_date', row.target_date);
+    fData.append('ending_date', row.ending_date);
     console.log(row.starting_date);
 
     axios.post(url+'update_task.php', fData)
