@@ -29,34 +29,12 @@ const Topbar = () => {
             }}/>
 
             <Box display="flex" justifyContent="space-between">
-                <Box sx={{
-                    display: "flex",
-                    backgroundColor: colors.primary.light,
-                    borderRadius: "3px",
-                    height: '35px',
-                    alignSelf: 'center',
-                    }}> 
-                    <InputBase sx={{ml: 2, flex: 1}} placeholder="Search">
-                        <IconButton type="button" sx={{p: 1}}>
-                            <SearchIcon>
-                            </SearchIcon>
-                        </IconButton>
-                    </InputBase>
-                </Box>
 
                 <Box display="flex" justifyContent="flex-end" sx={{
                     alignSelf: 'center',
                     paddingLeft: '30px',
                     marginRight: '20px',
                     }}>
-                    <Icon className="material-icons-outlined" sx = {{
-                        marginInlineEnd: '5px',
-                        color: '#f4ffe9'
-                    }}>notifications_outlined_icon</Icon>
-                    <Icon className="material-icons-outlined" sx = {{
-                        marginInlineEnd: '5px',
-                        color: '#f4ffe9'
-                    }}>settings_outlined_icon</Icon>
                     <Icon className="material-icons-outlined" sx = {{
                         marginInlineEnd: '5px',
                         color: '#f4ffe9'

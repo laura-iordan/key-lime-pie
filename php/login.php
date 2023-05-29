@@ -29,6 +29,7 @@ if($conn){
 
 include "dbsqlconnection.php";
 
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
@@ -47,6 +48,7 @@ if ($conn) {
     array_push($users, $row);
   }*/
   echo json_encode(sqlsrv_fetch_object($stmt));
+
 } else {
   die(print_r(sqlsrv_errors(), true));
 }

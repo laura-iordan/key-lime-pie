@@ -37,12 +37,10 @@ function Login(){
         const userData = response.data;
         if(userData.username === username && userData.password === password){
           if(userData.id_role===1){
-            navigate(`/admin`);
+            navigate(`/admin`, {state: {id_user: userData.id_user}});
           } else if(userData.id_role===2){
-            navigate(`/manager/dashboard`);
-          } else if(userData.id_role===3){
-            navigate(`/user`);
-          }
+            navigate(`/manager/dashboard`, {state: {id_user: userData.id_user}});
+          } 
         } else{
           alert("Error");
         }

@@ -1,11 +1,13 @@
 
 <?php
+
 include "dbsqlconnection.php";
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
+  echo $_SESSION['id_user'];
   $sql = "SELECT e.id_employee, e.name, e.surname, u.email, e.status, t.team_name 
   FROM  [dbo].[employees] AS e
   LEFT JOIN [dbo].[users] AS u
@@ -24,6 +26,7 @@ if ($conn) {
   }
   
   echo json_encode($users);
+  json_encode($_SESSION['id_user']);
 } else {
   die(print_r(sqlsrv_errors(), true));
 }

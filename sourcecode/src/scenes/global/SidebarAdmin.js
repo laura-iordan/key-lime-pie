@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography} from "@mui/material";
 import { Link } from "react-router-dom";
@@ -10,6 +10,10 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { mainTheme } from "../../theme";
+import url from '../../get_php_link';
+import axios from 'axios';
+
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -27,7 +31,30 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const SidebarManager = () => {
+const SidebarManager = (props) => {
+  //const location = useLocation();
+
+  //let userId = location.state.id_user;
+  let userId=props.userId;
+  const [user, setUser] = useState({
+    id_role: 3,
+    name: "",
+    surname: "",
+    SSN: 0,
+    address: "",
+    phone_no: "",
+    hourly_fee: 0,
+    status: 1,
+  });
+  useEffect(() => {
+    axios.post(url+'get_employee.php?id_user='+userId)
+    .then(function(response) {
+      console.log(response.data);
+      setUser(response.data);
+  })
+      .catch(error => console.error(error));
+  }, [userId]);
+
   const theme = mainTheme;
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -90,10 +117,10 @@ const SidebarManager = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Name Surname
+                  {user.surname + ' ' + user.name}
                 </Typography>
                 <Typography variant="h5" color={colors.primary.dark}>
-                  name.surname@gmail.com
+                  {user.email}
                 </Typography>
               </Box>
             </Box>
