@@ -14,7 +14,7 @@ import { mainTheme } from '../../theme';
 
 
 
-function AddEmployee(){
+function AddTask(){
     
     const [taskName, setTaskName] = useState('');
     const [idEmployee, setIdEmployee] = useState(0);
@@ -121,7 +121,7 @@ function AddEmployee(){
               ))}
 
             </Select>
-            <InputLabel id="project-label">Status</InputLabel>
+            <InputLabel id="project-label">Project</InputLabel>
             <Select
               sx={{       
                 width: 250,
@@ -130,9 +130,9 @@ function AddEmployee(){
               }}
 
               value={idProject}
-              labelId="status-label"
-              id="status-select"
-              label="Status"
+              labelId="project-label"
+              id="project-select"
+              label="Project"
               onChange={handleChangeProject}
               >
               {projects.map(project => (
@@ -188,4 +188,4 @@ function AddEmployee(){
     );
 }
 
-export default AddEmployee;
+export default AddTask;

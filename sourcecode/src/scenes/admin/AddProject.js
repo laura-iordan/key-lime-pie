@@ -13,68 +13,48 @@ import { mainTheme } from '../../theme';
 
 
 
-function AddEmployee(){
+
+function AddProject(){
     
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [ssn, setSsn] = useState('');
-    const [address, setAddress] = useState('');
-    const [phoneNo, setPhoneNo] = useState('');
-    const [hourlyFee, setHourlyFee] = useState('');
-    const [status, setStatus] = useState(1);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [role, setRole] = useState(3);
-    const [roles, setRoles] = useState([]);
-    const [statuses, setStatuses] = useState([]);
+    const [projectName, setProjectName] = useState('');
+    const [idManager, setIdManager] = useState();
+    const [budget, setBudget] = useState();
+    const [startingDate, setStartingDate] = useState();
+    const [targetDate, setTargetDate] = useState();
+    const [hours, setHours] = useState();
+    const [managers, setManagers] = useState([]);
 
     useEffect(() => {
-      fetch(url+'get_role.php')
+      fetch(url+'get_mng.php')
         .then(response => response.json())
-        .then(data => setRoles(data))
-        .catch(error => console.error(error));
-    }, []);
-
-    useEffect(() => {
-      fetch(url+'get_status.php')
-        .then(response => response.json())
-        .then(data => setStatuses(data))
+        .then(data => setManagers(data))
         .catch(error => console.error(error));
     }, []);
     
     const handleSubmit = () => {
-          if(username.length === 0){
-              alert("Username is blank!");
-          } else if(email.length === 0){
-              alert("Email is blank!");
+          if(projectName.length === 0){
+              alert("Project name is blank!");
+          } else if(startingDate.length === 0){
+              alert("Starting date is blank!");
           } else{
               
   
               let fData = new FormData();
-              fData.append('username', username);
-              fData.append('email', email);
-              fData.append('password', '1234');
-              fData.append('id_role', role);
-              fData.append('name', name);
-              fData.append('surname', surname);
-              fData.append('SSN', ssn);
-              fData.append('address', address);
-              fData.append('email', email);
-              fData.append('phoneNo', phoneNo);
-              fData.append('hourlyFee', hourlyFee);
-              fData.append('status', status);
+              fData.append('project_name', projectName);
+              fData.append('id_manager', idManager);
+              fData.append('budget', budget);
+              fData.append('hours', hours);
+              fData.append('starting_date', startingDate);
+              fData.append('target_date', targetDate);
+              console.log(fData);
   
-              axios.post(url+'add_employee.php', fData)
+              axios.post(url+'add_project.php', fData)
               .then(response=>alert(response.data))
               .catch(error=>alert(error));                  
               }
           }
-    const handleChangeRole=(e)=>{
-      setRole(e.target.value);
-    }
-
-    const handleChangeStatus=(e)=>{
-      setStatus(e.target.value);
+    const handleChangeManager=(e)=>{
+      setIdManager(e.target.value);
     }
 
     return (
@@ -87,7 +67,7 @@ function AddEmployee(){
           <p style={{
             textAlign: 'center'
           }}>
-          Add Employee
+          Add Task
           </p>
         </Typography>
         <Box className="rounded-corners" style = {{
@@ -104,27 +84,15 @@ function AddEmployee(){
             margin="normal"
             required
             fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
+            id="projectName"
+            label="Project Name"
+            name="projectName"
+            autoComplete="projectName"
             autoFocus
-            value={username} 
-            onChange={(e)=>setUsername(e.target.value)}
+            value={projectName} 
+            onChange={(e)=>setProjectName(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="email"
-            label="Email"
-            type="email"
-            id="email"
-            autoComplete="email"
-            value={email} 
-            onChange={(e)=>setEmail(e.target.value)}
-          />
-          <InputLabel id="role-label">Role</InputLabel>
+          <InputLabel id="manager-label">Manager</InputLabel>
             <Select
               sx={{       
                 width: 250,
@@ -132,113 +100,77 @@ function AddEmployee(){
                 background: '#ffffff'
               }}
 
-              value={role}
-              labelId="role-label"
-              id="role-select"
-              label="Role"
-              onChange={handleChangeRole}
+              value={idManager}
+              labelId="manager-label"
+              id="manager-select"
+              label="Manager"
+              onChange={handleChangeManager}
               >
-              {roles.map(role => (
-                <MenuItem value={role.id_role}>{role.role}</MenuItem>
+              {managers.map(manager => (
+                <MenuItem value={manager.id_employee}>{manager.manager_name}</MenuItem>
               ))}
 
             </Select>
+            <TextField
+                backgroundColor='#ffffff'
+                margin="normal"
+                required
+                fullWidth
+                id="budget"
+                label="Budget"
+                name="budget"
+                autoComplete="budget"
+                autoFocus
+                value={budget} 
+                onChange={(e)=>setBudget(e.target.value)}
+            />
+            <TextField
+                backgroundColor='#ffffff'
+                margin="normal"
+                required
+                fullWidth
+                id="hours"
+                label="Hours"
+                name="hours"
+                autoComplete="hours"
+                autoFocus
+                value={hours} 
+                onChange={(e)=>setHours(e.target.value)}
+            />
+            <TextField
+                backgroundColor='#ffffff'
+                margin="normal"
+                required
+                fullWidth
+                id="startingDate"
+                label="Starting Date YYYY-MM-DD"
+                name="startingDate"
+                autoComplete="startingDate"
+                autoFocus
+                value={startingDate} 
+                onChange={(e)=>setStartingDate(e.target.value)}
+            />
           <TextField
+            backgroundColor='#ffffff'
             margin="normal"
             required
             fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
+            id="targetDate"
+            label="Target Date YYYY-MM-DD"
+            name="targetDate"
+            autoComplete="targetDate"
             autoFocus
-            value={name} 
-            onChange={(e)=>setName(e.target.value)}
+            value={targetDate} 
+            onChange={(e)=>setTargetDate(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="surname"
-            label="Surname"
-            type="surname"
-            id="surname"
-            autoComplete="surname"
-            value={surname} 
-            onChange={(e)=>setSurname(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="ssn"
-            label="SSN"
-            name="ssn"
-            autoComplete="ssn"
-            autoFocus
-            value={ssn} 
-            onChange={(e)=>setSsn(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="address"
-            label="Address"
-            type="address"
-            id="address"
-            autoComplete="address"
-            value={address} 
-            onChange={(e)=>setAddress(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="phoneNo"
-            label="PhoneNo"
-            name="phoneNo"
-            autoComplete="phoneNo"
-            autoFocus
-            value={phoneNo} 
-            onChange={(e)=>setPhoneNo(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="hourlyFee"
-            label="Hourly Fee"
-            type="hourlyFee"
-            id="hourlyFee"
-            autoComplete="hourlyFee"
-            value={hourlyFee} 
-            onChange={(e)=>setHourlyFee(e.target.value)}
-          />
-          <InputLabel id="status-label">Status</InputLabel>
-            <Select
-              sx={{       
-                width: 250,
-                height: 50,
-                background: '#ffffff'
-              }}
-
-              value={status}
-              labelId="status-label"
-              id="status-select"
-              label="Status"
-              onChange={handleChangeStatus}
-              >
-              {statuses.map(status => (
-                <MenuItem value={status.id_status}>{status.status}</MenuItem>
-              ))}
-
-            </Select>
+            
+          
+          
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/admin"
+            component={Link} to="/admin/projects"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >
@@ -253,4 +185,4 @@ function AddEmployee(){
     );
 }
 
-export default AddEmployee;
+export default AddProject;

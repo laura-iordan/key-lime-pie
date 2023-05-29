@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
+import {Link } from "react-router-dom";
 import url from '../../get_php_link';
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Button, Typography, IconButton } from "@mui/material";
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import Header from '../../components/Header';
 import axios from 'axios';
@@ -64,7 +65,7 @@ function UpdateProjects() {
   }, [loading]);
 
   const columns = useMemo(()=>[
-    {field:'id_project', headerName:'ID', width:60},
+    {field:'id_project', headerName:'ID', width:60, hide: 'true'},
     {field:'project_name', headerName:'Project Name', flex: 1,editable: true},
     {field:'budget', headerName:'Budget', type: "number", flex: 1, headerAlign: "left", align: "left", editable: true},
     {field:'hours', headerName:'Hours', type: "number", flex: 1, headerAlign: "left", align: "left",editable: true},
@@ -130,6 +131,7 @@ function UpdateProjects() {
     sx = {{
       margin: '50px'
     }}>
+    <Button variant="contained" component={Link} to="/admin/addProject">New Project</Button>
       <DataGrid
       checkboxSelection
       columns={columns}

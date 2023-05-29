@@ -32,6 +32,7 @@ import AddTask from './scenes/manager/AddTask';
 import UpdateTask from './scenes/manager/UpdateTask';
 import CardinalAreaChart from './components/CardinalAreaChart';
 import UpdateProjects from './scenes/admin/UpdateProjects';
+import AddProject from './scenes/admin/AddProject';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
                     <Routes>
                 <Route path="/admin" element={<SidebarAdmin isSidebar={isSidebar} />}>
                     <Route path="/admin/projects" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/addProject" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/teams" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/addEmployee" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/updateEmployee/:id" element={<SidebarAdmin isSidebar={isSidebar} />} />
@@ -77,6 +79,7 @@ function App() {
                         <Route path="/admin" element={<Admin />}>
                             <Route path="/admin" element={<Employees />} />
                             <Route path="/admin/projects" element={<UpdateProjects />} />
+                            <Route path="/admin/addProject" element={<AddProject />} />
                             <Route path="/admin/teams" element={<Teams />} />
                             <Route path="/admin/addTeam" element={<AddTeam />} />
                             <Route path="/admin/updateTeam/:id" element={<UpdateTeam />} />
