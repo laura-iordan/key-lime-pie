@@ -16,7 +16,7 @@ function UpdateProjects() {
   let options = [];
   for(var i=0; i<managers.length; i++){
     var obj = {};
-    obj['value']=managers[i]['id_user'];
+    obj['value']=managers[i]['id_employee'];
     obj['label']=managers[i]['manager_name'];
     options.push(obj);
   }
@@ -32,8 +32,9 @@ function UpdateProjects() {
     fData.append('starting_date', row.starting_date);
     fData.append('target_date', row.target_date);
 
+
     axios.post(url+'update_projects.php', fData)
-    .then(response=>alert(response.data))
+    .then(response=>response.data)
     .catch(error=>alert(error));  
     
     if(loading === true){

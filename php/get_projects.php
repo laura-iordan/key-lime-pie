@@ -10,10 +10,8 @@ if ($conn) {
   CONCAT(e.name, ' ',  e.surname) AS manager_name, CAST(p.starting_date AS varchar) AS starting_date, 
   CAST(p.target_date AS varchar) AS target_date 
   FROM [dbo].[projects] AS p
-  INNER JOIN  [dbo].[users] AS u
-  ON p.id_manager=u.id_user
   INNER JOIN [dbo].[employees] AS e
-  ON e.id_user=u.id_user";
+  ON p.id_manager=e.id_employee";
   
   $stmt = sqlsrv_query($conn, $sql);
   if (!$stmt) {
