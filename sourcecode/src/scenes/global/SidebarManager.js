@@ -18,7 +18,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-const Item = ({ title, to, icon, selected, setSelected, setUser, user, userId, props}) => {
+const Item = ({ title, to, icon, selected, setSelected, user, userId}) => {
   return (
     <MenuItem
       active={selected === title}
@@ -29,14 +29,15 @@ const Item = ({ title, to, icon, selected, setSelected, setUser, user, userId, p
       icon={icon}
     >
       <Typography component='div'>{title}</Typography>
-      <Link to={to} state={[props.userId, user.name, user.surname, user.email]}/>
+      <Link to={to} state={[userId, user.name, user.surname, user.email]}/>
     </MenuItem>
     
   );
 };
 
-const SidebarManager = (props) => {  
+const SidebarManager = (props) => { 
   let userId = props.userId;
+
   const [user, setUser] = useState({
     id_role: 3,
     name: "",
@@ -60,6 +61,7 @@ const SidebarManager = (props) => {
       .catch(error => console.error(error));
   }, [userId]);
 
+
   const theme = mainTheme;
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -69,15 +71,12 @@ const SidebarManager = (props) => {
     userId = data[0];
   }
 
-  const nav = useNavigate();
+  console.log(data[0]);
+  console.log(data[1]);
+  console.log(data[2]);
+  console.log(data[3]);
 
-  useEffect(() => {
-    const navigationEntries = window.performance.getEntriesByType('navigation');
-    if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
-      <Link to={{}} state={[props.userId, user.name, user.surname, user.email]}/>
-    }
-  }, [props.userId, user.name, user.surname, user.email]);
-  
+  const nav = useNavigate();
 
   return (
     <Box
@@ -266,9 +265,6 @@ const SidebarManager = (props) => {
     </Box>
     
   );
-
-  
-
 };
 
 
