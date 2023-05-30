@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import url from '../../get_php_link';
-import { Box, Typography, Button, IconButton } from "@mui/material";
+import { Box, Typography, Button, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import Header from '../../components/Header';
 import {Link } from "react-router-dom";
@@ -11,11 +11,13 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 function Employees2() {
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [open,setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null); // 
+  const [name,setName] = useState(null); // numele angajatului care va fi sters 
 
   let opt= [];
   for(var i=0; i<teams.length; i++){
@@ -44,21 +46,33 @@ function Employees2() {
     }  
 }
 
-const handleDelete = (row) => { 
-  console.log(row);         
-  let fData = new FormData();
-  fData.append('id_user', row.id_user)
+const handleClickOpen = (row) => {
+  setOpen(true);
+  setSelectedRow(row);
+  console.log(row.id_user);
+  setName(row.name + ' ' + row.surname);
+};
 
-  axios.post(url+'delete.php', fData)
-  .then(response=>response.data)
-  .catch(error=>alert(error)); 
-  
-  if(loading === true){
-    setLoading(false);
-  } else{
-    setLoading(true);
-  }  
-}
+const handleClose = () => {
+  setOpen(false);
+  setSelectedRow(null);
+};
+
+const handleDelete = () => {
+  if (selectedRow) {
+    console.log(selectedRow);
+    let fData = new FormData();
+    fData.append('id_user', selectedRow.id_user);
+
+    axios
+      .post(url + 'delete.php', fData)
+      .then((response) => response.data)
+      .catch((error) => alert(error));
+
+    setLoading((prev) => !prev);
+    handleClose();
+  }
+};
 
   const columns = useMemo(()=>[
     {field:'id_user', headerName:'ID', width:60, hide: true},
@@ -88,12 +102,12 @@ const handleDelete = (row) => {
         <IconButton  onClick={() => handleUpdate(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
         <SaveOutlinedIcon />
         </IconButton>,
-        <IconButton  onClick={() => handleDelete(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
+        <IconButton  onClick={() => handleClickOpen(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
         <DeleteOutlineOutlinedIcon />
         </IconButton>
+        
           ]
       }
-// eslint-disable-next-line react-hooks/exhaustive-deps
   ], [opt, loading])
 
   useEffect(() => {
@@ -178,6 +192,26 @@ const handleDelete = (row) => {
     </DataGrid>
 
     </Box>
+
+      <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="delete-confirmation-dialog"
+          aria-describedby="cancel-or-proceed-deleting"
+      > 
+          <DialogTitle >{"Are you sure you want to delete the selected employee?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>If you confirm, employee {name} will be deleted.</DialogContentText>
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleDelete} autoFocus>
+              Confirm
+            </Button>
+          </DialogActions>
+      </Dialog>
+
     </Box>
     
     
