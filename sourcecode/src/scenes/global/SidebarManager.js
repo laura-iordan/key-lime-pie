@@ -15,8 +15,10 @@ import { mainTheme } from "../../theme";
 import StackedBarChartOutlinedIcon from '@mui/icons-material/StackedBarChartOutlined';
 import url from '../../get_php_link';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+
+const Item = ({ title, to, icon, selected, setSelected, setUser, user, userId, props}) => {
   return (
     <MenuItem
       active={selected === title}
@@ -27,13 +29,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       icon={icon}
     >
       <Typography component='div'>{title}</Typography>
-      <Link to={to} />
+      <Link to={to} state={[props.userId, user.name, user.surname, user.email]}/>
     </MenuItem>
+    
   );
 };
 
-const SidebarManager = (props) => {
-
+const SidebarManager = (props) => {  
   let userId = props.userId;
   const [user, setUser] = useState({
     id_role: 3,
@@ -45,6 +47,10 @@ const SidebarManager = (props) => {
     hourly_fee: 0,
     status: 1,
   });
+
+  const location = useLocation();
+  const data = location.state;
+
   useEffect(() => {
     axios.post(url+'get_employee.php?id_user='+userId)
     .then(function(response) {
@@ -53,10 +59,25 @@ const SidebarManager = (props) => {
   })
       .catch(error => console.error(error));
   }, [userId]);
+
   const theme = mainTheme;
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
+
+  if (userId === undefined) {
+    userId = data[0];
+  }
+
+  const nav = useNavigate();
+
+  useEffect(() => {
+    const navigationEntries = window.performance.getEntriesByType('navigation');
+    if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
+      <Link to={{}} state={[props.userId, user.name, user.surname, user.email]}/>
+    }
+  }, [props.userId, user.name, user.surname, user.email]);
+  
 
   return (
     <Box
@@ -132,6 +153,11 @@ const SidebarManager = (props) => {
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/dashboard", {state: data})}}
             />
 
             <Typography
@@ -148,6 +174,11 @@ const SidebarManager = (props) => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId} 
+              onClick={() => {nav("/manager/team", {state: data})}}
             />
             <Item
               title="Contacts Information"
@@ -155,6 +186,11 @@ const SidebarManager = (props) => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/task", {state: data})}}
             />
             <Typography
             component='div'
@@ -170,13 +206,23 @@ const SidebarManager = (props) => {
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/barChart", {state: data})}}
             />
             <Item
               title="Bar Chart"
               to="/manager/barChart2"
               icon={<StackedBarChartOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={setSelected} 
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/barChart2", {state: data})}}
             />
             <Item
               title="Pie Chart"
@@ -184,6 +230,11 @@ const SidebarManager = (props) => {
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/pieChart", {state: data})}}
             />
             <Item
               title="Line Chart"
@@ -191,6 +242,11 @@ const SidebarManager = (props) => {
               icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/lineChart", {state: data})}}
             />
             <Item
               title="Line Chart"
@@ -198,64 +254,22 @@ const SidebarManager = (props) => {
               icon={<StackedLineChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/manager/bumpChart", {state: data})}}
             />
           </Box>
         </Menu>
       </ProSidebar>
     </Box>
+    
   );
+
+  
+
 };
 
+
 export default SidebarManager;
-
-
-/*
-const drawerWidth = 240;
-
-export default function PermanentDrawerLeft() {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar />
-        <Divider />
-        <List>
-            <ListItem key="Employees" disablePadding>
-              <ListItemButton component={Link} to="/">
-                <ListItemText primary="Employees" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key="Projects" disablePadding>
-              <ListItemButton component={Link} to="/projects">
-                <ListItemText primary="Projects" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key="Teams" disablePadding>
-              <ListItemButton component={Link} to="/teams">
-                <ListItemText primary="Teams" />
-              </ListItemButton>
-            </ListItem>
-        </List>
-      </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
-      </Box>
-    </Box>
-  );
-}
-*/
-
