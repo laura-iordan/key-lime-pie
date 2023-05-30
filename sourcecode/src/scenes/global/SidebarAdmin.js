@@ -12,10 +12,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { mainTheme } from "../../theme";
 import url from '../../get_php_link';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
-
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, selected, setSelected, user, userId }) => {
   return (
     <MenuItem
       active={selected === title}
@@ -26,16 +26,14 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
+      <Link to={to} state={[userId, user.name, user.surname, user.email]}/>
     </MenuItem>
   );
 };
 
 const SidebarManager = (props) => {
-  //const location = useLocation();
+  let userId = props.userId;
 
-  //let userId = location.state.id_user;
-  let userId=props.userId;
   const [user, setUser] = useState({
     id_role: 3,
     name: "",
@@ -46,6 +44,10 @@ const SidebarManager = (props) => {
     hourly_fee: 0,
     status: 1,
   });
+
+  const location = useLocation();
+  const data = location.state;
+
   useEffect(() => {
     axios.post(url+'get_employee.php?id_user='+userId)
     .then(function(response) {
@@ -59,6 +61,12 @@ const SidebarManager = (props) => {
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
+
+  if (userId === undefined) {
+    userId = data[0];
+  }
+
+  const nav = useNavigate();
 
   return (
     <Box
@@ -133,6 +141,11 @@ const SidebarManager = (props) => {
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId}
+              onClick={() => {nav("/admin", {state: data})}}
             />
 
             <Typography
@@ -148,6 +161,11 @@ const SidebarManager = (props) => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId} 
+              onClick={() => {nav("/admin/teams", {state: data})}}
             />
             <Item
               title="Projects"
@@ -155,6 +173,11 @@ const SidebarManager = (props) => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId} 
+              onClick={() => {nav("/admin/projects", {state: data})}}
             />
             <Typography
               variant="h6"
@@ -169,6 +192,11 @@ const SidebarManager = (props) => {
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId} 
+              onClick={() => {nav("/admin/barChartAdmin", {state: data})}}
             />
             <Item
               title="Pie Chart"
@@ -176,6 +204,11 @@ const SidebarManager = (props) => {
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              userId={userId} 
+              onClick={() => {nav("/admin/pieChartAdmin", {state: data})}}
             />
           </Box>
         </Menu>
@@ -185,55 +218,3 @@ const SidebarManager = (props) => {
 };
 
 export default SidebarManager;
-
-
-/*
-const drawerWidth = 240;
-
-export default function PermanentDrawerLeft() {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar />
-        <Divider />
-        <List>
-            <ListItem key="Employees" disablePadding>
-              <ListItemButton component={Link} to="/">
-                <ListItemText primary="Employees" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key="Projects" disablePadding>
-              <ListItemButton component={Link} to="/projects">
-                <ListItemText primary="Projects" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key="Teams" disablePadding>
-              <ListItemButton component={Link} to="/teams">
-                <ListItemText primary="Teams" />
-              </ListItemButton>
-            </ListItem>
-        </List>
-      </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
-      </Box>
-    </Box>
-  );
-}
-*/
-
