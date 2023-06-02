@@ -3,7 +3,7 @@ import url from "../../get_php_link";
 import { Box, Typography, Button,IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Header from "../../components/Header";
-import {Link } from "react-router-dom";
+import {Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -11,6 +11,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 //import moment from 'moment';
 
 function Tasks() {
+  const { idUser } = useParams();
   const [tasks, setTasks] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -105,7 +106,7 @@ function Tasks() {
             headerName: "Action",
             sortable: false,
             renderCell: ({ row }) =>[
-            <IconButton  onClick={() => navigate(`/manager/updateTask/${row.id_task}`)} className="material-icons-outlined" type="button" sx={{p: 1}}>
+            <IconButton  onClick={() => navigate(`/manager/updateTask/${idUser}/${row.id_task}`)} className="material-icons-outlined" type="button" sx={{p: 1}}>
             <EditOutlinedIcon />
             </IconButton>,
             <IconButton  onClick={() => handleUpdate(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
@@ -166,7 +167,7 @@ function Tasks() {
   alignItems="flex-end"
 >
       <Button size="large" variant="contained" 
-        component={Link} to="/manager/addTask">Add Task</Button>
+        onClick={()=>{navigate(`/manager/addTask/${idUser}`)}}>Add Task</Button>
       </Box>
         <Box height="75vh" sx={{ margin: "50px" }}>
         

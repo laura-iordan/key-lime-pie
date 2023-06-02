@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -18,7 +18,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-const Item = ({ title, to, icon, selected, setSelected, user, userId}) => {
+const Item = ({ title, to, icon, selected, setSelected, user, idUser}) => {
   return (
     <MenuItem
       active={selected === title}
@@ -29,14 +29,16 @@ const Item = ({ title, to, icon, selected, setSelected, user, userId}) => {
       icon={icon}
     >
       <Typography component='div'>{title}</Typography>
-      <Link to={to} state={[userId, user.name, user.surname, user.email]}/>
+      <Link to={`${to}/${idUser}`} />
     </MenuItem>
     
   );
 };
 
 const SidebarManager = (props) => { 
-  let userId = props.userId;
+  const { idUser } = useParams();
+  const nav = useNavigate();
+  console.log(idUser);
 
   const [user, setUser] = useState({
     id_role: 3,
@@ -47,36 +49,27 @@ const SidebarManager = (props) => {
     phone_no: "",
     hourly_fee: 0,
     status: 1,
+    email:""
   });
 
-  const location = useLocation();
-  const data = location.state;
+ 
 
   useEffect(() => {
-    axios.post(url+'get_employee.php?id_user='+userId)
+    axios.post(url+'get_employee.php?id_user='+idUser)
     .then(function(response) {
       console.log(response.data);
       setUser(response.data);
   })
       .catch(error => console.error(error));
-  }, [userId]);
+  }, []);
+
+
 
 
   const theme = mainTheme;
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
-
-  if (userId === undefined) {
-    userId = data[0];
-  }
-
-  console.log(data[0]);
-  console.log(data[1]);
-  console.log(data[2]);
-  console.log(data[3]);
-
-  const nav = useNavigate();
 
   return (
     <Box
@@ -145,6 +138,8 @@ const SidebarManager = (props) => {
             </Box>
           )}
 
+          
+
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
@@ -155,8 +150,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/dashboard", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav(`/manager/dashboard/${idUser}`)}}
             />
 
             <Typography
@@ -176,8 +171,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId} 
-              onClick={() => {nav("/manager/team", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav(`/manager/team/${idUser}`)}}
             />
             <Item
               title="Contacts Information"
@@ -188,8 +183,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/task", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav("/manager/task")}}
             />
             <Typography
             component='div'
@@ -208,8 +203,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/barChart", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav("/manager/barChart")}}
             />
             <Item
               title="Bar Chart"
@@ -220,8 +215,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/barChart2", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav("/manager/barChart2")}}
             />
             <Item
               title="Pie Chart"
@@ -232,8 +227,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/pieChart", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav("/manager/pieChart")}}
             />
             <Item
               title="Line Chart"
@@ -244,8 +239,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/lineChart", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav("/manager/lineChart")}}
             />
             <Item
               title="Line Chart"
@@ -256,8 +251,8 @@ const SidebarManager = (props) => {
               user={user}
               setUser={setUser}
               props={props}
-              userId={userId}
-              onClick={() => {nav("/manager/bumpChart", {state: data})}}
+              idUser={idUser}
+              onClick={() => {nav("/manager/bumpChart")}}
             />
           </Box>
         </Menu>

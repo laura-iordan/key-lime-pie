@@ -9,10 +9,13 @@ import Container from "@mui/material/Container";
 import url from '../get_php_link';
 import { useNavigate } from "react-router-dom";
 
-function Login(){
+function Login(props){
     const navigate = useNavigate();
+    
+    const {userCredential, setUserCredential} = props;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    
 
     function getPath(role){
       if(role === 0){
@@ -35,11 +38,13 @@ function Login(){
       axios.post(url+'login.php', fData)
       .then(function(response) {
         const userData = response.data;
+        setUserCredential(userData);
         if(userData.username === username && userData.password === password){
+          
           if(userData.id_role===1){
-            navigate(`/admin`, {state: {id_user: userData.id_user}});
+            navigate(`/admin/${userData.id_user}`);
           } else if(userData.id_role===2){
-            navigate(`/manager/dashboard`, {state: {id_user: userData.id_user}});
+            navigate(`/manager/dashboard/${userData.id_user}`);
           } 
         } else{
           alert("Error");

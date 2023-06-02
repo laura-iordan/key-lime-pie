@@ -35,7 +35,11 @@ header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
   $username = $_POST['username'];
-  $sql = "SELECT * FROM users WHERE username=?";
+  $sql = "SELECT u.*, name, surname
+  FROM users AS u
+  INNER JOIN [dbo].[employees] AS e
+  ON u.id_user=e.id_user
+  WHERE username=?";
   $params = array($username);
   
   $stmt = sqlsrv_query($conn, $sql, $params);

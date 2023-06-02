@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -26,15 +26,15 @@ const Item = ({ title, to, icon, selected, setSelected, user, userId }) => {
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to} state={[userId, user.name, user.surname, user.email]}/>
+      <Link to={to} />
     </MenuItem>
   );
 };
 
 const SidebarManager = (props) => {
-  let userId = props.userId;
 
-  const [user, setUser] = useState({
+
+  /*const [user, setUser] = useState({
     id_role: 3,
     name: "",
     surname: "",
@@ -55,16 +55,16 @@ const SidebarManager = (props) => {
       setUser(response.data);
   })
       .catch(error => console.error(error));
-  }, [userId]);
+  }, [userId]);*/
 
   const theme = mainTheme;
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
 
-  if (userId === undefined) {
+  /*if (userId === undefined) {
     userId = data[0];
-  }
+  }*/
 
   const nav = useNavigate();
 
@@ -125,10 +125,10 @@ const SidebarManager = (props) => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {user.surname + ' ' + user.name}
+                  {props.surname + ' ' + props.name}
                 </Typography>
                 <Typography variant="h5" color={colors.primary.dark}>
-                  {user.email}
+                  {props.email}
                 </Typography>
               </Box>
             </Box>
@@ -141,11 +141,6 @@ const SidebarManager = (props) => {
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              user={user}
-              setUser={setUser}
-              props={props}
-              userId={userId}
-              onClick={() => {nav("/admin", {state: data})}}
             />
 
             <Typography
@@ -161,11 +156,6 @@ const SidebarManager = (props) => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              user={user}
-              setUser={setUser}
-              props={props}
-              userId={userId} 
-              onClick={() => {nav("/admin/teams", {state: data})}}
             />
             <Item
               title="Projects"
@@ -173,11 +163,6 @@ const SidebarManager = (props) => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              user={user}
-              setUser={setUser}
-              props={props}
-              userId={userId} 
-              onClick={() => {nav("/admin/projects", {state: data})}}
             />
             <Typography
               variant="h6"
@@ -192,11 +177,6 @@ const SidebarManager = (props) => {
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              user={user}
-              setUser={setUser}
-              props={props}
-              userId={userId} 
-              onClick={() => {nav("/admin/barChartAdmin", {state: data})}}
             />
             <Item
               title="Pie Chart"
@@ -204,11 +184,6 @@ const SidebarManager = (props) => {
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              user={user}
-              setUser={setUser}
-              props={props}
-              userId={userId} 
-              onClick={() => {nav("/admin/pieChartAdmin", {state: data})}}
             />
           </Box>
         </Menu>

@@ -7,7 +7,7 @@ import url from '../../get_php_link';
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {Link } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import { Typography } from '@mui/material';
 import { mainTheme } from '../../theme';
 
@@ -15,7 +15,8 @@ import { mainTheme } from '../../theme';
 
 
 function AddTask(){
-    
+    const navigate = useNavigate();
+    const { idUser} = useParams();
     const [taskName, setTaskName] = useState('');
     const [idEmployee, setIdEmployee] = useState(0);
     const [idProject, setIdProject] = useState();
@@ -58,6 +59,7 @@ function AddTask(){
               .then(response=>alert(response.data))
               .catch(error=>alert(error));                  
               }
+              navigate(`/manager/task/${idUser}`)
           }
     const handleChangeEmployee=(e)=>{
       setIdEmployee(e.target.value);
@@ -173,7 +175,6 @@ function AddTask(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/admin"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >

@@ -7,7 +7,7 @@ import url from '../../get_php_link';
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {Link } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import { Typography } from '@mui/material';
 import { mainTheme } from '../../theme';
 import { useParams } from "react-router-dom";
@@ -17,8 +17,9 @@ import { useParams } from "react-router-dom";
 
 
 function UpdateTask(){
+  const navigate = useNavigate();
 
-    const { id } = useParams();
+    const { idUser, id } = useParams();
     const [task, setTask] = useState({
       task_name: "",
       id_employee: 0,
@@ -69,7 +70,8 @@ function UpdateTask(){
   
               axios.post(url+'update_task.php', fData)
               .then(response=>alert(response.data))
-              .catch(error=>alert(error));                  
+              .catch(error=>alert(error));   
+              navigate(`/manager/task/${idUser}`)               
               }
           const handleChange = (e) => {
             const taskClone = { ...task };
@@ -198,7 +200,6 @@ function UpdateTask(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/manager/task"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >
