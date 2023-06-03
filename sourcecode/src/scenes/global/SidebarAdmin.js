@@ -15,7 +15,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-const Item = ({ title, to, icon, selected, setSelected, user, userId }) => {
+const Item = ({ title, to, icon, selected, setSelected, user, idUser }) => {
   return (
     <MenuItem
       active={selected === title}
@@ -26,15 +26,17 @@ const Item = ({ title, to, icon, selected, setSelected, user, userId }) => {
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
+      <Link to={`${to}/${idUser}`} />
     </MenuItem>
   );
 };
 
 const SidebarManager = (props) => {
+  const { idUser } = useParams();
+  console.log(idUser);
 
 
-  /*const [user, setUser] = useState({
+  const [user, setUser] = useState({
     id_role: 3,
     name: "",
     surname: "",
@@ -43,28 +45,24 @@ const SidebarManager = (props) => {
     phone_no: "",
     hourly_fee: 0,
     status: 1,
+    email:""
   });
 
-  const location = useLocation();
-  const data = location.state;
+ 
 
   useEffect(() => {
-    axios.post(url+'get_employee.php?id_user='+userId)
+    axios.post(url+'get_employee.php?id_user='+idUser)
     .then(function(response) {
       console.log(response.data);
       setUser(response.data);
   })
       .catch(error => console.error(error));
-  }, [userId]);*/
+  }, []);
 
   const theme = mainTheme;
   const colors = theme.palette;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
-
-  /*if (userId === undefined) {
-    userId = data[0];
-  }*/
 
   const nav = useNavigate();
 
@@ -125,10 +123,10 @@ const SidebarManager = (props) => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {props.surname + ' ' + props.name}
+                  {user.surname + ' ' + user.name}
                 </Typography>
                 <Typography variant="h5" color={colors.primary.dark}>
-                  {props.email}
+                  {user.email}
                 </Typography>
               </Box>
             </Box>
@@ -141,6 +139,11 @@ const SidebarManager = (props) => {
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              idUser={idUser}
+              onClick={() => {nav(`/admin/${idUser}`)}}
             />
 
             <Typography
@@ -156,6 +159,11 @@ const SidebarManager = (props) => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              idUser={idUser}
+              onClick={() => {nav(`/admin/teams/${idUser}`)}}
             />
             <Item
               title="Projects"
@@ -163,6 +171,11 @@ const SidebarManager = (props) => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              idUser={idUser}
+              onClick={() => {nav(`/admin/projects/${idUser}`)}}
             />
             <Typography
               variant="h6"
@@ -177,6 +190,11 @@ const SidebarManager = (props) => {
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              idUser={idUser}
+              onClick={() => {nav(`/admin/barChartAdmin/${idUser}`)}}
             />
             <Item
               title="Pie Chart"
@@ -184,6 +202,11 @@ const SidebarManager = (props) => {
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              idUser={idUser}
+              onClick={() => {nav(`/admin/pieChartAdmin/${idUser}`)}}
             />
           </Box>
         </Menu>
