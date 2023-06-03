@@ -32,6 +32,7 @@ import UpdateTask from './scenes/manager/UpdateTask';
 import CardinalAreaChart from './components/CardinalAreaChart';
 import UpdateProjects from './scenes/admin/UpdateProjects';
 import AddProject from './scenes/admin/AddProject';
+import Profile from './scenes/global/Profile';
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                 </Route>
                 <Route path="/manager" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>}>
                     <Route path="/manager/dashboard/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>}/>       
+                    <Route path="/manager/profile/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>}/>
                     <Route path="/manager/team/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/task/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/addTask/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
@@ -85,7 +87,35 @@ function App() {
                 
                 
                     <main className="content">
-                    <Topbar setIsSidebar={setIsSidebar} />
+                    <Routes>
+                <Route path="/admin/" element={<SidebarAdmin isSidebar={isSidebar} />}>
+                    <Route path="/admin/:idUser" element={<SidebarAdmin isSidebar={isSidebar} />} />
+                    <Route path="/admin/projects" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/addProject" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/teams" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/addEmployee" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/updateEmployee/:id" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/updateTeam/:id" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/barChartAdmin" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/pieChartAdmin" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                </Route>
+                <Route path="/manager" element={<Topbar setIsSidebar={setIsSidebar} userId={userId}/>}>
+                    <Route path="/manager/dashboard/:idUser" element={<Topbar setIsSidebar={setIsSidebar} userId={userId}/>}/>       
+                    <Route path="/manager/profile/:idUser" element={<Topbar setIsSidebar={setIsSidebar} userId={userId}/>}/>
+                    <Route path="/manager/team/:idUser" element={<Topbar setIsSidebar={setIsSidebar} userId={userId}/>} />
+                    <Route path="/manager/task/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/addTask/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/updateTask/:idUser/:id" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/barChart/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/pieChart/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/lineChart/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/bumpChart/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/barChart2/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/cardinalAreaChart/:idUser" element={<Topbar isSidebar={isSidebar} />}/>
+                </Route>
+                <Route path="/user" element={<SidebarManager isSidebar={isSidebar} />}/>
+                </Routes>
+
                     
                     <Routes>
                         <Route path="/" element={<Login userCredential={userCredential} setUserCredential={setUserCredential} />} />
@@ -103,7 +133,8 @@ function App() {
                             <Route path="/admin/pieChartAdmin" element={<Piead userId={userId}/>} />
                         </Route>
                         <Route path="/manager" element={<Manager />}>
-                            <Route path="/manager/dashboard/:idUser" element={<Dashboard userId={userId}/>}/>       
+                            <Route path="/manager/dashboard/:idUser" element={<Dashboard userId={userId}/>}/>  
+                            <Route path="/manager/profile/:idUser" element={<Profile userId={userId}/>}/>     
                             <Route path="/manager/team/:idUser" element={<Team userId={userId}/>} />
                             <Route path="/manager/task/:idUser" element={<Task userId={userId}/>} />
                             <Route path="/manager/addTask/:idUser" element={<AddTask userId={userId}/>} />

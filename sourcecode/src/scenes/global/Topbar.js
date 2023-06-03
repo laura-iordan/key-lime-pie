@@ -7,9 +7,12 @@ import Box from '@mui/material/Box';
 import { mainTheme } from "../../theme";
 import logo from '../../resources/logo.png';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 
 const Topbar = () => {
+    const { idUser } = useParams();
+    console.log(idUser);
     const navigate = useNavigate();
     const theme = mainTheme;
     const colors = theme.palette;
@@ -35,10 +38,9 @@ const Topbar = () => {
                     paddingLeft: '30px',
                     marginRight: '20px',
                     }}>
-                    <Icon className="material-icons-outlined" sx = {{
-                        marginInlineEnd: '5px',
-                        color: '#f4ffe9'
-                    }}>person_outlined_icon</Icon>
+                    <IconButton onClick={() => navigate(`/manager/profile/${idUser}`)}>
+                        <Person2OutlinedIcon />
+                    </IconButton>
                     <IconButton onClick={() => navigate(`/`)}>
                         <ExitToAppOutlinedIcon />
                     </IconButton>
