@@ -3,7 +3,6 @@ import url from '../../get_php_link';
 import { Box, Typography, Button } from '@mui/material';
 import Header from '../../components/Header';
 import { useParams } from 'react-router-dom';
-import profile from '../../resources/profil.png';
 import axios from 'axios'; // Adăugat importul pentru Axios
 
 function Profile() {
@@ -22,7 +21,6 @@ function Profile() {
       })
       .catch((error) => console.error(error));
   }, []);
-  let profil='C:\\xampp1\\htdocs\\key-lime-pie\\sourcecode\\src\\resources\\'+employee.picture;
 
   const handleImageUpload = () => {
     if (!selectedImage) {
@@ -46,6 +44,8 @@ function Profile() {
     const file = event.target.files[0];
     setSelectedImage(file);
   };
+
+
 
   return (
     <Box m="40px 0 0 0" display="flex" flexDirection="column" alignItems="center">
@@ -82,7 +82,20 @@ function Profile() {
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       />
     </div>
-  ) : (
+  ) : (employee.picture === null ? (<div
+      style={{
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        borderRadius: '50%',
+      }}
+    >
+      <img
+        src={require(`../../resources/profil.png`)}
+        alt="Profile"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+    </div>):(
     <div
       style={{
         width: '100%',
@@ -97,7 +110,7 @@ function Profile() {
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       />
     </div>
-  )}
+  ))}
 </Box>
 
         <Box
