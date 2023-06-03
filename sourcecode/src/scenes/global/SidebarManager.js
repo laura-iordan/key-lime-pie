@@ -15,7 +15,7 @@ import { mainTheme } from "../../theme";
 import StackedBarChartOutlinedIcon from '@mui/icons-material/StackedBarChartOutlined';
 import url from '../../get_php_link';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 
 const Item = ({ title, to, icon, selected, setSelected, user, idUser}) => {
@@ -39,6 +39,7 @@ const SidebarManager = (props) => {
   const { idUser } = useParams();
   const nav = useNavigate();
   console.log(idUser);
+  
 
   const [user, setUser] = useState({
     id_role: 3,
