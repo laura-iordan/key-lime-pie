@@ -8,13 +8,14 @@ import url from '../../get_php_link';
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {Link } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import { mainTheme } from '../../theme';
 import { Typography } from '@mui/material';
 
 function UpdateEmployee(){
+  const navigate = useNavigate();
 
-  const { id } = useParams();
+  const { idUser, id } = useParams();
     const [user, setUser] = useState({
       id_role: 3,
       name: "",
@@ -33,7 +34,6 @@ function UpdateEmployee(){
     useEffect(() => {
       axios.post(url+'get_employee.php?id_user='+id)
       .then(function(response) {
-        console.log(response.data);
         setUser(response.data);
     })
         .catch(error => console.error(error));
@@ -75,8 +75,9 @@ function UpdateEmployee(){
               fData.append('status', user.status);
   
               axios.post(url+'update_employee.php', fData)
-              .then(response=>alert(response.data))
-              .catch(error=>alert(error));                  
+              .then(response=>response.data)
+              .catch(error=>alert(error));  
+              navigate(`/admin/${idUser}`)                
               
           }
 
@@ -219,7 +220,6 @@ function UpdateEmployee(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/admin"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >

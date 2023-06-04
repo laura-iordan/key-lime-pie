@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useMemo} from 'react';
-import {Link } from "react-router-dom";
+import {Link, useParams, useNavigate } from "react-router-dom";
 import url from '../../get_php_link';
 import { Box, Button, Typography, IconButton } from "@mui/material";
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
@@ -8,7 +8,8 @@ import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
 function UpdateProjects() {
-
+  const { idUser } = useParams();
+  const navigate = useNavigate();
 
   const [projects, setProjects] = useState([]);
   const [managers,setManagers] = useState([]); // lista de manageri
@@ -131,7 +132,7 @@ function UpdateProjects() {
     sx = {{
       margin: '50px'
     }}>
-    <Button variant="contained" component={Link} to="/admin/addProject">New Project</Button>
+    <Button variant="contained" onClick={()=>{navigate(`/admin/addProject/${idUser}`)}} >New Project</Button>
       <DataGrid
       checkboxSelection
       columns={columns}

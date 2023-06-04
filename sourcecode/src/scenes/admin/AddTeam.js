@@ -7,11 +7,13 @@ import url from "../../get_php_link";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { mainTheme } from '../../theme';
 import { Typography } from '@mui/material';
 
 function AddTeam() {
+  const { idUser } = useParams();
+  const navigate = useNavigate();
   const [teamName, setTeamName] = useState('');
   const [managers, setManagers] = useState([]);
   const [manager, setManager] = useState('');
@@ -36,10 +38,10 @@ function AddTeam() {
       
       axios
         .post(url+'add_team.php',fData)
-        .then((response) => alert(response.data))
+        .then((response) => response.data)
         .catch((error) => alert(error));
 
-      alert("New team created!");
+        navigate(`/admin/teams/${idUser}`) 
     }
   };
 
@@ -106,8 +108,6 @@ function AddTeam() {
           type="submit"
           fullWidth
           variant="contained"
-          component={Link}
-          to="/admin/teams"
           sx={{ mt: 3, mb: 2 }}
           onClick={() => handleInsert()}
         >

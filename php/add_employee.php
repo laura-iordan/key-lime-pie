@@ -6,17 +6,17 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if($conn){
-    echo $username = $_POST['username'];
-    echo $email = $_POST['email'];
-    echo $password = $_POST['password'];
-    echo $id_role = $_POST['id_role'];
-    echo $name = $_POST['name'];
-    echo $surname = $_POST['surname'];
-    echo $SSN = $_POST['SSN'];
-    echo $address = $_POST['address'];
-    echo $phone_no = $_POST['phoneNo'];
-    echo $hourly_fee = $_POST['hourlyFee'];
-    echo $status = $_POST['status'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $id_role = $_POST['id_role'];
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $SSN = $_POST['SSN'];
+    $address = $_POST['address'];
+    $phone_no = $_POST['phoneNo'];
+    $hourly_fee = $_POST['hourlyFee'];
+    $status = $_POST['status'];
 
     if($id_role == 2){
         $sql1 = "INSERT INTO [dbo].[users](username, email, password, id_role) VALUES(?, ?, ?, ?)";

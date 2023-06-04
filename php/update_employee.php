@@ -6,15 +6,15 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 
 if($conn){
-    echo $id_user = $_POST['id_user'];
-    echo $id_role = $_POST['id_role'];
-    echo $name = $_POST['name'];
-    echo $surname = $_POST['surname'];
-    echo $SSN = $_POST['SSN'];
-    echo $address = $_POST['address'];
-    echo $phone_no = $_POST['phoneNo'];
-    echo $hourly_fee = $_POST['hourlyFee'];
-    echo $status = $_POST['status'];
+    $id_user = $_POST['id_user'];
+    $id_role = $_POST['id_role'];
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $SSN = $_POST['SSN'];
+    $address = $_POST['address'];
+    $phone_no = $_POST['phoneNo'];
+    $hourly_fee = $_POST['hourlyFee'];
+    $status = $_POST['status'];
 
     $sql1 = "SELECT [id_role]
         FROM [dbo].[users]
@@ -25,11 +25,10 @@ if($conn){
             die(print_r(sqlsrv_errors(), true));
         }
     
-        echo $id_role_vechi = sqlsrv_fetch_object($stmt1)->id_role;
+        $id_role_vechi = sqlsrv_fetch_object($stmt1)->id_role;
 
 
     if($id_role == 2 && $id_role != $id_role_vechi){
-        echo "manager";
         $sql = "UPDATE [dbo].[employees]
         SET name=?, surname=?, SSN=?, address=?, phone_no=?, hourly_fee=?
         WHERE id_user=?";
@@ -69,7 +68,6 @@ if($conn){
         }
 
     }else if($id_role == 3 && $id_role != $id_role_vechi){
-        echo "employee";
         $sql = "UPDATE [dbo].[employees]
         SET name=?, surname=?, SSN=?, address=?, phone_no=?, hourly_fee=?
         WHERE id_user=?";
@@ -108,7 +106,6 @@ if($conn){
 
     }
     else{
-        echo "neschimbat";
         $sql = "UPDATE [dbo].[employees]
         SET name=?, surname=?, SSN=?, address=?, phone_no=?, hourly_fee=?
         WHERE id_user=?";

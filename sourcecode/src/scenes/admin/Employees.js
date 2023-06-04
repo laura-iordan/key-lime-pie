@@ -3,7 +3,7 @@ import url from '../../get_php_link';
 import { Box, Typography, Button, IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import Header from '../../components/Header';
-import {Link } from "react-router-dom";
+import {Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -11,6 +11,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 function Employees2() {
+  const { idUser } = useParams();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -96,7 +97,7 @@ const handleDelete = () => {
         headerName: "Action",
         sortable: false,
         renderCell: ({ row }) =>[
-        <IconButton  onClick={() => navigate(`/admin/updateEmployee/${row.id_user}`)} className="material-icons-outlined" type="button" sx={{p: 1}}>
+        <IconButton  onClick={() => navigate(`/admin/updateEmployee/${idUser}/${row.id_user}`)} className="material-icons-outlined" type="button" sx={{p: 1}}>
         <EditOutlinedIcon />
         </IconButton>,
         <IconButton  onClick={() => handleUpdate(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
@@ -175,7 +176,7 @@ const handleDelete = () => {
   justifyContent="flex-end"
   alignItems="flex-end"
 >
-      <Button variant="contained" component={Link} to="/admin/addEmployee">Add Employee</Button>
+      <Button variant="contained" onClick={()=>{navigate(`/admin/addEmployee/${idUser}`)}}>Add Employee</Button>
       </Box>
       <Box
     height="75vh"

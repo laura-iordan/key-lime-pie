@@ -3,13 +3,15 @@ import url from "../../get_php_link";
 import { Box, Typography, Button,IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Header from "../../components/Header";
-import {Link } from "react-router-dom";
+import {Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function Teams({ history }) {
+  const { idUser } = useParams();
+
   const [teams, setTeams] = useState([]);
   const [managers, setManagers] = useState([]);
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ function Teams({ history }) {
             headerName: "Action",
             sortable: false,
             renderCell: ({ row }) =>[
-            <IconButton  onClick={() => navigate(`/admin/updateTeam/${row.id_teams}`)} className="material-icons-outlined" type="button" sx={{p: 1}}>
+            <IconButton  onClick={() => navigate(`/admin/updateTeam/${idUser}/${row.id_teams}`)} className="material-icons-outlined" type="button" sx={{p: 1}}>
             <EditOutlinedIcon />
             </IconButton>,
             <IconButton  onClick={() => handleUpdate(row)} className="material-icons-outlined" type="button" sx={{p: 1}}>
@@ -130,7 +132,7 @@ function Teams({ history }) {
   justifyContent="flex-end"
   alignItems="flex-end"
 >
-      <Button variant="contained" component={Link} to="/admin/addTeam">Add Team</Button>
+      <Button variant="contained" onClick={()=>{navigate(`/admin/addTeam/${idUser}`)}} >Add Team</Button>
       </Box>
         <Box height="75vh" sx={{ margin: "50px" }}>
           <DataGrid

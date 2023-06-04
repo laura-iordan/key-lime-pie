@@ -8,13 +8,14 @@ import url from '../../get_php_link';
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {Link } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import { mainTheme } from '../../theme';
 import { Typography } from '@mui/material';
 
 function UpdateTeam(){
 
-    const { id } = useParams();
+    const {idUser, id } = useParams();
+    const navigate = useNavigate();
     const [team, setTeam] = useState({
         id_manager: 0,
         team_name: "",
@@ -56,7 +57,8 @@ function UpdateTeam(){
   
               axios.post(url+'update_team.php', fData)
               .then(response=>response.data)
-              .catch(error=>alert(error));                  
+              .catch(error=>alert(error));  
+              navigate(`/admin/teams/${idUser}`)                 
               
           }
 
@@ -120,7 +122,6 @@ function UpdateTeam(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/admin/teams"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >

@@ -7,7 +7,7 @@ import url from '../../get_php_link';
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {Link } from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import { Typography } from '@mui/material';
 import { mainTheme } from '../../theme';
 
@@ -15,7 +15,8 @@ import { mainTheme } from '../../theme';
 
 
 function AddProject(){
-    
+  const { idUser } = useParams();
+  const navigate = useNavigate();
     const [projectName, setProjectName] = useState('');
     const [idManager, setIdManager] = useState();
     const [budget, setBudget] = useState();
@@ -49,9 +50,10 @@ function AddProject(){
               console.log(fData);
   
               axios.post(url+'add_project.php', fData)
-              .then(response=>alert(response.data))
+              .then(response=>response.data)
               .catch(error=>alert(error));                  
               }
+              navigate(`/admin/projects/${idUser}`)
           }
     const handleChangeManager=(e)=>{
       setIdManager(e.target.value);
@@ -170,7 +172,6 @@ function AddProject(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/admin/projects"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >

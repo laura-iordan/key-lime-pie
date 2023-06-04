@@ -7,14 +7,15 @@ import url from '../../get_php_link';
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import {Link } from "react-router-dom";
+import {useParams, useNavigate } from "react-router-dom";
 import { Typography } from '@mui/material';
 import { mainTheme } from '../../theme';
 
 
 
 function AddEmployee(){
-    
+    const { idUser } = useParams();
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [ssn, setSsn] = useState('');
@@ -65,9 +66,10 @@ function AddEmployee(){
               fData.append('status', status);
   
               axios.post(url+'add_employee.php', fData)
-              .then(response=>alert(response.data))
+              .then(response=>response.data)
               .catch(error=>alert(error));                  
               }
+              navigate(`/admin/${idUser}`) 
           }
     const handleChangeRole=(e)=>{
       setRole(e.target.value);
@@ -238,7 +240,6 @@ function AddEmployee(){
             type="submit"
             fullWidth
             variant="contained"
-            component={Link} to="/admin"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => handleSubmit()}
           >
