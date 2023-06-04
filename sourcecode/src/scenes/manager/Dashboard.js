@@ -37,6 +37,9 @@ const Dashboard = () => {
   const [overdueTasks, setOverdueTasks] = useState([{
     overdue_tasks: 0
   }]);
+  const [projectsTargetMonth, setProjectsTargetMonth] = useState([{
+    projects_target_month: 0
+  }]);
 
   useEffect(() => {
     fetch(url+'get_team_performance.php')
@@ -47,7 +50,6 @@ const Dashboard = () => {
   }, []);
 
   let performance = teamPerformance['team_performance'] + "%";
-  console.log(performance);
 
   useEffect(() => {
     fetch(url+'get_tasks_on_time.php')
@@ -57,7 +59,6 @@ const Dashboard = () => {
   }, []);
 
   let onTime = onTimeTasks['on_schedule_tasks'] + "%";
-  console.log(onTime);
 
   useEffect(() => {
     fetch(url+'get_overdue_tasks.php')
@@ -67,11 +68,15 @@ const Dashboard = () => {
   }, []);
 
   let overdue = overdueTasks['overdue_tasks'] + "%";
-  console.log(overdue);
 
-  //performance.push(teamPerformance[0]["team_performance"]);
-  //onTime.push(onTimeTasks[0]["on_schedule_tasks"]);
-  //overdue.push(overdueTasks[0]["overdue_tasks"]);
+  useEffect(() => {
+    fetch(url+'get_projects_target_month.php')
+      .then(response => response.json())
+      .then(data => setProjectsTargetMonth(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  let targetMonth = projectsTargetMonth['projects_target_month'];
 
   const ref = useRef(null);
 
@@ -220,7 +225,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="2"
+            title={targetMonth}
             subtitle="Projects Approaching Deadline"
             progress="0.80"
             increase="+23%"
