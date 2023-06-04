@@ -22,7 +22,7 @@ const Item = ({ title, to, icon, selected, setSelected, user, idUser }) => {
       style={{
         color: '#f4ffe9',
       }}
-      onClick={() => setSelected(title)}
+      onClick={() => window.location.reload()}
       icon={icon}
     >
       <Typography>{title}</Typography>

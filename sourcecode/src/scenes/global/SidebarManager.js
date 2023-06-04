@@ -18,14 +18,14 @@ import axios from 'axios';
 import {useNavigate } from 'react-router-dom';
 
 
-const Item = ({ title, to, icon, selected, setSelected, user, idUser}) => {
+const Item = ({ title, to, icon, selected, setSelected, user, idUser, theme}) => {
   return (
     <MenuItem
       active={selected === title}
       style={{
-        color: '#f4ffe9',
+        color: '#f4ffe9'
       }}
-      onClick={() => setSelected(title)}
+      onClick={() => window.location.reload()}
       icon={icon}
     >
       <Typography component='div'>{title}</Typography>
@@ -63,9 +63,6 @@ const SidebarManager = (props) => {
   })
       .catch(error => console.error(error));
   }, []);
-
-
-
 
   const theme = mainTheme;
   const colors = theme.palette;
@@ -153,6 +150,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav(`/manager/dashboard/${idUser}`)}}
+              theme={theme}
             />
 
             <Typography
@@ -174,6 +172,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav(`/manager/team/${idUser}`)}}
+              theme={theme}
             />
             <Item
               title="Contacts Information"
@@ -186,6 +185,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav("/manager/task")}}
+              theme={theme}
             />
             <Typography
             component='div'
@@ -206,6 +206,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav("/manager/barChart")}}
+              theme={theme}
             />
             <Item
               title="Bar Chart"
@@ -218,6 +219,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav("/manager/barChart2")}}
+              theme={theme}
             />
             <Item
               title="Pie Chart"
@@ -230,6 +232,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav("/manager/pieChart")}}
+              theme={theme}
             />
             <Item
               title="Line Chart"
@@ -242,6 +245,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav("/manager/lineChart")}}
+              theme={theme}
             />
             <Item
               title="Line Chart"
@@ -254,6 +258,7 @@ const SidebarManager = (props) => {
               props={props}
               idUser={idUser}
               onClick={() => {nav("/manager/bumpChart")}}
+              theme={theme}
             />
           </Box>
         </Menu>
