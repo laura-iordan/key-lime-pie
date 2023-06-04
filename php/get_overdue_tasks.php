@@ -13,12 +13,7 @@ if ($conn) {
     die(print_r(sqlsrv_errors(), true));
   }
   
-  $users = array();
-  while ($row = sqlsrv_fetch_object($stmt)) {
-    array_push($users, $row);
-  }
-  
-  echo json_encode($users);
+  echo json_encode(sqlsrv_fetch_object($stmt));
 } else {
-  die(print_r(sqlsrv_errors(), true));
+die(print_r(sqlsrv_errors(), true));
 }
