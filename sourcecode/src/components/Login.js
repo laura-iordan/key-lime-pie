@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import url from '../get_php_link';
 import { useNavigate } from "react-router-dom";
+import { mainTheme } from '../theme';
+import background from '../resources/background.jpg';
 
 function Login(props){
     const navigate = useNavigate();
@@ -55,23 +57,36 @@ function Login(props){
     }
   }
     
-
-    
-
     return (
-    <Container component="main" maxWidth="xs">
-      <Box
+      <div style = {{
+        backgroundImage: `url(${background})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: '100vh',
+        paddingTop: "8px",
+        height: "90%"
+      }}>
+          <Container component="main" maxWidth="xs">
+      <Box className="rounded-corners" style = {{
+          padding: '50px',
+          backgroundColor: mainTheme.green[100]
+          }}
         sx={{  
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "center"
+        
         }}
       >
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
+          {"Sign In"}
+          </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1,
+          '.MuiTextField-root': {
+            background: '#ffffff'
+          }  }}>
           <TextField
             margin="normal"
             required
@@ -104,11 +119,15 @@ function Login(props){
             component={Link} to={getPath()}
             onClick={() => handleSubmit()}
           >
-            Sign In
+            <Typography variant="h5">
+          {"Sign In"}
+          </Typography>
           </Button>
         </Box>
       </Box>
-    </Container>);
+    </Container>
+      </div>
+    );
 
 }
 
