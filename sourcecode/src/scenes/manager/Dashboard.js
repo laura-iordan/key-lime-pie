@@ -31,13 +31,12 @@ const Dashboard = () => {
   const [teamPerformance, setTeamPerformance] = useState({
     team_performance: 0
   });
-  const [onTimeTasks, setOnTimeTasks] = useState([]);
-  const [overdueTasks, setOverdueTasks] = useState([]);
-  
-
-  //const performance = [];
-  const onTime = [];
-  const overdue = [];
+  const [onTimeTasks, setOnTimeTasks] = useState({
+    on_schedule_tasks: 0
+  });
+  const [overdueTasks, setOverdueTasks] = useState({
+    overdue_tasks: 0
+  });
 
   useEffect(() => {
     fetch(url+'get_team_performance.php')
@@ -50,18 +49,23 @@ const Dashboard = () => {
   useEffect(() => {
     fetch(url+'get_tasks_on_time.php')
       .then(response => response.json())
-      .then(onTimeTasks => setOnTimeTasks(onTimeTasks))
+      .then(data => setOnTimeTasks(data))
       .catch(error => console.error(error));
   }, []);
 
   useEffect(() => {
     fetch(url+'get_tasks_overdue.php')
       .then(response => response.json())
-      .then(overdueTasks => setOverdueTasks(overdueTasks))
+      .then(data => setOverdueTasks(data))
       .catch(error => console.error(error));
   }, []);
-  let title = teamPerformance['team_performance'] + "%";
-  console.log(title);
+
+  let performance = teamPerformance['team_performance'] + "%";
+  console.log(performance);
+  let onTime = onTimeTasks['on_schedule_tasks'] + '%';
+  console.log(onTime);
+  let overdue = overdueTasks['overdue_tasks'] + '%';
+  console.log(overdue);
 
   //performance.push(teamPerformance[0]["team_performance"]);
   //onTime.push(onTimeTasks[0]["on_schedule_tasks"]);
@@ -142,7 +146,7 @@ const Dashboard = () => {
           >
 
           <StatBox
-              title={title}
+              title={performance}
               subtitle="Employees Performance"
               progress="0.75"
               increase="+14%"
@@ -191,7 +195,7 @@ const Dashboard = () => {
         >
           <StatBox
             className="rounded-corners"
-            title={overdue}
+            title={"overdue"}
             subtitle="Overdue tasks"
             progress="0.30"
             increase="+5%"
