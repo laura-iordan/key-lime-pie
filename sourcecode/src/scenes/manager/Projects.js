@@ -67,14 +67,14 @@ function UpdateProjects() {
 
   const columns = useMemo(()=>[
     {field:'id_project', headerName:'ID', width:60, hide: 'true'},
-    {field:'project_name', headerName:'Project Name', flex: 1,editable: true},
-    {field:'budget', headerName:'Budget', type: "number", flex: 1, headerAlign: "left", align: "left", editable: true},
-    {field:'hours', headerName:'Hours', type: "number", flex: 1, headerAlign: "left", align: "left",editable: true},
+    {field:'project_name', headerName:'Project Name', flex: 1},
+    {field:'budget', headerName:'Budget', type: "number", flex: 1, headerAlign: "left", align: "left"},
+    {field:'hours', headerName:'Hours', type: "number", flex: 1, headerAlign: "left", align: "left"},
     //{field:'manager_name', headerName:'Manager', flex: 1},
-    {field:'manager_name', headerName:'Manager', flex: 1, editable: true, type: 'singleSelect', 
+    {field:'manager_name', headerName:'Manager', flex: 1, type: 'singleSelect', 
     valueOptions: options},
-    {field: 'starting_date', headerName: 'Starting Date', flex: 1, editable: true},
-    {field: 'target_date', headerName: 'Target Date', flex: 1, editable: true},
+    {field: 'starting_date', headerName: 'Starting Date', flex: 1},
+    {field: 'target_date', headerName: 'Target Date', flex: 1},
     // eslint-disable-next-line react-hooks/exhaustive-deps
   ], [options, loading])
 
