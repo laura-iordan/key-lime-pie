@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
     $id_user=$_GET['id_user'];
-  $sql = "SELECT u.id_user, e.name, e.surname, u.email, t.team_name 
+  $sql = "SELECT e.id_employee, e.name, e.surname, u.email, t.team_name 
   FROM  [dbo].[employees] AS e
   INNER JOIN [dbo].[users] AS u
   ON e.id_user=u.id_user 

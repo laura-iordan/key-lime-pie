@@ -39,14 +39,14 @@ function Tasks() {
   }
 
   useEffect(() => {
-    fetch(url+'get_projects.php')
+    fetch(url+'get_projects_mng.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => setProjects(data))
       .catch(error => console.error(error));
   }, []);
 
   useEffect(() => {
-    fetch(url+'get_employees.php')
+    fetch(url+'get_team_new.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => setEmployees(data))
       .catch(error => console.error(error));

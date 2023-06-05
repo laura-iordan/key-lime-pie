@@ -22,8 +22,11 @@ import url from '../../get_php_link';
 import Canvas1 from "./Canvas";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import { Canvas } from "@react-pdf/renderer";
+import {useParams} from "react-router-dom";
 
 const Dashboard = () => {
+  const { idUser } = useParams();
+
 
   const [open, setOpen] = useState(false);
   const [boxId, setBoxId] = useState("");
@@ -42,7 +45,7 @@ const Dashboard = () => {
   }]);
 
   useEffect(() => {
-    fetch(url+'get_team_performance.php')
+    fetch(url+'get_team_performance.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => {setTeamPerformance(data)
       console.log(data)})
@@ -53,25 +56,25 @@ const Dashboard = () => {
   console.log(performance);
 
   useEffect(() => {
-    fetch(url+'get_tasks_on_time.php')
+    fetch(url+'get_tasks_on_time.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => setOnTimeTasks(data))
       .catch(error => console.error(error));
   }, []);
 
-  let onTime = onTimeTasks['on_schedule_tasks'] + "%";
+  let onTime = parseFloat(onTimeTasks['on_schedule_tasks']).toFixed(2) + "%";
 
   useEffect(() => {
-    fetch(url+'get_overdue_tasks.php')
+    fetch(url+'get_overdue_tasks.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => setOverdueTasks(data))
       .catch(error => console.error(error));
   }, []);
 
-  let overdue = overdueTasks['overdue_tasks'] + "%";
+  let overdue = parseFloat(overdueTasks['overdue_tasks']).toFixed(2) + "%";
 
   useEffect(() => {
-    fetch(url+'get_projects_target_month.php')
+    fetch(url+'get_projects_target_month.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => setProjectsTargetMonth(data))
       .catch(error => console.error(error));
