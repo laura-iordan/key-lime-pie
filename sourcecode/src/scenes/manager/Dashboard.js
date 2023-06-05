@@ -23,10 +23,10 @@ import Canvas1 from "./Canvas";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import { Canvas } from "@react-pdf/renderer";
 import {useParams} from "react-router-dom";
+import "./../../index.css";
 
 const Dashboard = () => {
   const { idUser } = useParams();
-
 
   const [open, setOpen] = useState(false);
   const [boxId, setBoxId] = useState("");
@@ -41,6 +41,20 @@ const Dashboard = () => {
     overdue_tasks: 0
   }]);
   const [projectsTargetMonth, setProjectsTargetMonth] = useState([{
+    projects_target_month: 0
+  }]);
+
+  const [teamPerformanceBox, setTeamPerformanceBox] = useState([{
+    employee_performance: 0,
+    emp_name: ""
+  }]);
+  const [onTimeTasksBox, setOnTimeTasksBox] = useState({
+    on_schedule_tasks: 0
+  });
+  const [overdueTasksBox, setOverdueTasksBox] = useState([{
+    overdue_tasks: 0
+  }]);
+  const [projectsTargetMonthBox, setProjectsTargetMonthBox] = useState([{
     projects_target_month: 0
   }]);
 
@@ -62,7 +76,7 @@ const Dashboard = () => {
       .catch(error => console.error(error));
   }, []);
 
-  let onTime = parseFloat(onTimeTasks['on_schedule_tasks']).toFixed(2) + "%";
+  let onTime = parseFloat(onTimeTasks['on_schedule_tasks']);
 
   useEffect(() => {
     fetch(url+'get_overdue_tasks.php?id_user='+idUser)
@@ -71,7 +85,7 @@ const Dashboard = () => {
       .catch(error => console.error(error));
   }, []);
 
-  let overdue = parseFloat(overdueTasks['overdue_tasks']).toFixed(2) + "%";
+  let overdue = parseFloat(overdueTasks['overdue_tasks']);
 
   useEffect(() => {
     fetch(url+'get_projects_target_month.php?id_user='+idUser)
@@ -81,6 +95,14 @@ const Dashboard = () => {
   }, []);
 
   let targetMonth = projectsTargetMonth['projects_target_month'];
+
+  useEffect(() => {
+    fetch(url+'get_team_performance_box.php?id_user='+idUser)
+      .then(response => response.json())
+      .then(teamPerformanceBox => {setTeamPerformanceBox(teamPerformanceBox)
+      console.log(teamPerformanceBox)})
+      .catch(error => console.error(error));
+  }, []);
 
   const ref = useRef(null);
 
@@ -97,28 +119,94 @@ const Dashboard = () => {
     if (boxId === "first-box") {
       return (
         <span>
-          box1
+          <DialogTitle>
+            <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
+              {"Employees Performance"}
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <div style = {{
+                paddingTop: "20px",
+                paddingLeft: "40px",
+                paddingRight: "40px",
+                paddingBottom: "20px"
+              }}>
+                <table className="rounded-corners">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Performance</th>
+                  </tr>
+                  </thead>
+                  {teamPerformanceBox.map((val, key) => {
+                      return (
+                        <tbody>
+                            <tr key={key}>
+                            <td>{val.emp_name}</td>
+                            <td>{val.employee_performance}%</td>
+                          </tr>
+                        </tbody>
+                      )
+                  })}
+                </table>
+              </div>
+            </DialogContentText>
+          </DialogContent>
         </span>
       );
     }
     if (boxId === "second-box") {
       return (
         <span>
-          box2
+          <DialogTitle>
+            <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
+              {"TITLE2"}
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <span>
+                box2
+              </span>
+            </DialogContentText>
+          </DialogContent>
         </span>
       );
     }
     if (boxId === "third-box") {
       return (
         <span>
-          box3
+          <DialogTitle>
+            <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
+              {"TITLE3"}
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <span>
+                box3
+              </span>
+            </DialogContentText>
+          </DialogContent>
         </span>
       );
     }
     if (boxId === "fourth-box") {
       return (
         <span>
-          box4
+          <DialogTitle>
+            <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
+              {"TITLE4"}
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <span>
+                box4
+              </span>
+            </DialogContentText>
+          </DialogContent>
         </span>
       );
     }
@@ -253,18 +341,10 @@ const Dashboard = () => {
               onClick={handleClose} autoFocus>
               </CloseIcon>
         </DialogActions>
-        <DialogTitle>
-          <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
-          {"TITLE"}
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <div>
+        <div>
               {handleContent(boxId)}
             </div>
-          </DialogContentText>
-        </DialogContent>
+
       </Dialog>
 
 
