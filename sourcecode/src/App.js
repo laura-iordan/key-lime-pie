@@ -61,7 +61,7 @@ function App() {
                 <Route path="/admin/" element={<SidebarAdmin isSidebar={isSidebar} />}>
                     <Route path="/admin/:idUser" element={<SidebarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/profile/:idUser" element={<SidebarAdmin setIsSidebar={setIsSidebar} userId={userId}/>}/>
-                    <Route path="/admin/projects/:idUser" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/project/:idUser" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/admin/addProject/:idUser" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/admin/teams/:idUser" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/admin/addEmployee/:idUser" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
@@ -96,7 +96,7 @@ function App() {
                 <Route path="/admin/" element={<TopbarAdmin isSidebar={isSidebar} />}>
                     <Route path="/admin/:idUser" element={<TopbarAdmin isSidebar={isSidebar} />} />
                     <Route path="/admin/profile/:idUser" element={<TopbarAdmin setIsSidebar={setIsSidebar} userId={userId}/>}/>
-                    <Route path="/admin/projects/:idUser" element={<TopbarAdmin isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/admin/project/:idUser" element={<TopbarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/admin/addProject/:idUser" element={<TopbarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/admin/teams/:idUser" element={<TopbarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/admin/addEmployee/:idUser" element={<TopbarAdmin isSidebar={isSidebar} userId={userId}/>} />
@@ -129,7 +129,7 @@ function App() {
                         <Route path="/admin" element={<Admin userCredential={userCredential} setUserCredential={setUserCredential}/>}>
                             <Route path="/admin/:idUser" element={<Employees />} />
                             <Route path="/admin/profile/:idUser" element={<Profile userId={userId}/>}/>  
-                            <Route path="/admin/projects/:idUser" element={<UpdateProjects userId={userId}/>} />
+                            <Route path="/admin/project/:idUser" element={<UpdateProjects userId={userId}/>} />
                             <Route path="/admin/addProject/:idUser" element={<AddProject userId={userId}/>} />
                             <Route path="/admin/teams/:idUser" element={<Teams userId={userId}/>} />
                             <Route path="/admin/addTeam/:idUser" element={<AddTeam userId={userId}/>} />
