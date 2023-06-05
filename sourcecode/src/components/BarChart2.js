@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {ResponsiveBar} from '@nivo/bar';
 import url from '../get_php_link';
+import { useParams } from "react-router-dom";
 
 function BarChart2(){
+    const { idUser } = useParams();
     const [tasks, setTasks] = useState([]);
     const data=[];
     const keys = [];
 
     useEffect(() => {
-      fetch(url+'get_tasks.php')
+      fetch(url+'get_tasks_bar.php?id_user='+idUser)
         .then(response => response.json())
         .then(data => setTasks(data))
         .catch(error => console.error(error));

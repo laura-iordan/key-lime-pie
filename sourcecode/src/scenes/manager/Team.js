@@ -80,7 +80,7 @@ function Team() {
       checkboxSelection
       columns={columns}
       rows={users}
-      getRowId={row=>row.id_user}
+      getRowId={row=>row.id_employee}
       components={{ Toolbar: GridToolbar }}
     >
     </DataGrid>

@@ -11,15 +11,18 @@ import {
 import { curveCardinal } from "d3-shape";
 import "./../index.css";
 import url from "../get_php_link";
+import {useParams } from "react-router-dom";
 
 function CardinalAreaChart() {
+  const { idUser } = useParams();
+
   const [performance, setPerformance] = React.useState([]);
   const data = [];
 
   console.log(performance);
 
   React.useEffect(() => {
-    fetch(url+'get_employees_performance.php')
+    fetch(url+'get_employees_performance.php?id_user='+idUser)
     .then(response => response.json())
     .then(data => setPerformance(data))
     .catch(error => console.error(error));
