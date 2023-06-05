@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {ResponsiveBar} from '@nivo/bar';
 import url from '../get_php_link';
+import {useParams} from "react-router-dom";
 
 function BarChart({forwardRef}){
+    const { idUser } = useParams();
     const [tasks, setTasks] = useState([]);
     const data=[];
 
     useEffect(() => {
-      fetch(url+'get_tasks_overdue.php')
+      fetch(url+'get_tasks_overdue.php?id_user='+idUser)
         .then(response => response.json())
         .then(data => setTasks(data))
         .catch(error => console.error(error));

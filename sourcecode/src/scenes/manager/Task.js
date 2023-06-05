@@ -53,7 +53,7 @@ function Tasks() {
   }, [loading]);
 
   useEffect(() => {
-    fetch(url+'get_all_tasks.php')
+    fetch(url+'get_all_tasks.php?id_user='+idUser)
       .then((response) => response.json())
       .then((data) => setTasks(data))
       .catch((error) => console.error(error));
