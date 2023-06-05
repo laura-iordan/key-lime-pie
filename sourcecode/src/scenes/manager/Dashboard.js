@@ -156,8 +156,8 @@ const Dashboard = () => {
           <StatBox
               title={performance}
               subtitle="Employees Performance"
-              progress="0.75"
-              increase="+14%"
+              progress={parseFloat(performance)/100}
+              increase={performance}
               icon={
                 <BsPersonFillUp
                   style = {{ color: '#5b7a54', fontSize: "26px" }}
@@ -180,8 +180,8 @@ const Dashboard = () => {
             className="rounded-corners"
             title={onTime}
             subtitle="Tasks on time"
-            progress="0.50"
-            increase="+21%"
+            progress={parseFloat(onTime)/100}
+              increase={onTime}
             icon={
               <FaTasks
                 style = {{ color: '#5b7a54', fontSize: "26px" }}
@@ -205,8 +205,8 @@ const Dashboard = () => {
             className="rounded-corners"
             title={overdue}
             subtitle="Overdue tasks"
-            progress="0.30"
-            increase="+5%"
+            progress={parseFloat(overdue)/100}
+              increase={overdue}
             icon={
               <BiTaskX
                 style ={{ color: "#5b7a54", fontSize: "26px" }}
@@ -228,8 +228,8 @@ const Dashboard = () => {
           <StatBox
             title={targetMonth}
             subtitle="Projects Approaching Deadline"
-            progress="0.80"
-            increase="+23%"
+            progress={parseFloat(targetMonth)/100}
+              increase={targetMonth}
             icon={
               <AiFillAlert
                 style = {{
