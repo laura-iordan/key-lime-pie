@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: *');
 if ($conn) {
     $id_user=$_GET['id_user'];
   $sql = "SELECT 100 * ROUND(CAST(t.on_schedule_tasks AS float) / CAST(t.total_tasks AS float), 4) as employee_performance, CONCAT(e.name, ' ', e.surname) as emp_name
-  FROM (SELECT COUNT(CASE WHEN ending_date IS NOT NULL AND DATEDIFF(day, ending_date, target_date) <= 0  THEN 1 END) AS on_schedule_tasks,
+  FROM (SELECT COUNT(CASE WHEN ending_date IS NOT NULL AND DATEDIFF(day, ending_date, target_date) > 0  THEN 1 END) AS on_schedule_tasks,
         COUNT(CASE WHEN ending_date IS NOT NULL THEN 1 END) AS total_tasks,
         id_employee
   FROM (  SELECT t.id_task, t.task_name, t.id_employee, CONCAT(emp.name, ' ', emp.surname) AS employee_name, 
@@ -41,5 +41,5 @@ if ($conn) {
   
   echo json_encode($users);
 } else {
-  die(print_r(sqlsrv_errors(), true));
+  die(print_r(sqlsrv_errors(), true));
 }

@@ -49,7 +49,9 @@ const Dashboard = () => {
     emp_name: ""
   }]);
   const [onTimeTasksBox, setOnTimeTasksBox] = useState({
-    on_schedule_tasks: 0
+    total_tasks: 0,
+    on_schedule_tasks: 0,
+    emp_name: ""
   });
   const [overdueTasksBox, setOverdueTasksBox] = useState([{
     overdue_tasks: 0
@@ -104,6 +106,13 @@ const Dashboard = () => {
       .catch(error => console.error(error));
   }, []);
 
+  useEffect(() => {
+    fetch(url+'get_tasks_on_time_box.php?id_user='+idUser)
+      .then(response => response.json())
+      .then(onTimeTasksBox => setOnTimeTasksBox(onTimeTasksBox))
+      .catch(error => console.error(error));
+  }, []);
+
   const ref = useRef(null);
 
   const handleClickOpen = (event) => {
@@ -144,7 +153,7 @@ const Dashboard = () => {
                         <tbody>
                             <tr key={key}>
                             <td>{val.emp_name}</td>
-                            <td>{val.employee_performance}%</td>
+                            <td>{val.employee_performance.toFixed(2)}%</td>
                           </tr>
                         </tbody>
                       )
@@ -161,14 +170,38 @@ const Dashboard = () => {
         <span>
           <DialogTitle>
             <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
-              {"TITLE2"}
+              {"Tasks on time"}
             </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <span>
-                box2
-              </span>
+              <div style = {{
+                paddingTop: "20px",
+                paddingLeft: "40px",
+                paddingRight: "40px",
+                paddingBottom: "20px"
+              }}>
+                <table className="rounded-corners">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>On Time</th>
+                    <th>Total</th>
+                  </tr>
+                  </thead>
+                  {onTimeTasksBox.map((val, key) => {
+                      return (
+                        <tbody>
+                            <tr key={key}>
+                            <td>{val.emp_name}</td>
+                            <td>{val.on_schedule_tasks}</td>
+                            <td>{val.total_tasks}</td>
+                          </tr>
+                        </tbody>
+                      )
+                  })}
+                </table>
+              </div>
             </DialogContentText>
           </DialogContent>
         </span>
