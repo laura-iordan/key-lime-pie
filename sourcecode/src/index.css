@@ -35,3 +35,55 @@ body,
 ::-webkit-scrollbar-track {
     background: #555;
 }
+
+
+table.rounded-corners {
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 20px;
+    background-color: #eaf5e8;
+  }
+  
+  table.rounded-corners th, table.rounded-corners td {
+    border: 1px solid black;
+    padding: 20px;
+    font-size: larger;
+    color:black;
+    
+  }
+
+table.rounded-corners th {
+    background: #acd5a3;
+    padding: 30px;
+    font-size: x-large;
+}
+
+table.rounded-corners {
+    --border: 1px solid black;
+    border-radius: 20px;
+   
+    /* Don't change these properties */
+    border-spacing: 0;
+    border-collapse: separate;
+    border: var(--border);
+    overflow: hidden;
+   }
+   
+   table.rounded-corners th:not(:last-child),
+   table.rounded-corners td:not(:last-child) {
+    border-right: var(--border);
+   }
+   
+   table.rounded-corners>thead>tr:not(:last-child)>th,
+   table.rounded-corners>thead>tr:not(:last-child)>td,
+   table.rounded-corners>tbody>tr:not(:last-child)>th,
+   table.rounded-corners>tbody>tr:not(:last-child)>td,
+   table.rounded-corners>tfoot>tr:not(:last-child)>th,
+   table.rounded-corners>tfoot>tr:not(:last-child)>td,
+   table.rounded-corners>tr:not(:last-child)>td,
+   table.rounded-corners>tr:not(:last-child)>th,
+   table.rounded-corners>thead:not(:last-child),
+   table.rounded-corners>tbody:not(:last-child),
+   table.rounded-corners>tfoot:not(:last-child) {
+    border-bottom: var(--border);
+   }
