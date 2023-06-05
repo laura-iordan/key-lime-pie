@@ -69,7 +69,7 @@ function AddProject(){
           <p style={{
             textAlign: 'center'
           }}>
-          Add Task
+          Add Project
           </p>
         </Typography>
         <Box className="rounded-corners" style = {{
