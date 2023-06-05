@@ -34,9 +34,9 @@ function Profile() {
 
     axios
       .post(url + 'update_pictures.php', formData)
-      .then((response) => {
-        alert(response.data);
-      })
+      .then((response) => 
+        response.data
+      )
       .catch((error) => alert(error));
   };
 

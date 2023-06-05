@@ -7,8 +7,8 @@ header('Access-Control-Allow-Headers: *');
 if ($conn) {
   $id_user=$_GET['id_user'];
   $sql = "    SELECT t.total_tasks, t.on_schedule_tasks, t.overdue_tasks, CONCAT(e.name, ' ', e.surname) as emp_name
-  FROM (SELECT COUNT(CASE WHEN [ending_date] IS NOT NULL AND DATEDIFF(day, [ending_date], [target_date]) > 0 THEN 1 END) AS overdue_tasks,
-        COUNT(CASE WHEN [ending_date] IS NOT NULL AND DATEDIFF(day, [ending_date], [target_date]) <= 0  THEN 1 END) AS on_schedule_tasks,
+  FROM (SELECT COUNT(CASE WHEN [ending_date] IS NOT NULL AND DATEDIFF(day, [ending_date], [target_date]) >= 0 THEN 1 END) AS on_schedule_tasks,
+        COUNT(CASE WHEN [ending_date] IS NOT NULL AND DATEDIFF(day, [ending_date], [target_date]) < 0  THEN 1 END) AS overdue_taskS,
         COUNT(CASE WHEN [ending_date] IS NOT NULL THEN 1 END) AS total_tasks,
         id_employee
   FROM (SELECT t.id_task, t.task_name, t.id_employee, CONCAT(emp.name, ' ', emp.surname) AS employee_name, 

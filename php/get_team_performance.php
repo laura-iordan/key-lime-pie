@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
   $id_user=$_GET['id_user'];
-  $sql = "SELECT 100 * ROUND(CAST(COUNT(CASE WHEN task.ending_date IS NOT NULL AND DATEDIFF(day, task.ending_date, task.target_date) <= 0  THEN 1 END) AS float) / 
+  $sql = "SELECT 100 * ROUND(CAST(COUNT(CASE WHEN task.ending_date IS NOT NULL AND DATEDIFF(day, task.ending_date, task.target_date) >= 0  THEN 1 END) AS float) / 
   CAST(COUNT(CASE WHEN task.ending_date IS NOT NULL THEN 1 END) AS float), 4) AS team_performance
   FROM (SELECT t.ending_date AS ending_date, T.target_date AS target_date, t.starting_date AS starting_date FROM [dbo].[tasks] AS t
 INNER JOIN (
