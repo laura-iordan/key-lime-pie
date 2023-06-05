@@ -3,23 +3,26 @@ import url from '../../get_php_link';
 import {Box, Typography} from '@mui/material';
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import Header from '../../components/Header';
+import {useNavigate, useParams } from "react-router-dom";
 
 function Team() {
+
+  const { idUser } = useParams();
+  const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
 
   const columns = useMemo(()=>[
-    {field:'id_user', headerName:'ID', width:60},
+    {field:'id_user', headerName:'ID', width:60, hide:'true'},
     {field:'name', headerName:'Name', flex: 1, cellClassName: "name-column--cell",},
     {field:'surname', headerName:'Surname', flex: 1},
     {field:'email', headerName:'Email', flex: 1},
-    {field:'status', headerName:'Status', type: "number", flex: 1, headerAlign: "left", align: "left",},
     {field:'team_name', headerName:'Team Name', flex: 1}
 
   ], [])
 
   useEffect(() => {
-    fetch(url+'get_users.php')
+    fetch(url+'get_team_new.php?id_user='+idUser)
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -65,7 +68,7 @@ function Team() {
     
     <Box m="20px">
     <Typography component='div'>
-      <Header title="Manage Users" />
+      <Header title="Manage Team" />
       </Typography>
       <Box
     height="75vh"

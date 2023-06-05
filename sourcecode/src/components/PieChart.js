@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { ResponsivePie } from "@nivo/pie";
 import url from '../get_php_link';
+import {useParams } from "react-router-dom";
 
 function PieChart(){
+
+    const { idUser } = useParams();
 
     const [projects, setProjects] = useState([]);
     let data=[];
 
     useEffect(() => {
-      fetch(url+'get_projects_piechart.php')
+      fetch(url+'get_projects_piechart.php?id_user='+idUser)
         .then(response => response.json())
         .then(data => setProjects(data))
         .catch(error => console.error(error));

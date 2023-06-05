@@ -16,6 +16,7 @@ import StackedBarChartOutlinedIcon from '@mui/icons-material/StackedBarChartOutl
 import url from '../../get_php_link';
 import axios from 'axios';
 import {useNavigate } from 'react-router-dom';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 
 
 const Item = ({ title, to, icon, selected, setSelected, user, idUser, theme}) => {
@@ -175,7 +176,7 @@ const SidebarManager = (props) => {
               theme={theme}
             />
             <Item
-              title="Contacts Information"
+              title="Tasks"
               to="/manager/task"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
@@ -184,7 +185,20 @@ const SidebarManager = (props) => {
               setUser={setUser}
               props={props}
               idUser={idUser}
-              onClick={() => {nav("/manager/task")}}
+              onClick={() => {nav(`/manager/task/${idUser}`)}}
+              theme={theme}
+            />
+            <Item
+              title="Projects"
+              to="/manager/project"
+              icon={<AccountBalanceWalletOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+              user={user}
+              setUser={setUser}
+              props={props}
+              idUser={idUser}
+              onClick={() => {nav(`/manager/project/${idUser}`)}}
               theme={theme}
             />
             <Typography

@@ -34,6 +34,7 @@ import AddProject from './scenes/admin/AddProject';
 import Profile from './scenes/global/Profile';
 import TopbarLog from './scenes/global/TopbarLog';
 import TopbarAdmin from './scenes/global/TopbarAdmin';
+import Projects from './scenes/manager/Projects';
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
                     <Route path="/manager/profile/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>}/>
                     <Route path="/manager/team/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/task/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/project/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/addTask/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/updateTask/:idUser/:id" element={<SidebarAdmin isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/barChart/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
@@ -108,6 +110,7 @@ function App() {
                     <Route path="/manager/profile/:idUser" element={<Topbar setIsSidebar={setIsSidebar} userId={userId}/>}/>
                     <Route path="/manager/team/:idUser" element={<Topbar setIsSidebar={setIsSidebar} userId={userId}/>} />
                     <Route path="/manager/task/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
+                    <Route path="/manager/project/:idUser" element={<SidebarManager isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/addTask/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/updateTask/:idUser/:id" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
                     <Route path="/manager/barChart/:idUser" element={<Topbar isSidebar={isSidebar} userId={userId}/>} />
@@ -141,6 +144,7 @@ function App() {
                             <Route path="/manager/profile/:idUser" element={<Profile userId={userId}/>}/>     
                             <Route path="/manager/team/:idUser" element={<Team userId={userId}/>} />
                             <Route path="/manager/task/:idUser" element={<Task userId={userId}/>} />
+                            <Route path="/manager/project/:idUser" element={<Projects userId={userId}/>} />
                             <Route path="/manager/addTask/:idUser" element={<AddTask userId={userId}/>} />
                             <Route path="/manager/updateTask/:idUser/:id" element={<UpdateTask userId={userId}/>} />
                             <Route path="/manager/barChart/:idUser" element={<Chart userId={userId}/>} />

@@ -167,7 +167,7 @@ const SidebarManager = (props) => {
             />
             <Item
               title="Projects"
-              to="/admin/projects"
+              to="/admin/project"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -175,7 +175,7 @@ const SidebarManager = (props) => {
               setUser={setUser}
               props={props}
               idUser={idUser}
-              onClick={() => {nav(`/admin/projects/${idUser}`)}}
+              onClick={() => {nav(`/admin/project/${idUser}`)}}
             />
             <Typography
               variant="h6"

@@ -46,7 +46,7 @@ const Dashboard = () => {
       .catch(error => console.error(error));
   }, []);
 
-  let performance = teamPerformance['team_performance'] + "%";
+  let performance = parseFloat(teamPerformance['team_performance']).toFixed(2) + "%";
   console.log(performance);
 
   useEffect(() => {
