@@ -54,10 +54,13 @@ const Dashboard = () => {
     emp_name: ""
   });
   const [overdueTasksBox, setOverdueTasksBox] = useState([{
-    overdue_tasks: 0
+    total_tasks: 0,
+    overdue_tasks: 0,
+    emp_name: ""
   }]);
   const [projectsTargetMonthBox, setProjectsTargetMonthBox] = useState([{
-    projects_target_month: 0
+    project_name: "",
+    target_date: null
   }]);
 
   useEffect(() => {
@@ -110,6 +113,20 @@ const Dashboard = () => {
     fetch(url+'get_tasks_on_time_box.php?id_user='+idUser)
       .then(response => response.json())
       .then(onTimeTasksBox => setOnTimeTasksBox(onTimeTasksBox))
+      .catch(error => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    fetch(url+'get_overdue_tasks_box.php?id_user='+idUser)
+      .then(response => response.json())
+      .then(overdueTasksBox => setOverdueTasksBox(overdueTasksBox))
+      .catch(error => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    fetch(url+'get_projects_target_month_box.php?id_user='+idUser)
+      .then(response => response.json())
+      .then(projectsTargetMonthBox => setProjectsTargetMonthBox(projectsTargetMonthBox))
       .catch(error => console.error(error));
   }, []);
 
@@ -212,14 +229,38 @@ const Dashboard = () => {
         <span>
           <DialogTitle>
             <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
-              {"TITLE3"}
+              {"Overdue Tasks"}
             </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <span>
-                box3
-              </span>
+              <div style = {{
+                paddingTop: "20px",
+                paddingLeft: "40px",
+                paddingRight: "40px",
+                paddingBottom: "20px"
+              }}>
+                <table className="rounded-corners">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Overdue</th>
+                    <th>Total</th>
+                  </tr>
+                  </thead>
+                  {overdueTasksBox.map((val, key) => {
+                      return (
+                        <tbody>
+                            <tr key={key}>
+                            <td>{val.emp_name}</td>
+                            <td>{val.overdue_tasks}</td>
+                            <td>{val.total_tasks}</td>
+                          </tr>
+                        </tbody>
+                      )
+                  })}
+                </table>
+              </div>
             </DialogContentText>
           </DialogContent>
         </span>
@@ -230,14 +271,36 @@ const Dashboard = () => {
         <span>
           <DialogTitle>
             <Typography variant="h3" fontStyle={{fontWeight: "bold"}}>
-              {"TITLE4"}
+              {"Projects approaching deadline"}
             </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <span>
-                box4
-              </span>
+              <div style = {{
+                paddingTop: "20px",
+                paddingLeft: "40px",
+                paddingRight: "40px",
+                paddingBottom: "20px"
+              }}>
+                <table className="rounded-corners">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Deadline</th>
+                  </tr>
+                  </thead>
+                  {projectsTargetMonthBox.map((val, key) => {
+                      return (
+                        <tbody>
+                            <tr key={key}>
+                            <td>{val.project_name}</td>
+                            <td>{val.target_date}</td>
+                          </tr>
+                        </tbody>
+                      )
+                  })}
+                </table>
+              </div>
             </DialogContentText>
           </DialogContent>
         </span>
