@@ -6,11 +6,11 @@ header('Access-Control-Allow-Headers: *');
 
 if ($conn) {
     $id_user=$_GET['id_user'];
-  $sql = "SELECT t.total_tasks, t.on_schedule_tasks, CONCAT(e.name, ' ', e.surname) as emp_name
-  FROM (SELECT COUNT(CASE WHEN [ending_date] IS NOT NULL AND DATEDIFF(day, [ending_date], [target_date]) > 0  THEN 1 END) AS on_schedule_tasks,
+  $sql = "  SELECT t.total_tasks, t.on_schedule_tasks, CONCAT(e.name, ' ', e.surname) as emp_name
+  FROM (SELECT COUNT(CASE WHEN [ending_date] IS NOT NULL AND DATEDIFF(day, [ending_date], [target_date]) >= 0 THEN 1 END) AS on_schedule_tasks,
         COUNT(CASE WHEN [ending_date] IS NOT NULL THEN 1 END) AS total_tasks,
         id_employee
-  FROM (  SELECT t.id_task, t.task_name, t.id_employee, CONCAT(emp.name, ' ', emp.surname) AS employee_name, 
+  FROM (SELECT t.id_task, t.task_name, t.id_employee, CONCAT(emp.name, ' ', emp.surname) AS employee_name, 
   t.id_project, p.project_name, CAST(t.starting_date AS varchar) AS starting_date, 
   CAST(t.target_date AS varchar) AS target_date, CAST(t.ending_date AS varchar) AS ending_date
   FROM tasks AS t
@@ -23,7 +23,7 @@ if ($conn) {
   INNER JOIN [dbo].[employees] AS e
   ON p.id_manager=e.id_employee
   WHERE e.id_user=?) AS p
-  ON p.id_project=t.id_project) as task
+  ON p.id_project=t.id_project) tasks
   GROUP BY [id_employee]) as t
   LEFT JOIN [dbo].[employees] AS e
   ON E.id_employee=T.id_employee";
