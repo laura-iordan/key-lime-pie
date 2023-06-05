@@ -53,7 +53,7 @@ function AddProject(){
               .then(response=>response.data)
               .catch(error=>alert(error));                  
               }
-              navigate(`/admin/projects/${idUser}`)
+              navigate(`/admin/project/${idUser}`)
           }
     const handleChangeManager=(e)=>{
       setIdManager(e.target.value);
