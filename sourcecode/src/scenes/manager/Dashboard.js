@@ -490,14 +490,7 @@ const Dashboard = () => {
           >
             
           </Typography>
-          <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: "#5b7a54"}}
-                  onclick={() => download()}
-                />
-              </IconButton>
-            </Box>
+
           <Box height="250px" mt="-20px">
             <Canvas1 isDashboard={true} />
           </Box>

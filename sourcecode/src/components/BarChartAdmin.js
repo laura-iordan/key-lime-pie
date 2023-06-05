@@ -8,7 +8,7 @@ function BarChartAdmin(){
     const keys = ['budget'];
 
     useEffect(() => {
-      fetch(url+'get_projects_piechart.php')
+      fetch(url+'get_pichart_adm.php')
         .then(response => response.json())
         .then(data => setProjects(data))
         .catch(error => console.error(error));
